@@ -4,7 +4,7 @@ import 'package:e_shopping/utils/prefs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-enum LoginStatus { initial, validating, success, failure, }
+enum LoginStatus { initial, validating, success, failure, save_failure, }
 
 class LoginNotifier with ChangeNotifier {
 
@@ -17,10 +17,14 @@ class LoginNotifier with ChangeNotifier {
     currentStatus = LoginStatus.validating;
     notifyListeners();
     if (await accountInput(account: account) && await passwordInput(password: password)) {
-      currentStatus = LoginStatus.success;
       MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
-      prefs.setBool(key: "login", value: true,);
-      notifyListeners();
+      if (await prefs.setBool(key: "login", value: true,)) {
+        currentStatus = LoginStatus.success;
+        notifyListeners();
+      } else {
+        currentStatus = LoginStatus.save_failure;
+        notifyListeners();
+      }
     } else {
       currentStatus = LoginStatus.failure;
       notifyListeners();

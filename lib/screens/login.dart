@@ -37,7 +37,7 @@ class Login extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               CircularProgressIndicator(),
-                              const SizedBox(width: 10,),
+                              const SizedBox(width: 20,),
                               Text("validating"),
                             ],
                           ),
@@ -51,7 +51,6 @@ class Login extends StatelessWidget {
               const SizedBox(height: 50,),
               TextFormField(
                 controller: accountController,
-
               ),
               const SizedBox(height: 10,),
               TextFormField(
@@ -74,7 +73,18 @@ class Login extends StatelessWidget {
                           password: passwordController.text,
                         );
                         if (context.read<LoginNotifier>().currentStatus == LoginStatus.failure) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("驗證失敗")));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: const Text("登入失敗"),
+                            ),
+                          );
+                        }
+                        if (context.read<LoginNotifier>().currentStatus == LoginStatus.save_failure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: const Text("登入資料儲存失敗，請在試一次"),
+                            ),
+                          );
                         }
                         if (context.read<LoginNotifier>().currentStatus == LoginStatus.success) {
                           Navigator.pushAndRemoveUntil(
