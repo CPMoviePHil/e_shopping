@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:e_shopping/providers/loading_notifier.dart';
+import 'package:e_shopping/screens/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -14,6 +16,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
+import 'package:provider/provider.dart';
 
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -46,15 +49,6 @@ void main() async {
   );
 
   print('User granted permission: ${settings.authorizationStatus}');
-
-  /*FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('Got a message whilst in the foreground!');
-    print('Message data: ${message.data}');
-
-    if (message.notification != null) {
-      print('Message also contained a notification: ${message.notification}');
-    }
-  });*/
   String token = await messaging.getToken();
   Logger logger = Logger();
   logger.wtf(token);
@@ -165,6 +159,7 @@ class _AppPage extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -181,12 +176,14 @@ const String womanLookLeftImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.
 Cart cart = Cart();
 
 class SimpleShopping extends StatelessWidget {
+  /*Builder(builder: (context) => HomeScreen(),);*/
   @override
   Widget build(BuildContext context) {
     return Theme(
       data: ThemeData.light(),
-      child: Builder(
-        builder: (context) => HomeScreen(),
+      child: ChangeNotifierProvider(
+        create: (context) => LoadingNotifier()..loadingProcess(),
+        child: Loading(),
       ),
     );
   }
