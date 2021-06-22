@@ -224,17 +224,22 @@ class _HomeScreenState extends State<HomeScreen> {
             productsToSort.add(products[i]);
           }
         }
-        searchResultTiles = products
-            .where(
-                (p) => p.name.toLowerCase().contains(searchString.toLowerCase()))
-            .map(
-              (p) => ProductTile(product: p),
-        )
-            .toList();
+        searchResultTiles = products.where((p)
+        => p.name.toLowerCase().contains(searchString.toLowerCase())).map((p)
+        => ProductTile(product: p),
+        ).toList();
       }
     }
     return Scaffold(
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            
+          },
+          child: Icon(
+            Icons.menu,  // add custom icons also
+          ),
+        ),
         title: SearchBar(
           onChanged: setSearchString,
         ),
