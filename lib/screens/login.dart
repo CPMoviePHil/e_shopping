@@ -1,5 +1,7 @@
 import 'package:e_shopping/main.dart';
+import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
+import 'package:e_shopping/screens/user_data_loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +92,12 @@ class Login extends StatelessWidget {
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
+                              builder: (context) => ChangeNotifierProvider(
+                                create: (context) => LoadingDataNotifier()..loadingUserDataProcess(
+                                  context: context,
+                                ),
+                                child: UserDataLoading(),
+                              ),
                             ), (r) => false,
                           );
                         }

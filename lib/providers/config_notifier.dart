@@ -1,22 +1,15 @@
+import 'package:e_shopping/data/user.dart';
 import 'package:flutter/cupertino.dart';
 
 class ConfigNotifier with ChangeNotifier {
 
-  int currentUser = -1;
+  UserModel currentUser;
 
-  String currentUserName = '';
-
-  void setCurrentUser({@required int userID,}) {
-    if (currentUser != userID) {
-      currentUser = userID;
+  void setCurrentUser({@required UserModel user,}) {
+    if (currentUser != user) {
+      currentUser = user;
       notifyListeners();
     }
   }
 
-  void setCurrentUserName({@required String userName,}) {
-    if (currentUserName != userName) {
-      currentUserName = userName;
-      notifyListeners();
-    }
-  }
 }
