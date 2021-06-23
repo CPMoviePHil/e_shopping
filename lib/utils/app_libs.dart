@@ -53,7 +53,7 @@ class AppLibScreen {
         fontSize = 25;
         break;
       case "small":
-        fontSize = 15;
+        fontSize = 13;
         break;
       case "medium":
       default :
@@ -84,6 +84,49 @@ class AppLibScreen {
       ),
       placeholder: (context, url) => CircularProgressIndicator(),
       errorWidget: (context, url, error) => Icon(Icons.error),
+    );
+  }
+
+  static InputDecoration inputDecoration ({
+    @required String hintText,
+    Color fontColor,
+    double fontSize = 15,
+    IconData suffixIcon,
+    VoidCallback suffixIconPress,
+  }) {
+    if (fontColor == null) {
+      fontColor = Colors.grey[200];
+    }
+    return InputDecoration(
+      suffixIcon: suffixIcon != null ?
+      IconButton(
+        padding: EdgeInsets.all(0),
+        icon: Icon(suffixIcon,),
+        onPressed: suffixIconPress,
+      ) : null,
+      hintText: hintText,
+      hintStyle: TextStyle(
+        color: fontColor,
+        fontSize: fontSize,
+      ),
+    );
+  }
+
+  static AppBar commonAppBar ({
+    @required BuildContext context,
+    @required String appBarMsg,
+  }) {
+    return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () => Navigator.of(context).pop(),
+      ),
+      elevation: 0,
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      title: AppLibScreen.appText(
+        text: appBarMsg,
+      ),
     );
   }
 }
