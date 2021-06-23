@@ -3,10 +3,8 @@ import 'dart:math';
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
-import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/left_list.dart';
 import 'package:e_shopping/screens/loading.dart';
-import 'package:e_shopping/screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +18,6 @@ import 'dart:io' show Platform;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 
 
@@ -252,7 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: MediaQuery.of(context).size.width * 0.7,
           child: SafeArea(
             child: Container(
-              height: MediaQuery.of(context).size.height,
+              height: double.infinity,
               child: LeftList(),
             ),
           ),

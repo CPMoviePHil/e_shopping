@@ -14,17 +14,12 @@ class LeftList extends StatelessWidget {
 
   Widget personalProfile() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         loginProfile(),
-        ListTileTheme(
-          contentPadding: const EdgeInsets.only(right: 0, left: 0,),
-          child: ListTile(
-            title: loginName(),
-            subtitle: loginAccount(),
-          ),
-        ),
+        loginName(),
+        loginAccount(),
       ],
     );
   }
@@ -37,8 +32,8 @@ class LeftList extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(100),
           ),
-          height: 80,
-          width: 80,
+          height: 150,
+          width: 150,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(100),
             child: AppLibScreen.imageContent(
@@ -51,18 +46,14 @@ class LeftList extends StatelessWidget {
   }
 
   Widget loginName() {
-    return Row(
-      children: [
-        Consumer<ConfigNotifier>(
-          builder: (context, config, _config,) {
-            return AppLibScreen.appText(
-              text: config.currentUser.userName,
-              textSize: "large",
-              fontColor: Colors.white,
-            );
-          },
-        ),
-      ],
+    return Consumer<ConfigNotifier>(
+      builder: (context, config, _config,) {
+        return AppLibScreen.appText(
+          text: config.currentUser.userName,
+          textSize: "large",
+          fontColor: Colors.white,
+        );
+      },
     );
   }
 
@@ -156,8 +147,7 @@ class LeftList extends StatelessWidget {
                 return Container();
               } else {
                 return Container(
-                  color: Theme.of(context).accentColor,
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+                  padding: const EdgeInsets.symmetric(vertical: 10,),
                   child: personalProfile(),
                 );
               }
@@ -166,8 +156,9 @@ class LeftList extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              border: Border(
-                bottom: AppLibScreen.appBorder(),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
               ),
             ),
             child: Consumer<ConfigNotifier>(
@@ -185,9 +176,7 @@ class LeftList extends StatelessWidget {
                   )).toList(),);
                   barLists.add(listViewSpace);
                 }
-                return ListView(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
+                return Column(
                   children: barLists,
                 );
               },
@@ -201,7 +190,12 @@ class LeftList extends StatelessWidget {
                 );
               } else {
                 return Container(
-                  color: Colors.white,
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: AppLibScreen.appBorder(),
+                    ),
+                    color: Colors.white,
+                  ),
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
                   child: Row(
