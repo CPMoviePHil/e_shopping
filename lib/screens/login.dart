@@ -1,6 +1,8 @@
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/user_data_loading.dart';
+import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +19,19 @@ class Login extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.white,
           centerTitle: true,
-          title: Text("登入",),
+          title: AppLibScreen.appText(
+            text: "會員登入",
+          ),
         ),
         body: Container(
+          color: Colors.white,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
           ),
@@ -52,20 +63,34 @@ class Login extends StatelessWidget {
               const SizedBox(height: 50,),
               TextFormField(
                 controller: accountController,
+                decoration: WidgetsHelper.inputDecoration(
+                  hintText: "account",
+                ),
               ),
               const SizedBox(height: 10,),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
+              Consumer<LoginNotifier>(
+                builder: (context, login, _login,) {
+                  return TextFormField(
+                    controller: passwordController,
+                    obscureText: login.hidePassword,
+                    decoration: WidgetsHelper.inputDecoration(
+                      hintText: "password",
+                      suffixIcon: login.hidePassword
+                          ? Icons.remove_red_eye_outlined
+                          : Icons.remove_red_eye,
+                      suffixIconPress: () => login.changeHidePassword(),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 30,),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20,),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () async {
+                    GestureDetector(
+                      onTap: () async {
                         await Provider.of<LoginNotifier>(
                           context,
                           listen: false,
@@ -101,15 +126,39 @@ class Login extends StatelessWidget {
                           );
                         }
                       },
-                      child: Text("登入"),
-                    ),
-                    ElevatedButton(
-                      onPressed: null,
-                      child: Text("註冊"),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).accentColor,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(20),
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(vertical: 5,),
+                        child: AppLibScreen.appText(text: "登入", fontColor: Colors.white,),
+                      ),
                     ),
                   ],
                 ),
-              )
+              ),
+              const SizedBox(height: 70,),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 90,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppLibScreen.appText(text: "沒有帳號嗎?", textSize: "small",),
+                    GestureDetector(
+                      child: AppLibScreen.appText(
+                        text: "註冊",
+                        fontColor: Theme.of(context).accentColor,
+                        textSize: "small",
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

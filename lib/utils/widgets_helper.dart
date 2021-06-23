@@ -34,4 +34,28 @@ class WidgetsHelper {
       },
     );
   }
+
+  static InputDecoration inputDecoration ({
+    @required String hintText,
+    Color fontColor,
+    double fontSize = 15,
+    IconData suffixIcon,
+    VoidCallback suffixIconPress,
+  }) {
+    if (fontColor == null) {
+      fontColor = Colors.grey[200];
+    }
+    return InputDecoration(
+      suffixIcon: suffixIcon != null ?
+      IconButton(
+        icon: Icon(suffixIcon),
+        onPressed: suffixIconPress,
+      ) : null,
+      hintText: hintText,
+      hintStyle: TextStyle(
+        color: fontColor,
+        fontSize: fontSize,
+      )
+    );
+  }
 }

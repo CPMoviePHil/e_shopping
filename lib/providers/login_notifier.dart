@@ -10,6 +10,8 @@ class LoginNotifier with ChangeNotifier {
 
   LoginStatus currentStatus = LoginStatus.initial;
 
+  bool hidePassword = true;
+
   Future<void> formValidation ({
     @required String account,
     @required String password,
@@ -55,5 +57,10 @@ class LoginNotifier with ChangeNotifier {
       }
     }
     return false;
+  }
+
+  void changeHidePassword() {
+    hidePassword = !hidePassword;
+    notifyListeners();
   }
 }
