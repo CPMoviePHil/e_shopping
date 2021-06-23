@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:e_shopping/providers/loading_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
+import 'package:e_shopping/screens/left_list.dart';
 import 'package:e_shopping/screens/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -197,8 +198,10 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
+
   String searchString;
   bool isLowToHigh;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -234,11 +237,10 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () {
-            
+            print("wtf");
+            scaffoldKey.currentState.openDrawer();
           },
-          child: Icon(
-            Icons.menu,  // add custom icons also
-          ),
+          child: const Icon(Icons.menu),  // add custom icons also),
         ),
         title: SearchBar(
           onChanged: setSearchString,
@@ -247,6 +249,19 @@ class _HomeScreenState extends State<HomeScreen> {
           CartAppBarAction(),
         ],
       ),
+      drawer: Drawer(
+        child: Container(
+          color: Colors.white,
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: SafeArea(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: LeftList(),
+            ),
+          ),
+        ),
+      ),
+      key: scaffoldKey,
       body: searchString.isNotEmpty ?
       GridView.count(
         padding: listViewPadding,

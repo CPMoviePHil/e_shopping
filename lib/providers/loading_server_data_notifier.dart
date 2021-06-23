@@ -27,11 +27,7 @@ class LoadingDataNotifier with ChangeNotifier {
       await prefs.setString(key: "account", value: data['account'],);
       await prefs.setString(key: "user_name", value: data['user_name'],);
       await Future.delayed(Duration(seconds: 1,));
-      user = UserModel(
-        id: data['id'],
-        account: data['account'],
-        userName: data['user_name'],
-      );
+      user = UserModel.fromJson(data);
       currentStatus = LoadingDataStatus.success;
       notifyListeners();
     } else {
