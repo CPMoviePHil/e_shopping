@@ -265,25 +265,18 @@ class _HomeScreenState extends State<HomeScreen> {
           CartAppBarAction(),
         ],
       ),
-      drawer: Consumer<ConfigNotifier>(
-        builder: (context, config, _config,) {
-          if (config.currentStatus == ViewStatus.user) {
-            return Drawer(
-              child: Container(
-                color: Theme.of(context).accentColor,
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: SafeArea(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height,
-                    child: LeftList(),
-                  ),
-                ),
-              ),
-            );
-          }
-          return Container();
-        },
-      ),
+      drawer: context.watch<ConfigNotifier>().currentStatus == ViewStatus.user ? Drawer(
+        child: Container(
+          color: Theme.of(context).accentColor,
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: SafeArea(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: LeftList(),
+            ),
+          ),
+        ),
+      ) : null,
       key: scaffoldKey,
       body: searchString.isNotEmpty ?
       GridView.count(

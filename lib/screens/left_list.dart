@@ -1,6 +1,7 @@
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -140,15 +141,22 @@ class LeftList extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () async {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
-                    bool logout = await context.read<ConfigNotifier>().logout();
-                    ScaffoldMessenger.of(context)
-                      ..hideCurrentSnackBar()
-                      ..showSnackBar(
-                        SnackBar(
-                          content: Text( logout? "已成功登出!" : "登出失敗",),
-                        ),
-                      );
+                    bool choiceResult = await WidgetsHelper.choiceDialog(
+                      context: context,
+                      dialogTitle: "登出",
+                      dialogMsg: "確定登出此裝置嗎?",
+                    );
+                    if (choiceResult) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
+                      bool logout = await context.read<ConfigNotifier>().logout();
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(
+                          SnackBar(
+                            content: Text( logout? "已成功登出!" : "登出失敗",),
+                          ),
+                        );
+                    }
                   },
                   child: AppLibScreen.appText(
                     text: "登出",

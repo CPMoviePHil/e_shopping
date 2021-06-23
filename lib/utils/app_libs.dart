@@ -57,7 +57,7 @@ class AppLibScreen {
         break;
       case "medium":
       default :
-        fontSize = 18;
+        fontSize = 16;
         break;
     }
     return Text(
@@ -74,6 +74,14 @@ class AppLibScreen {
   }) {
     return CachedNetworkImage(
       imageUrl: imageOnePath,
+      imageBuilder: (context, imageProvider) => Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
       placeholder: (context, url) => CircularProgressIndicator(),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );

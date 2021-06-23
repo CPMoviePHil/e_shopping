@@ -40,6 +40,9 @@ class ConfigNotifier with ChangeNotifier {
       if (prefs.getString(key: "profile") != null) {
         process = await prefs.removeKey(key: "profile");
       }
+      if (prefs.getBool(key: "login") != null) {
+        prefs.setBool(key: "login", value: false,);
+      }
       currentUser = null;
       notifyListeners();
     }
