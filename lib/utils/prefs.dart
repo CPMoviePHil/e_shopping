@@ -30,4 +30,8 @@ class MainPrefs {
   Future<bool> setBool({@required String key, @required bool value}) async {
     return await prefs.setBool(key, value);
   }
+
+  Future<bool> removeKey({@required String key,}) async {
+    return await prefs.remove(key);
+  }
 }

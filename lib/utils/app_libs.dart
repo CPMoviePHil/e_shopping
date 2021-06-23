@@ -2,19 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-class LeftBarItems {
-  final IconData icon;
-  final String leftBarItemsName;
-  final String routes;
-
-  const LeftBarItems({
-    @required this.icon,
-    @required this.leftBarItemsName,
-    @required this.routes,
-  });
-}
-
-
 class AppLibScreen {
 
   static BorderSide appBorder({
@@ -89,45 +76,6 @@ class AppLibScreen {
       imageUrl: imageOnePath,
       placeholder: (context, url) => CircularProgressIndicator(),
       errorWidget: (context, url, error) => Icon(Icons.error),
-    );
-  }
-
-  static Widget leftBarList ({
-    @required List leftBarItems,
-  }) {
-    return Container(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: leftBarItems.length,
-        itemBuilder: (context, index) {
-          return leftBarItemWidget(context: context, item: leftBarItems[index],);
-        },
-      ),
-    );
-  }
-
-  static Widget leftBarItemWidget({
-    @required BuildContext context,
-    @required LeftBarItems item,
-  }) {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.065,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AppLibScreen.appIcon(
-            icon: item.icon,
-            iconSize: "medium",
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          AppLibScreen.appText(
-            text: item.leftBarItemsName,
-          ),
-        ],
-      ),
     );
   }
 }

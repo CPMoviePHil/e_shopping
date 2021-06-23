@@ -1,9 +1,12 @@
 import 'dart:math';
 
+import 'package:e_shopping/configs/constants.dart';
+import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
-import 'package:e_shopping/providers/loading_server_data_notifier.dart';
+import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/left_list.dart';
 import 'package:e_shopping/screens/loading.dart';
+import 'package:e_shopping/screens/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -52,8 +55,6 @@ void main() async {
 
   print('User granted permission: ${settings.authorizationStatus}');
   String token = await messaging.getToken();
-  Logger logger = Logger();
-  logger.wtf(token);
   runApp(MyApp(token: token,));
 }
 
@@ -178,7 +179,6 @@ const String womanLookLeftImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.
 Cart cart = Cart();
 
 class SimpleShopping extends StatelessWidget {
-  /*Builder(builder: (context) => HomeScreen(),);*/
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -197,8 +197,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
   String searchString;
   bool isLowToHigh;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -235,12 +233,30 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            print("wtf");
-            scaffoldKey.currentState.openDrawer();
+        leading: Consumer<ConfigNotifier>(
+          builder: (context, config, _config,) {
+            if (config.currentStatus == ViewStatus.visitor) {
+              return GestureDetector(
+                onTap: () => Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                      create: (context) => LoginNotifier(),
+                      child: Login(),
+                    ),
+                  ), (r) => false,
+                ),
+                child: const Icon(Icons.login,),
+              );
+            } else {
+              return GestureDetector(
+                onTap: () {
+                  scaffoldKey.currentState.openDrawer();
+                },
+                child: const Icon(Icons.menu),  // add custom icons also),
+              );
+            }
           },
-          child: const Icon(Icons.menu),  // add custom icons also),
         ),
         title: SearchBar(
           onChanged: setSearchString,
@@ -249,17 +265,24 @@ class _HomeScreenState extends State<HomeScreen> {
           CartAppBarAction(),
         ],
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.white,
-          width: MediaQuery.of(context).size.width * 0.7,
-          child: SafeArea(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              child: LeftList(),
-            ),
-          ),
-        ),
+      drawer: Consumer<ConfigNotifier>(
+        builder: (context, config, _config,) {
+          if (config.currentStatus == ViewStatus.user) {
+            return Drawer(
+              child: Container(
+                color: Colors.white,
+                width: MediaQuery.of(context).size.width * 0.7,
+                child: SafeArea(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: LeftList(),
+                  ),
+                ),
+              ),
+            );
+          }
+          return Container();
+        },
       ),
       key: scaffoldKey,
       body: searchString.isNotEmpty ?

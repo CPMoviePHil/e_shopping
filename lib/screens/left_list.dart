@@ -1,20 +1,13 @@
+import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LeftList extends StatelessWidget {
+import 'models.dart';
 
-  final List<LeftBarItems> leftBarItems = [
-    LeftBarItems(icon: Icons.shopping_bag_outlined, leftBarItemsName: "熱門商品", routes: '',),
-    LeftBarItems(icon: Icons.collections_outlined, leftBarItemsName: "收藏商品", routes: '',),
-    LeftBarItems(icon: Icons.notifications_outlined, leftBarItemsName: "訊息通知", routes: '',),
-    LeftBarItems(icon: Icons.info_outline, leftBarItemsName: "最新消息", routes: '',),
-    LeftBarItems(icon: Icons.shopping_cart_outlined, leftBarItemsName: "紀錄中心", routes: '',),
-    LeftBarItems(icon: Icons.person_outline, leftBarItemsName: "個人資料", routes: '',),
-    LeftBarItems(icon: Icons.chat_outlined, leftBarItemsName: "客服中心", routes: '',),
-  ];
+class LeftList extends StatelessWidget {
 
   Widget personalProfile() {
     return Container(
@@ -79,38 +72,79 @@ class LeftList extends StatelessWidget {
     );
   }
 
+  Widget leftBarItemWidget({
+    @required BuildContext context,
+    @required LeftBarItem item,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 25,),
+      height: MediaQuery.of(context).size.height * 0.08,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          AppLibScreen.appIcon(
+            icon: item.icon,
+            iconSize: "medium",
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          AppLibScreen.appText(
+            text: item.leftBarItemsName,
+          ),
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 10,
+      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+          child: personalProfile(),
+        ),
+        //const Divider(thickness: 0.5, color: Colors.black,),
+        Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: AppLibScreen.appBorder(),
+                  bottom: AppLibScreen.appBorder(),
                 ),
-                child: personalProfile(),
               ),
-              const Divider(
-                thickness: 0.5,
-                color: Colors.black,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                children: leftBarItems.map((e) => leftBarItemWidget(
+                  context: context, item: e,
+                )).toList(),
               ),
-              Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20,
-                    ),
-                    child: AppLibScreen.leftBarList(leftBarItems: leftBarItems),
+            ),
+          ],
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+          child: GestureDetector(
+            onTap: () async {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
+              bool logout = await context.read<ConfigNotifier>().logout();
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text( logout? "已成功登出!" : "登出失敗",),
                   ),
-                ],
-              ),
-            ],
+                );
+            },
+            child: AppLibScreen.appText(
+              text: "登出",
+            ),
           ),
         ),
       ],

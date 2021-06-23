@@ -1,4 +1,5 @@
 import 'package:e_shopping/main.dart';
+import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/user_data_loading.dart';
@@ -19,7 +20,7 @@ class Login extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text("Login",),
+          title: Text("登入",),
         ),
         body: Container(
           padding: const EdgeInsets.symmetric(
@@ -40,7 +41,7 @@ class Login extends StatelessWidget {
                             children: [
                               CircularProgressIndicator(),
                               const SizedBox(width: 20,),
-                              Text("validating"),
+                              Text("驗證中..."),
                             ],
                           ),
                         ),
@@ -102,11 +103,25 @@ class Login extends StatelessWidget {
                           );
                         }
                       },
-                      child: Text("Login"),
+                      child: Text("登入"),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                              create: (context) => ConfigNotifier()..setVisitor(),
+                              child: HomeScreen(),
+                            ),
+                          ), (r) => false,
+                        );
+                      },
+                      child: Text("訪客"),
                     ),
                     ElevatedButton(
                       onPressed: null,
-                      child: Text("Sign Up"),
+                      child: Text("註冊"),
                     ),
                   ],
                 ),
