@@ -10,21 +10,19 @@ import 'models.dart';
 class LeftList extends StatelessWidget {
 
   Widget personalProfile() {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          loginProfile(),
-          ListTileTheme(
-            contentPadding: const EdgeInsets.only(right: 0, left: 0,),
-            child: ListTile(
-              title: loginName(),
-              subtitle: loginAccount(),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        loginProfile(),
+        ListTileTheme(
+          contentPadding: const EdgeInsets.only(right: 0, left: 0,),
+          child: ListTile(
+            title: loginName(),
+            subtitle: loginAccount(),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -32,6 +30,10 @@ class LeftList extends StatelessWidget {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
         return Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(100),
+          ),
           height: 80,
           width: 80,
           child: ClipRRect(
@@ -53,6 +55,7 @@ class LeftList extends StatelessWidget {
             return AppLibScreen.appText(
               text: config.currentUser.userName,
               textSize: "large",
+              fontColor: Colors.white,
             );
           },
         ),
@@ -65,8 +68,8 @@ class LeftList extends StatelessWidget {
       builder: (context, config, _config,) {
         return AppLibScreen.appText(
           text: "@${config.currentUser.account}",
-          fontColor: Colors.grey,
           textSize: "small",
+          fontColor: Colors.white,
         );
       },
     );
@@ -100,54 +103,68 @@ class LeftList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
-          child: personalProfile(),
-        ),
-        //const Divider(thickness: 0.5, color: Colors.black,),
-        Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  top: AppLibScreen.appBorder(),
-                  bottom: AppLibScreen.appBorder(),
-                ),
-              ),
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                children: leftBarItems.map((e) => leftBarItemWidget(
-                  context: context, item: e,
-                )).toList(),
+    List<Widget> barLists = <Widget>[];
+    Widget listViewSpace = const SizedBox(height: 10,);
+    barLists.add(listViewSpace);
+    barLists.addAll(leftBarItems.map((e) => leftBarItemWidget(
+      context: context, item: e,
+    )).toList(),);
+    barLists.add(listViewSpace);
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            color: Theme.of(context).accentColor,
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+            child: personalProfile(),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                bottom: AppLibScreen.appBorder(),
               ),
             ),
-          ],
-        ),
-        Container(
-          alignment: Alignment.centerLeft,
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
-          child: GestureDetector(
-            onTap: () async {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
-              bool logout = await context.read<ConfigNotifier>().logout();
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text( logout? "已成功登出!" : "登出失敗",),
-                  ),
-                );
-            },
-            child: AppLibScreen.appText(
-              text: "登出",
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              children: barLists,
             ),
           ),
-        ),
-      ],
+          Container(
+            color: Colors.white,
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
+                    bool logout = await context.read<ConfigNotifier>().logout();
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        SnackBar(
+                          content: Text( logout? "已成功登出!" : "登出失敗",),
+                        ),
+                      );
+                  },
+                  child: AppLibScreen.appText(
+                    text: "登出",
+                  ),
+                ),
+                GestureDetector(
+                  onTap: null,
+                  child: AppLibScreen.appText(
+                    text: "設定",
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

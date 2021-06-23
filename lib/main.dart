@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
           if (config.currentStatus == ViewStatus.user) {
             return Drawer(
               child: Container(
-                color: Colors.white,
+                color: Theme.of(context).accentColor,
                 width: MediaQuery.of(context).size.width * 0.7,
                 child: SafeArea(
                   child: Container(
