@@ -23,12 +23,14 @@ class LoadingDataNotifier with ChangeNotifier {
     if (jsonResult['result']) {
       MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance(),);
       final data = jsonResult['data'];
-      await prefs.setInt(key: "id", value: data['id'],);
-      await prefs.setString(key: "account", value: data['account'],);
-      await prefs.setString(key: "user_name", value: data['user_name'],);
-      await prefs.setString(key: "profile", value: data['profile'],);
+      //載入測試用資料
+      final userData = data[0];
+      await prefs.setInt(key: "id", value: userData['id'],);
+      await prefs.setString(key: "account", value: userData['account'],);
+      await prefs.setString(key: "user_name", value: userData['user_name'],);
+      await prefs.setString(key: "profile", value: userData['profile'],);
       await Future.delayed(Duration(seconds: 1,));
-      user = UserModel.fromJson(data);
+      user = UserModel.fromJson(userData);
       currentStatus = LoadingDataStatus.success;
       notifyListeners();
     } else {
