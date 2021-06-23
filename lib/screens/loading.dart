@@ -1,3 +1,5 @@
+import 'package:e_shopping/main.dart';
+import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
@@ -25,8 +27,8 @@ class Loading extends StatelessWidget {
             );
           } else {
             return ChangeNotifierProvider(
-              create: (context) => LoginNotifier(),
-              child: Login(),
+              create: (context) => ConfigNotifier()..setVisitor(),
+              child: HomeScreen(),
             );
           }
         }

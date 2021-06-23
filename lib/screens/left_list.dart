@@ -1,11 +1,13 @@
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
+import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'login.dart';
 import 'models.dart';
 
 class LeftList extends StatelessWidget {
@@ -106,18 +108,60 @@ class LeftList extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Widget> barLists = <Widget>[];
     Widget listViewSpace = const SizedBox(height: 10,);
-    barLists.add(listViewSpace);
-    barLists.addAll(leftBarItems.map((e) => leftBarItemWidget(
-      context: context, item: e,
-    )).toList(),);
-    barLists.add(listViewSpace);
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          Container(
-            color: Theme.of(context).accentColor,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
-            child: personalProfile(),
+          Consumer<ConfigNotifier>(
+            builder: (context, config, _,) {
+              if (config.currentStatus == ViewStatus.visitor) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10,),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: AppLibScreen.appBorder(),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20,),
+                        child: AppLibScreen.appText(text: "訪客，你好!"),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider(
+                              create: (context) => LoginNotifier(),
+                              child: Login(),
+                            ),
+                          ),
+                        ),
+                        child: leftBarItemWidget(
+                          context: context,
+                          item: loginLeftBarItem,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+          Consumer<ConfigNotifier>(
+            builder: (context, config, _,) {
+              if (config.currentStatus == ViewStatus.visitor) {
+                return Container();
+              } else {
+                return Container(
+                  color: Theme.of(context).accentColor,
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+                  child: personalProfile(),
+                );
+              }
+            },
           ),
           Container(
             decoration: BoxDecoration(
@@ -126,50 +170,78 @@ class LeftList extends StatelessWidget {
                 bottom: AppLibScreen.appBorder(),
               ),
             ),
-            child: ListView(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              children: barLists,
+            child: Consumer<ConfigNotifier>(
+              builder: (context, config, _,) {
+                if (config.currentStatus == ViewStatus.visitor) {
+                  barLists.add(listViewSpace);
+                  barLists.addAll(visitorLeftBarItems.map((e) => leftBarItemWidget(
+                    context: context, item: e,
+                  )).toList(),);
+                  barLists.add(listViewSpace);
+                } else {
+                  barLists.add(listViewSpace);
+                  barLists.addAll(leftBarItems.map((e) => leftBarItemWidget(
+                    context: context, item: e,
+                  )).toList(),);
+                  barLists.add(listViewSpace);
+                }
+                return ListView(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  children: barLists,
+                );
+              },
             ),
           ),
-          Container(
-            color: Colors.white,
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () async {
-                    bool choiceResult = await WidgetsHelper.choiceDialog(
-                      context: context,
-                      dialogTitle: "登出",
-                      dialogMsg: "確定登出此裝置嗎?",
-                    );
-                    if (choiceResult) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
-                      bool logout = await context.read<ConfigNotifier>().logout();
-                      ScaffoldMessenger.of(context)
-                        ..hideCurrentSnackBar()
-                        ..showSnackBar(
-                          SnackBar(
-                            content: Text( logout? "已成功登出!" : "登出失敗",),
-                          ),
-                        );
-                    }
-                  },
-                  child: AppLibScreen.appText(
-                    text: "登出",
+          Consumer<ConfigNotifier>(
+            builder: (context, config, _,) {
+              if (config.currentStatus == ViewStatus.visitor) {
+                return Container(
+                  color: Colors.white,
+                );
+              } else {
+                return Container(
+                  color: Colors.white,
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          bool choiceResult = await WidgetsHelper.choiceDialog(
+                            context: context,
+                            dialogTitle: "登出",
+                            dialogMsg: "確定登出此裝置嗎?",
+                          );
+                          if (choiceResult) {
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
+                            bool logout = await context.read<ConfigNotifier>().logout();
+                            ScaffoldMessenger.of(context)
+                              ..hideCurrentSnackBar()
+                              ..showSnackBar(
+                                SnackBar(
+                                  content: Text( logout? "已成功登出!" : "登出失敗",),
+                                ),
+                              );
+                            Navigator.of(context).pop();
+                          }
+                        },
+                        child: AppLibScreen.appText(
+                          text: "登出",
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: null,
+                        child: AppLibScreen.appText(
+                          text: "設定",
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                GestureDetector(
-                  onTap: null,
-                  child: AppLibScreen.appText(
-                    text: "設定",
-                  ),
-                ),
-              ],
-            ),
+                );
+              }
+            },
           ),
         ],
       ),

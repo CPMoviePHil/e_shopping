@@ -233,30 +233,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        leading: Consumer<ConfigNotifier>(
-          builder: (context, config, _config,) {
-            if (config.currentStatus == ViewStatus.visitor) {
-              return GestureDetector(
-                onTap: () => Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider(
-                      create: (context) => LoginNotifier(),
-                      child: Login(),
-                    ),
-                  ), (r) => false,
-                ),
-                child: const Icon(Icons.login,),
-              );
-            } else {
-              return GestureDetector(
-                onTap: () {
-                  scaffoldKey.currentState.openDrawer();
-                },
-                child: const Icon(Icons.menu),  // add custom icons also),
-              );
-            }
-          },
+        leading: GestureDetector(
+          onTap: () => scaffoldKey.currentState.openDrawer(),
+          child: const Icon(Icons.menu),  // add custom icons also),
         ),
         title: SearchBar(
           onChanged: setSearchString,
@@ -265,9 +244,11 @@ class _HomeScreenState extends State<HomeScreen> {
           CartAppBarAction(),
         ],
       ),
-      drawer: context.watch<ConfigNotifier>().currentStatus == ViewStatus.user ? Drawer(
+      drawer: Drawer(
         child: Container(
-          color: Theme.of(context).accentColor,
+          color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
+              ? Colors.white
+              : Theme.of(context).accentColor,
           width: MediaQuery.of(context).size.width * 0.7,
           child: SafeArea(
             child: Container(
@@ -276,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-      ) : null,
+      ),
       key: scaffoldKey,
       body: searchString.isNotEmpty ?
       GridView.count(

@@ -11,4 +11,11 @@ const List<LeftBarItem> leftBarItems = [
   const LeftBarItem(icon: Icons.chat_outlined, leftBarItemsName: "客服中心", routes: '',),
 ];
 
+const List<LeftBarItem> visitorLeftBarItems = [
+  const LeftBarItem(icon: Icons.shopping_bag_outlined, leftBarItemsName: "熱門商品", routes: '',),
+  const LeftBarItem(icon: Icons.info_outline, leftBarItemsName: "最新消息", routes: '',),
+  const LeftBarItem(icon: Icons.chat_outlined, leftBarItemsName: "客服中心", routes: '',),
+];
+
+const LeftBarItem loginLeftBarItem = const LeftBarItem(icon: Icons.login, leftBarItemsName: "登入", routes: '',);
 enum ViewStatus { user, visitor, }
