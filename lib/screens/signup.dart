@@ -64,7 +64,31 @@ class Signup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: null,
+                        onTap: () async {
+                          FocusScope.of(context).requestFocus(FocusNode());
+                          await Provider.of<SignupNotifier>(
+                            context,
+                            listen: false,
+                          ).formValidation(
+                            name: nameController.text,
+                            account: accountController.text,
+                            password: passwordController.text,
+                          );
+                          if (context.read<SignupNotifier>().currentStatus == SignupStatus.failure) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: AppLibScreen.appText(
+                                  text: "會員建立失敗",
+                                  fontColor: Colors.white,
+                                  textSize: "small",
+                                ),
+                              ),
+                            );
+                          }
+                          if (context.read<SignupNotifier>().currentStatus == SignupStatus.success) {
+                            Navigator.of(context).pop();
+                          }
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.5,
                           alignment: Alignment.center,
@@ -76,7 +100,8 @@ class Signup extends StatelessWidget {
                           ),
                           padding: EdgeInsets.symmetric(vertical: 5,),
                           child: AppLibScreen.appText(
-                            text: "建立會員",
+                            text: context.watch<SignupNotifier>().currentStatus == SignupStatus.validating
+                                ? "建立中..." : "建立會員",
                             fontColor: Colors.white,
                           ),
                         ),
@@ -90,7 +115,9 @@ class Signup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       GestureDetector(
-                        onTap: () => Navigator.of(context).pop(),
+                        onTap: context.watch<SignupNotifier>().currentStatus == SignupStatus.validating
+                            ? null
+                            : () => Navigator.of(context).pop(),
                         child: AppLibScreen.appText(
                           text: "已經有會員帳號?",
                           fontColor: Theme.of(context).accentColor,
