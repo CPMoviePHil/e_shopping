@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "creating" : MessageLookupByLibrary.simpleMessage("建立中..."),
     "customerService" : MessageLookupByLibrary.simpleMessage("客服中心"),
     "hotProduct" : MessageLookupByLibrary.simpleMessage("熱門商品"),
+    "language" : MessageLookupByLibrary.simpleMessage("語系"),
     "latestNews" : MessageLookupByLibrary.simpleMessage("最新消息"),
     "loggingOut" : MessageLookupByLibrary.simpleMessage("登出中.."),
     "login" : MessageLookupByLibrary.simpleMessage("登入"),

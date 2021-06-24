@@ -129,4 +129,18 @@ class AppLibScreen {
       ),
     );
   }
+
+  static Widget pageWidget ({
+    @required BuildContext context,
+    @required String pageName,
+    @required Widget page,
+  }) {
+    return Scaffold(
+      appBar: commonAppBar(context: context, appBarMsg: pageName,),
+      body: Container(
+        color: Colors.white,
+        child: page,
+      ),
+    );
+  }
 }

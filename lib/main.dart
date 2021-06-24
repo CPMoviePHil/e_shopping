@@ -33,10 +33,9 @@ AndroidNotificationChannel channel;
 /// Initialize the [FlutterLocalNotificationsPlugin] package.
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -53,7 +52,15 @@ void main() async {
 
   print('User granted permission: ${settings.authorizationStatus}');
   String token = await messaging.getToken();
-  runApp(MyApp(token: token,));
+
+  final myConfig = ConfigNotifier();
+  await myConfig.getLocale();
+  runApp(
+    ChangeNotifierProvider<ConfigNotifier>.value(
+      value: myConfig,
+      child: MyApp(token: token,),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -61,8 +68,7 @@ class MyApp extends StatefulWidget {
   final String token;
   const MyApp({@required this.token,});
 
-  @override
-  createState() => _AppPage();
+  @override createState() => _AppPage();
 }
 
 class _AppPage extends State<MyApp> {
@@ -168,7 +174,10 @@ class _AppPage extends State<MyApp> {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      locale: Locale("en", "",),
+      locale: Locale(
+        context.read<ConfigNotifier>().languageCode,
+        context.read<ConfigNotifier>().countryCode,
+      ),
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,

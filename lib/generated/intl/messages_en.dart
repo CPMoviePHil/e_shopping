@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "creating" : MessageLookupByLibrary.simpleMessage("Creating..."),
     "customerService" : MessageLookupByLibrary.simpleMessage("Customer Service"),
     "hotProduct" : MessageLookupByLibrary.simpleMessage("Hot Product"),
+    "language" : MessageLookupByLibrary.simpleMessage("Language"),
     "latestNews" : MessageLookupByLibrary.simpleMessage("Latest News"),
     "loggingOut" : MessageLookupByLibrary.simpleMessage("Logging out..."),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),

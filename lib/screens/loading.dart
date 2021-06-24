@@ -24,10 +24,8 @@ class Loading extends StatelessWidget {
               ),
             );
           } else {
-            return ChangeNotifierProvider(
-              create: (context) => ConfigNotifier()..setVisitor(),
-              child: HomeScreen(),
-            );
+            context.read<ConfigNotifier>()..setVisitor();
+            return HomeScreen();
           }
         }
         return Scaffold(

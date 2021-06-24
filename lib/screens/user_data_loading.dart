@@ -18,11 +18,9 @@ class UserDataLoading extends StatelessWidget {
         child: Consumer<LoadingDataNotifier>(
           builder: (context, loading, _loading) {
             if (loading.currentStatus == LoadingDataStatus.success) {
+              context.read<ConfigNotifier>()..setCurrentUser(user: loading.user,);
               return Builder(
-                builder: (context) => ChangeNotifierProvider(
-                  create: (context) => ConfigNotifier()..setCurrentUser(user: loading.user,),
-                  child: HomeScreen(),
-                ),
+                builder: (context) => HomeScreen(),
               );
             }
             return Center(

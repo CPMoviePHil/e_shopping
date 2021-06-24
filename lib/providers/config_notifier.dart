@@ -8,6 +8,8 @@ class ConfigNotifier with ChangeNotifier {
 
   ViewStatus currentStatus;
   UserModel currentUser;
+  String countryCode = "TW";
+  String languageCode = "zh";
 
   void setCurrentUser ({
     @required UserModel user,
@@ -15,13 +17,11 @@ class ConfigNotifier with ChangeNotifier {
     if (currentUser != user) {
       currentUser = user;
       currentStatus = ViewStatus.user;
-      notifyListeners();
     }
   }
 
   void setVisitor() {
     currentStatus = ViewStatus.visitor;
-    notifyListeners();
   }
 
   Future<bool> logout() async {
@@ -53,4 +53,20 @@ class ConfigNotifier with ChangeNotifier {
     return false;
   }
 
+  Future<void> changeLanguage({@required Locale locale}) async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    prefs.setString(key: "languageCode", value: locale.languageCode,);
+    prefs.setString(key: "countryCode", value: locale.countryCode??'',);
+    languageCode = locale.languageCode;
+    countryCode = locale.countryCode;
+    notifyListeners();
+  }
+
+  Future<void> getLocale () async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    if (prefs.getString(key: "languageCode") != null) {
+      languageCode = prefs.getString(key: "languageCode");
+      countryCode = prefs.getString(key: "countryCode") == '' ? null : prefs.getString(key: "countryCode") ;
+    }
+  }
 }

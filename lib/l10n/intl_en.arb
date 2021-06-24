@@ -30,5 +30,6 @@
   "validating": "Validating...",
   "accountInput": "account",
   "passwordInput": "password",
-  "nameInput": "name"
+  "nameInput": "name",
+  "language": "Language"
 }

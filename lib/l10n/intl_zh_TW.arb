@@ -30,5 +30,6 @@
   "validating": "驗證中...",
   "accountInput": "輸入會員帳號",
   "passwordInput": "輸入會員密碼",
-  "nameInput": "輸入名字"
+  "nameInput": "輸入名字",
+  "language": "語系"
 }

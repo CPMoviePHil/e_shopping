@@ -1,8 +1,8 @@
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
+import 'package:e_shopping/screens/settings.dart';
 import 'package:e_shopping/utils/app_libs.dart';
-import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -73,6 +73,12 @@ class LeftList extends StatelessWidget {
   final LeftBarItem loginLeftBarItem = LeftBarItem(
     icon: Icons.login,
     leftBarItemsName: S.current.login,
+    routes: '',
+  );
+
+  final LeftBarItem settingLeftBarItem = LeftBarItem(
+    icon: Icons.settings,
+    leftBarItemsName: S.current.setting,
     routes: '',
   );
 
@@ -253,56 +259,24 @@ class LeftList extends StatelessWidget {
                   color: Colors.white,
                 );
               } else {
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: AppLibScreen.appBorder(),
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Settings(),
                     ),
-                    color: Colors.white,
                   ),
-                  alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          bool choiceResult = await WidgetsHelper.choiceDialog(
-                            context: context,
-                            dialogTitle: S.current.logout,
-                            dialogMsg: S.current.logoutMsg,
-                          );
-                          if (choiceResult) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(S.current.loggingOut),
-                              ),
-                            );
-                            bool logout = await context.read<ConfigNotifier>().logout();
-                            ScaffoldMessenger.of(context)
-                              ..hideCurrentSnackBar()
-                              ..showSnackBar(
-                                SnackBar(
-                                  content: Text( logout
-                                      ? S.current.logoutSuccessfully
-                                      : S.current.logoutFailure,
-                                  ),
-                                ),
-                              );
-                            Navigator.of(context).pop();
-                          }
-                        },
-                        child: AppLibScreen.appText(
-                          text: S.current.logout,
-                        ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: AppLibScreen.appBorder(),
                       ),
-                      GestureDetector(
-                        onTap: null,
-                        child: AppLibScreen.appText(
-                          text: S.current.setting,
-                        ),
-                      ),
-                    ],
+                      color: Colors.white,
+                    ),
+                    child: leftBarItemWidget(
+                      context: context,
+                      item: settingLeftBarItem,
+                    ),
                   ),
                 );
               }
