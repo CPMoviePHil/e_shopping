@@ -140,12 +140,14 @@ class Login extends StatelessWidget {
                 ),
                 const SizedBox(height: 70,),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 100,),
+                  //padding: const EdgeInsets.symmetric(horizontal: 100,),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AppLibScreen.appText(text: S.current.needSignupMsg, textSize: "small",),
+                      const SizedBox(width: 5,),
                       GestureDetector(
+                        behavior: HitTestBehavior.translucent,
                         onTap: () {
                           Navigator.push(
                             context,
