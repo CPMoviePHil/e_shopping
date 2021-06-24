@@ -1,5 +1,6 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsHelper {
@@ -22,11 +23,17 @@ class WidgetsHelper {
                 children: [
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: AppLibScreen.appText(text: S.current.cancel),
+                    child: AppLibScreen.appText(
+                      text: S.current.cancel,
+                      fontColor: Colors.white,
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(true),
-                    child: AppLibScreen.appText(text: S.current.ok),
+                    child: AppLibScreen.appText(
+                      text: S.current.ok,
+                      fontColor: Colors.white,
+                    ),
                   ),
                 ],
               ),
@@ -34,6 +41,16 @@ class WidgetsHelper {
           ],
         );
       },
+    );
+  }
+
+  static Future<void> imageViewerDialog ({
+    @required BuildContext context,
+    @required String path,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (context) => ImageViewer(imagePath: path,),
     );
   }
 }

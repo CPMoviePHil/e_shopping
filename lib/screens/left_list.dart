@@ -3,6 +3,8 @@ import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/settings.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/images_viewer.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -97,17 +99,24 @@ class LeftList extends StatelessWidget {
   Widget loginProfile() {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(100),
-          ),
-          height: 150,
-          width: 150,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(100),
-            child: AppLibScreen.imageContent(
-              imageOnePath: config.currentUser.profile,
+        return GestureDetector(
+          onTap: () async {
+            await WidgetsHelper.imageViewerDialog(
+              context: context,
+              path: config.currentUser.profile,
+            );
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+            ),
+            height: 150,
+            width: 150,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: AppLibScreen.imageContent(
+                imageOnePath: config.currentUser.profile,
+              ),
             ),
           ),
         );
