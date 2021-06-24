@@ -10,7 +10,71 @@ import 'package:provider/provider.dart';
 import 'login.dart';
 import 'models.dart';
 
+import 'package:e_shopping/generated/l10n.dart';
+
 class LeftList extends StatelessWidget {
+
+  final List<LeftBarItem> leftBarItems = [
+    LeftBarItem(
+      icon: Icons.shopping_bag_outlined,
+      leftBarItemsName: S.current.hotProduct,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.collections_outlined,
+      leftBarItemsName: S.current.productCollections,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.notifications_outlined,
+      leftBarItemsName: S.current.notification,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.info_outline,
+      leftBarItemsName: S.current.latestNews,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.shopping_cart_outlined,
+      leftBarItemsName: S.current.latestNews,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.person_outline,
+      leftBarItemsName: S.current.personalInfo,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.chat_outlined,
+      leftBarItemsName: S.current.customerService,
+      routes: '',
+    ),
+  ];
+
+  final List<LeftBarItem> visitorLeftBarItems = [
+    LeftBarItem(
+      icon: Icons.shopping_bag_outlined,
+      leftBarItemsName: S.current.hotProduct,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.info_outline,
+      leftBarItemsName: S.current.latestNews,
+      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.chat_outlined,
+      leftBarItemsName: S.current.customerService,
+      routes: '',
+    ),
+  ];
+
+  final LeftBarItem loginLeftBarItem = LeftBarItem(
+    icon: Icons.login,
+    leftBarItemsName: S.current.login,
+    routes: '',
+  );
 
   Widget personalProfile() {
     return Column(
@@ -61,7 +125,7 @@ class LeftList extends StatelessWidget {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
         return AppLibScreen.appText(
-          text: "@${config.currentUser.account}",
+          text: S.current.loginAccount(config.currentUser.account),
           textSize: "small",
           fontColor: Colors.white,
         );
@@ -116,7 +180,7 @@ class LeftList extends StatelessWidget {
                     children: [
                       Container(
                         padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20,),
-                        child: AppLibScreen.appText(text: "訪客，你好!"),
+                        child: AppLibScreen.appText(text: S.of(context).visitorGreeting,),
                       ),
                       GestureDetector(
                         onTap: () => Navigator.push(
@@ -205,30 +269,37 @@ class LeftList extends StatelessWidget {
                         onTap: () async {
                           bool choiceResult = await WidgetsHelper.choiceDialog(
                             context: context,
-                            dialogTitle: "登出",
-                            dialogMsg: "確定登出此裝置嗎?",
+                            dialogTitle: S.current.logout,
+                            dialogMsg: S.current.logoutMsg,
                           );
                           if (choiceResult) {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("登出中.."),));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(S.current.loggingOut),
+                              ),
+                            );
                             bool logout = await context.read<ConfigNotifier>().logout();
                             ScaffoldMessenger.of(context)
                               ..hideCurrentSnackBar()
                               ..showSnackBar(
                                 SnackBar(
-                                  content: Text( logout? "已成功登出!" : "登出失敗",),
+                                  content: Text( logout
+                                      ? S.current.logoutSuccessfully
+                                      : S.current.logoutFailure,
+                                  ),
                                 ),
                               );
                             Navigator.of(context).pop();
                           }
                         },
                         child: AppLibScreen.appText(
-                          text: "登出",
+                          text: S.current.logout,
                         ),
                       ),
                       GestureDetector(
                         onTap: null,
                         child: AppLibScreen.appText(
-                          text: "設定",
+                          text: S.current.setting,
                         ),
                       ),
                     ],

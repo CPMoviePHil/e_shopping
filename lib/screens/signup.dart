@@ -1,3 +1,4 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/signup_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +18,7 @@ class Signup extends StatelessWidget {
       child: Scaffold(
         appBar: AppLibScreen.commonAppBar(
           context: context,
-          appBarMsg: "會員註冊",
+          appBarMsg: S.current.memberSignup,
         ),
         body: InkWell(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -32,13 +33,13 @@ class Signup extends StatelessWidget {
                 TextFormField(
                   controller: nameController,
                   decoration: AppLibScreen.inputDecoration(
-                    hintText: "輸入名字",
+                    hintText: S.current.nameInput,
                   ),
                 ),
                 TextFormField(
                   controller: accountController,
                   decoration: AppLibScreen.inputDecoration(
-                    hintText: "輸入帳號",
+                    hintText: S.current.accountInput,
                   ),
                 ),
                 const SizedBox(height: 10,),
@@ -48,7 +49,7 @@ class Signup extends StatelessWidget {
                       controller: passwordController,
                       obscureText: signup.hidePassword,
                       decoration: AppLibScreen.inputDecoration(
-                        hintText: "輸入會員密碼",
+                        hintText: S.current.passwordInput,
                         suffixIcon: signup.hidePassword
                             ? Icons.remove_red_eye_outlined
                             : Icons.remove_red_eye,
@@ -78,7 +79,7 @@ class Signup extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: AppLibScreen.appText(
-                                  text: "會員建立失敗",
+                                  text: S.current.signupFailure,
                                   fontColor: Colors.white,
                                   textSize: "small",
                                 ),
@@ -101,7 +102,8 @@ class Signup extends StatelessWidget {
                           padding: EdgeInsets.symmetric(vertical: 5,),
                           child: AppLibScreen.appText(
                             text: context.watch<SignupNotifier>().currentStatus == SignupStatus.validating
-                                ? "建立中..." : "建立會員",
+                                ? S.current.creating
+                                : S.current.signupLabel,
                             fontColor: Colors.white,
                           ),
                         ),
@@ -119,7 +121,7 @@ class Signup extends StatelessWidget {
                             ? null
                             : () => Navigator.of(context).pop(),
                         child: AppLibScreen.appText(
-                          text: "已經有會員帳號?",
+                          text: S.current.alreadyHaveAccount,
                           fontColor: Theme.of(context).accentColor,
                           textSize: "small",
                         ),

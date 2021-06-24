@@ -1,10 +1,10 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/providers/signup_notifier.dart';
 import 'package:e_shopping/screens/signup.dart';
 import 'package:e_shopping/screens/user_data_loading.dart';
 import 'package:e_shopping/utils/app_libs.dart';
-import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +21,7 @@ class Login extends StatelessWidget {
       child: Scaffold(
         appBar: AppLibScreen.commonAppBar(
           context: context,
-          appBarMsg: "會員登入",
+          appBarMsg: S.current.memberLogin,
         ),
         body: InkWell(
           onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
@@ -45,7 +45,7 @@ class Login extends StatelessWidget {
                               children: [
                                 CircularProgressIndicator(),
                                 const SizedBox(width: 20,),
-                                Text("驗證中..."),
+                                Text(S.current.validating),
                               ],
                             ),
                           ),
@@ -59,7 +59,7 @@ class Login extends StatelessWidget {
                 TextFormField(
                   controller: accountController,
                   decoration: AppLibScreen.inputDecoration(
-                    hintText: "輸入會員帳號",
+                    hintText: S.current.accountInput,
                   ),
                 ),
                 const SizedBox(height: 10,),
@@ -69,7 +69,7 @@ class Login extends StatelessWidget {
                       controller: passwordController,
                       obscureText: login.hidePassword,
                       decoration: AppLibScreen.inputDecoration(
-                        hintText: "輸入會員密碼",
+                        hintText: S.current.passwordInput,
                         suffixIcon: login.hidePassword
                             ? Icons.remove_red_eye_outlined
                             : Icons.remove_red_eye,
@@ -96,15 +96,15 @@ class Login extends StatelessWidget {
                           );
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: const Text("登入失敗"),
+                              SnackBar(
+                                content: Text(S.current.loginFailure),
                               ),
                             );
                           }
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.save_failure) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: const Text("登入資料儲存失敗，請在試一次"),
+                              SnackBar(
+                                content: Text(S.current.loginFailureMsgOne),
                               ),
                             );
                           }
@@ -132,7 +132,7 @@ class Login extends StatelessWidget {
                             ),
                           ),
                           padding: EdgeInsets.symmetric(vertical: 5,),
-                          child: AppLibScreen.appText(text: "登入", fontColor: Colors.white,),
+                          child: AppLibScreen.appText(text: S.current.login, fontColor: Colors.white,),
                         ),
                       ),
                     ],
@@ -144,7 +144,7 @@ class Login extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      AppLibScreen.appText(text: "沒有帳號嗎?", textSize: "small",),
+                      AppLibScreen.appText(text: S.current.needSignupMsg, textSize: "small",),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -159,7 +159,7 @@ class Login extends StatelessWidget {
                           FocusScope.of(context).requestFocus(FocusNode());
                         },
                         child: AppLibScreen.appText(
-                          text: "註冊",
+                          text: S.current.signup,
                           fontColor: Theme.of(context).accentColor,
                           textSize: "small",
                         ),
