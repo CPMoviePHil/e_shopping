@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "accountInput" : MessageLookupByLibrary.simpleMessage("輸入會員帳號"),
     "alreadyHaveAccount" : MessageLookupByLibrary.simpleMessage("已經有會員帳號"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("取消"),
     "creating" : MessageLookupByLibrary.simpleMessage("建立中..."),
     "customerService" : MessageLookupByLibrary.simpleMessage("客服中心"),
     "hotProduct" : MessageLookupByLibrary.simpleMessage("熱門商品"),
@@ -49,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameInput" : MessageLookupByLibrary.simpleMessage("輸入名字"),
     "needSignupMsg" : MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
     "notification" : MessageLookupByLibrary.simpleMessage("訊息通知"),
+    "ok" : MessageLookupByLibrary.simpleMessage("確認"),
     "passwordInput" : MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("個人資料"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("收藏商品"),
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signup" : MessageLookupByLibrary.simpleMessage("註冊"),
     "signupFailure" : MessageLookupByLibrary.simpleMessage("會員建立失敗"),
     "signupLabel" : MessageLookupByLibrary.simpleMessage("建立會員"),
+    "theme" : MessageLookupByLibrary.simpleMessage("切換主題"),
     "validating" : MessageLookupByLibrary.simpleMessage("驗證中..."),
     "visitorGreeting" : MessageLookupByLibrary.simpleMessage("訪客，你好!")
   };

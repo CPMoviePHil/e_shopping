@@ -59,6 +59,18 @@ class Settings extends StatelessWidget {
               },
             ),
             settingOption(
+              icon: Icons.color_lens_outlined,
+              option: S.current.theme,
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Languages(),
+                  ),
+                );
+              },
+            ),
+            settingOption(
               icon: Icons.logout,
               option: S.current.logout,
               onTap: () async {

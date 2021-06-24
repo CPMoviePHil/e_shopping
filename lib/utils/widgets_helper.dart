@@ -1,3 +1,5 @@
+import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsHelper {
@@ -20,11 +22,11 @@ class WidgetsHelper {
                 children: [
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: Text("取消"),
+                    child: AppLibScreen.appText(text: S.current.cancel),
                   ),
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(true),
-                    child: Text("確認"),
+                    child: AppLibScreen.appText(text: S.current.ok),
                   ),
                 ],
               ),

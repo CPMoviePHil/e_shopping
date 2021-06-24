@@ -31,5 +31,8 @@
   "accountInput": "輸入會員帳號",
   "passwordInput": "輸入會員密碼",
   "nameInput": "輸入名字",
-  "language": "語系"
+  "language": "語系",
+  "theme": "切換主題",
+  "ok": "確認",
+  "cancel": "取消"
 }

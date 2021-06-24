@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "accountInput" : MessageLookupByLibrary.simpleMessage("account"),
     "alreadyHaveAccount" : MessageLookupByLibrary.simpleMessage("Already Have an Account?"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
     "creating" : MessageLookupByLibrary.simpleMessage("Creating..."),
     "customerService" : MessageLookupByLibrary.simpleMessage("Customer Service"),
     "hotProduct" : MessageLookupByLibrary.simpleMessage("Hot Product"),
@@ -49,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "nameInput" : MessageLookupByLibrary.simpleMessage("name"),
     "needSignupMsg" : MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
     "notification" : MessageLookupByLibrary.simpleMessage("Notifications"),
+    "ok" : MessageLookupByLibrary.simpleMessage("Ok"),
     "passwordInput" : MessageLookupByLibrary.simpleMessage("password"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("Personal Info"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("Product Collection"),
@@ -56,6 +58,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signup" : MessageLookupByLibrary.simpleMessage("Signup"),
     "signupFailure" : MessageLookupByLibrary.simpleMessage("Signup failure"),
     "signupLabel" : MessageLookupByLibrary.simpleMessage("Create"),
+    "theme" : MessageLookupByLibrary.simpleMessage("Theme"),
     "validating" : MessageLookupByLibrary.simpleMessage("Validating..."),
     "visitorGreeting" : MessageLookupByLibrary.simpleMessage("Hello, Visitor!")
   };

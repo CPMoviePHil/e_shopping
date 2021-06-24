@@ -31,5 +31,8 @@
   "accountInput": "account",
   "passwordInput": "password",
   "nameInput": "name",
-  "language": "Language"
+  "language": "Language",
+  "theme": "Theme",
+  "ok": "Ok",
+  "cancel": "Cancel"
 }
