@@ -24,19 +24,34 @@ class Languages extends StatelessWidget {
         builder: (context, config, child,){
           return GestureDetector(
             onTap: () async {
-              config.changeLanguage(locale: locale);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: AppLibScreen.appText(
-                    text: lang.afterChangeMsg,
-                    fontColor: Colors.white,
-                  ),
-                ),
-              );
-              await S.load(locale);
-              await Future.delayed(Duration(microseconds: 1200,));
-              int count = 0;
-              Navigator.of(context).popUntil((_) => count++ >= 3);
+              if(config.languageCode == locale.languageCode && config.countryCode == lang.countryCode) {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: AppLibScreen.appText(
+                        text: lang.alertMsg,
+                        fontColor: Colors.white,
+                      ),
+                    ),
+                  );
+              } else {
+                config.changeLanguage(locale: locale);
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: AppLibScreen.appText(
+                        text: lang.afterChangeMsg,
+                        fontColor: Colors.white,
+                      ),
+                    ),
+                  );
+                await S.load(locale);
+                await Future.delayed(Duration(microseconds: 1200,));
+                int count = 0;
+                Navigator.of(context).popUntil((_) => count++ >= 3);
+              }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,

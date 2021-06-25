@@ -69,6 +69,8 @@ class ConfigNotifier with ChangeNotifier {
     MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
     if (prefs.getString(key: "languageCode") != null) {
       languageCode = prefs.getString(key: "languageCode");
+    }
+    if (prefs.getString(key: "countryCode") != null) {
       countryCode = prefs.getString(key: "countryCode") == '' ? null : prefs.getString(key: "countryCode") ;
     }
   }
