@@ -130,7 +130,6 @@ class LeftList extends StatelessWidget {
         return AppLibScreen.appText(
           text: config.currentUser.userName,
           textSize: "large",
-          fontColor: Colors.white,
         );
       },
     );
@@ -142,7 +141,6 @@ class LeftList extends StatelessWidget {
         return AppLibScreen.appText(
           text: S.current.loginAccount(config.currentUser.account),
           textSize: "small",
-          fontColor: Colors.white,
         );
       },
     );
@@ -176,6 +174,7 @@ class LeftList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("context:${context.watch<ConfigNotifier>().currentStatus}");
     List<Widget> barLists = <Widget>[];
     Widget listViewSpace = const SizedBox(height: 10,);
     return SingleChildScrollView(
@@ -188,7 +187,9 @@ class LeftList extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 10,),
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: AppLibScreen.appBorder(),
+                      bottom: AppLibScreen.appBorder(
+                        context: context,
+                      ),
                     ),
                   ),
                   child: Column(
@@ -234,7 +235,7 @@ class LeftList extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(15),
                 topRight: Radius.circular(15),
@@ -278,9 +279,11 @@ class LeftList extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border(
-                        top: AppLibScreen.appBorder(),
+                        top: AppLibScreen.appBorder(
+                          context: context,
+                        ),
                       ),
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColorLight,
                     ),
                     child: leftBarItemWidget(
                       context: context,

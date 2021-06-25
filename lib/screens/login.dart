@@ -5,6 +5,7 @@ import 'package:e_shopping/providers/signup_notifier.dart';
 import 'package:e_shopping/screens/signup.dart';
 import 'package:e_shopping/screens/user_data_loading.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -95,17 +96,15 @@ class Login extends StatelessWidget {
                             password: passwordController.text,
                           );
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.failure) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(S.current.loginFailure),
-                              ),
+                            WidgetsHelper.showSnackBar(
+                              context: context,
+                              msg: S.current.loginFailure,
                             );
                           }
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.save_failure) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(S.current.loginFailureMsgOne),
-                              ),
+                            WidgetsHelper.showSnackBar(
+                              context: context,
+                              msg: S.current.loginFailureMsgOne,
                             );
                           }
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.success) {

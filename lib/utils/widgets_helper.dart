@@ -9,7 +9,7 @@ class WidgetsHelper {
     @required String dialogTitle,
     @required String dialogMsg,
   }) async {
-    return showDialog(
+    return await showDialog<bool>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -22,17 +22,23 @@ class WidgetsHelper {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
                     onPressed: () => Navigator.of(context).pop(false),
                     child: AppLibScreen.appText(
                       text: S.current.cancel,
-                      fontColor: Colors.white,
                     ),
                   ),
                   ElevatedButton(
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      backgroundColor: Theme.of(context).primaryColor,
+                    ),
                     onPressed: () => Navigator.of(context).pop(true),
                     child: AppLibScreen.appText(
                       text: S.current.ok,
-                      fontColor: Colors.white,
                     ),
                   ),
                 ],
@@ -52,5 +58,20 @@ class WidgetsHelper {
       context: context,
       builder: (context) => ImageViewer(imagePath: path,),
     );
+  }
+
+  static void showSnackBar ({
+    @required BuildContext context,
+    @required String msg,
+  }) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(
+            msg,
+          ),
+        ),
+      );
   }
 }

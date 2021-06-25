@@ -1,6 +1,7 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/signup_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -76,14 +77,9 @@ class Signup extends StatelessWidget {
                             password: passwordController.text,
                           );
                           if (context.read<SignupNotifier>().currentStatus == SignupStatus.failure) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: AppLibScreen.appText(
-                                  text: S.current.signupFailure,
-                                  fontColor: Colors.white,
-                                  textSize: "small",
-                                ),
-                              ),
+                            WidgetsHelper.showSnackBar(
+                              context: context,
+                              msg: S.current.signupFailure,
                             );
                           }
                           if (context.read<SignupNotifier>().currentStatus == SignupStatus.success) {

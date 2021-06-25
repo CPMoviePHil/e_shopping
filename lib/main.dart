@@ -53,12 +53,11 @@ Future<void> main() async {
   print('User granted permission: ${settings.authorizationStatus}');
   String token = await messaging.getToken();
 
-  final myConfig = ConfigNotifier();
-  await myConfig.getLocale();
-  await myConfig.getTheme();
   runApp(
-    ChangeNotifierProvider<ConfigNotifier>.value(
-      value: myConfig,
+    ChangeNotifierProvider<ConfigNotifier>(
+      create: (context) => ConfigNotifier()
+        ..getLocale()
+        ..getTheme(),
       child: MyApp(token: token,),
     ),
   );
@@ -142,7 +141,6 @@ class _AppPage extends State<MyApp> {
       ),
     );
   }
-
 
   void showNotification(String title, String body, String id) async {
     await _demoNotification(title, body, id);
@@ -259,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Container(
           color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
               ? Colors.white
-              : Theme.of(context).accentColor,
+              : Theme.of(context).primaryColor,
           width: MediaQuery.of(context).size.width * 0.7,
           child: SafeArea(
             child: Container(

@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 class Settings extends StatelessWidget {
 
   Widget settingOption ({
+    @required BuildContext context,
     @required IconData icon,
     @required String option,
     @required AsyncCallback onTap,
@@ -20,7 +21,9 @@ class Settings extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 25, 0, 15,),
       decoration: BoxDecoration(
         border: Border(
-          bottom: AppLibScreen.appBorder(),
+          bottom: AppLibScreen.appBorder(
+            context: context,
+          ),
         ),
       ),
       child: GestureDetector(
@@ -43,11 +46,12 @@ class Settings extends StatelessWidget {
       context: context,
       pageName: S.current.setting,
       page: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,),
+        padding: const EdgeInsets.symmetric(horizontal: 20,),
         child: ListView(
           children: [
             const SizedBox(height: 15,),
             settingOption(
+              context: context,
               icon: Icons.language,
               option: S.current.language,
               onTap: () async {
@@ -60,6 +64,7 @@ class Settings extends StatelessWidget {
               },
             ),
             settingOption(
+              context: context,
               icon: Icons.color_lens_outlined,
               option: S.current.theme,
               onTap: () async {
@@ -71,32 +76,44 @@ class Settings extends StatelessWidget {
                 );
               },
             ),
-            settingOption(
-              icon: Icons.logout,
-              option: S.current.logout,
-              onTap: () async {
-                bool choiceResult = await WidgetsHelper.choiceDialog(
+            Consumer<ConfigNotifier>(
+              builder: (context, config, child,) {
+                return settingOption(
                   context: context,
-                  dialogTitle: S.current.logout,
-                  dialogMsg: S.current.logoutMsg,
-                );
-                if (choiceResult) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(S.current.loggingOut),),
-                  );
-                  bool logout = await context.read<ConfigNotifier>().logout();
-                  ScaffoldMessenger.of(context)
-                    ..hideCurrentSnackBar()
-                    ..showSnackBar(
-                      SnackBar(
-                        content: Text( logout
-                            ? S.current.logoutSuccessfully
-                            : S.current.logoutFailure,
-                        ),
-                      ),
+                  icon: Icons.logout,
+                  option: S.current.logout,
+                  onTap: () async {
+                    bool choiceResult = await WidgetsHelper.choiceDialog(
+                      context: context,
+                      dialogTitle: S.current.logout,
+                      dialogMsg: S.current.logoutMsg,
                     );
-                  Navigator.of(context).pop();
-                }
+                    if (choiceResult) {
+                      WidgetsHelper.showSnackBar(
+                        context: context,
+                        msg: S.current.loggingOut,
+                      );
+                      bool logout = await config.logout();
+                      if (logout) {
+                        config.setViewStatusToDefault();
+                        await config.setLanguageToDefault();
+                        await config.setThemeToDefault();
+                        WidgetsHelper.showSnackBar(
+                          context: context,
+                          msg: S.current.logoutSuccessfully,
+                        );
+                        print("currentView:${context.read<ConfigNotifier>().currentStatus}");
+                        print("config:${config.currentStatus}");
+                        Navigator.of(context).pop();
+                      } else {
+                        WidgetsHelper.showSnackBar(
+                          context: context,
+                          msg: S.current.logoutFailure,
+                        );
+                      }
+                    }
+                  },
+                );
               },
             ),
           ],

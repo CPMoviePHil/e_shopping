@@ -2,6 +2,7 @@ import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 class Languages extends StatelessWidget {
 
   Widget languageOption ({
+    @required BuildContext context,
     @required Locale locale,
   }) {
     ConfigLanguage lang = kLanguages.firstWhere((element) =>
@@ -17,7 +19,9 @@ class Languages extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(10, 25, 0, 15,),
       decoration: BoxDecoration(
         border: Border(
-          bottom: AppLibScreen.appBorder(),
+          bottom: AppLibScreen.appBorder(
+            context: context,
+          ),
         ),
       ),
       child: Consumer<ConfigNotifier>(
@@ -25,28 +29,16 @@ class Languages extends StatelessWidget {
           return GestureDetector(
             onTap: () async {
               if(config.languageCode == locale.languageCode && config.countryCode == lang.countryCode) {
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: AppLibScreen.appText(
-                        text: lang.alertMsg,
-                        fontColor: Colors.white,
-                      ),
-                    ),
-                  );
+                WidgetsHelper.showSnackBar(
+                  context: context,
+                  msg: lang.alertMsg,
+                );
               } else {
                 config.changeLanguage(locale: locale);
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(
-                    SnackBar(
-                      content: AppLibScreen.appText(
-                        text: lang.afterChangeMsg,
-                        fontColor: Colors.white,
-                      ),
-                    ),
-                  );
+                WidgetsHelper.showSnackBar(
+                  context: context,
+                  msg: lang.afterChangeMsg,
+                );
                 await S.load(locale);
                 await Future.delayed(Duration(microseconds: 1200,));
                 int count = 0;
@@ -75,7 +67,9 @@ class Languages extends StatelessWidget {
       page: Container(
         padding: EdgeInsets.symmetric(horizontal: 20,),
         child: ListView(
-          children: S.delegate.supportedLocales.map((e) => languageOption(locale: e,),).toList(),
+          children: S.delegate.supportedLocales.map((e) => languageOption(
+            locale: e, context: context,
+          ),).toList(),
         ),
       ),
     );

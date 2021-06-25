@@ -51,18 +51,26 @@ class ConfigNotifier with ChangeNotifier {
       notifyListeners();
     }
     if (process) {
-      setVisitor();
       return true;
     }
     return false;
   }
 
-  Future<void> changeLanguage({@required Locale locale}) async {
+  Future<void> changeLanguage ({@required Locale locale}) async {
     MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
     prefs.setString(key: "languageCode", value: locale.languageCode,);
     prefs.setString(key: "countryCode", value: locale.countryCode??'',);
     languageCode = locale.languageCode;
     countryCode = locale.countryCode;
+    notifyListeners();
+  }
+
+  Future<void> setLanguageToDefault() async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    prefs.removeKey(key: "languageCode");
+    prefs.removeKey(key: "countryCode");
+    countryCode = "TW";
+    languageCode = "zh";
     notifyListeners();
   }
 
@@ -107,6 +115,19 @@ class ConfigNotifier with ChangeNotifier {
         currentThemeCode = "lightTheme";
         break;
     }
+    notifyListeners();
+  }
+
+  Future<void> setThemeToDefault() async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    prefs.removeKey(key: "themeCode",);
+    currentTheme = buildLightTheme(languageCode);
+    currentThemeCode = "lightTheme";
+    notifyListeners();
+  }
+
+  void setViewStatusToDefault() {
+    currentStatus = ViewStatus.visitor;
     notifyListeners();
   }
 }

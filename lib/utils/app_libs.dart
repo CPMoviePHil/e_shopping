@@ -4,10 +4,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 class AppLibScreen {
 
-  static BorderSide appBorder({
+  static BorderSide appBorder ({
+    @required BuildContext context,
     double width = 0.2,
-    Color color = const Color.fromRGBO(61, 65, 69, 1),
+    Color color,
   }) {
+    if (color == null) {
+      color = Theme.of(context).highlightColor;
+    }
     return BorderSide(
       width: width,
       color: color,
@@ -16,7 +20,7 @@ class AppLibScreen {
 
   static Widget appIcon ({
     @required IconData icon,
-    Color iconColor = Colors.black,
+    Color iconColor,
     double size = 20,
     String iconSize = "medium",
   }) {
@@ -37,7 +41,9 @@ class AppLibScreen {
     return InkWell(
       onTap: null,
       child: Icon (
-        icon, color: iconColor, size: size,
+        icon,
+        color: iconColor,
+        size: size,
       ),
     );
   }
@@ -118,11 +124,11 @@ class AppLibScreen {
   }) {
     return AppBar(
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        icon: const Icon(Icons.arrow_back,),
         onPressed: () => Navigator.of(context).pop(),
       ),
       elevation: 0,
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).primaryColor,
       centerTitle: true,
       title: AppLibScreen.appText(
         text: appBarMsg,
@@ -138,7 +144,7 @@ class AppLibScreen {
     return Scaffold(
       appBar: commonAppBar(context: context, appBarMsg: pageName,),
       body: Container(
-        color: Colors.white,
+        color: Theme.of(context).primaryColor,
         child: page,
       ),
     );
