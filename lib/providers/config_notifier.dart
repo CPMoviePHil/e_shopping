@@ -1,7 +1,9 @@
 import 'package:e_shopping/configs/constants.dart';
+import 'package:e_shopping/configs/theme/index.dart';
 import 'package:e_shopping/data/user.dart';
 import 'package:e_shopping/utils/prefs.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigNotifier with ChangeNotifier {
@@ -10,6 +12,7 @@ class ConfigNotifier with ChangeNotifier {
   UserModel currentUser;
   String countryCode = "TW";
   String languageCode = "zh";
+  ThemeData currentTheme;
 
   void setCurrentUser ({
     @required UserModel user,
@@ -67,6 +70,16 @@ class ConfigNotifier with ChangeNotifier {
     if (prefs.getString(key: "languageCode") != null) {
       languageCode = prefs.getString(key: "languageCode");
       countryCode = prefs.getString(key: "countryCode") == '' ? null : prefs.getString(key: "countryCode") ;
+    }
+  }
+
+  Future<void> getTheme() async {
+    currentTheme = buildLightTheme(languageCode);
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    if (prefs.getBool(key: "darkMode") != null) {
+      if (prefs.getBool(key: "darkMode")) {
+        currentTheme = buildDarkTheme(languageCode);
+      }
     }
   }
 }

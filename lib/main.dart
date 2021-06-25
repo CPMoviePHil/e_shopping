@@ -55,6 +55,7 @@ Future<void> main() async {
 
   final myConfig = ConfigNotifier();
   await myConfig.getLocale();
+  await myConfig.getTheme();
   runApp(
     ChangeNotifierProvider<ConfigNotifier>.value(
       value: myConfig,
@@ -179,9 +180,7 @@ class _AppPage extends State<MyApp> {
         context.read<ConfigNotifier>().countryCode,
       ),
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: context.read<ConfigNotifier>().currentTheme,
       home: SimpleShopping(),
     );
   }
@@ -196,12 +195,9 @@ Cart cart = Cart();
 class SimpleShopping extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: ThemeData.light(),
-      child: ChangeNotifierProvider(
-        create: (context) => LoadingNotifier()..loadingProcess(),
-        child: Loading(),
-      ),
+    return ChangeNotifierProvider(
+      create: (context) => LoadingNotifier()..loadingProcess(),
+      child: Loading(),
     );
   }
 }

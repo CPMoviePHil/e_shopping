@@ -44,7 +44,7 @@ class AppLibScreen {
 
   static Widget appText ({
     @required String text,
-    Color fontColor = Colors.black,
+    Color fontColor,
     String textSize = 'medium',
   }) {
     double fontSize = 18;

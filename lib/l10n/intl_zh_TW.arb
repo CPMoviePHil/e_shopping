@@ -34,5 +34,7 @@
   "language": "語系",
   "theme": "切換主題",
   "ok": "確認",
-  "cancel": "取消"
+  "cancel": "取消",
+  "darkMode": "暗黑主題",
+  "normalMode": "一般主題"
 }

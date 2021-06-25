@@ -34,5 +34,7 @@
   "language": "Language",
   "theme": "Theme",
   "ok": "Ok",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "darkMode": "dark mode",
+  "normalMode": "normal mode"
 }

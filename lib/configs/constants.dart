@@ -15,6 +15,7 @@ class ConfigLanguage {
     @required this.afterChangeMsg,
   });
 }
+
 const List<ConfigLanguage> kLanguages = [
   ConfigLanguage(
     countryCode: "TW",

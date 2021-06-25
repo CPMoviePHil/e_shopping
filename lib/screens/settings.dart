@@ -1,6 +1,7 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/screens/languages.dart';
+import 'package:e_shopping/screens/themes.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,7 +66,7 @@ class Settings extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Languages(),
+                    builder: (context) => Themes(),
                   ),
                 );
               },
