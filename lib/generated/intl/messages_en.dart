@@ -23,6 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m1(username) => "${username}";
 
+  static m2(theme) => "set theme to ${theme}";
+
+  static m3(theme) => "${theme} already been set!";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "accountInput" : MessageLookupByLibrary.simpleMessage("account"),
@@ -34,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hotProduct" : MessageLookupByLibrary.simpleMessage("Hot Product"),
     "language" : MessageLookupByLibrary.simpleMessage("Language"),
     "latestNews" : MessageLookupByLibrary.simpleMessage("Latest News"),
+    "lightTheme" : MessageLookupByLibrary.simpleMessage("light mode"),
     "loggingOut" : MessageLookupByLibrary.simpleMessage("Logging out..."),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
     "loginAccount" : m0,
@@ -50,13 +55,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSignup" : MessageLookupByLibrary.simpleMessage("Member Signup"),
     "nameInput" : MessageLookupByLibrary.simpleMessage("name"),
     "needSignupMsg" : MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
-    "normalMode" : MessageLookupByLibrary.simpleMessage("normal mode"),
     "notification" : MessageLookupByLibrary.simpleMessage("Notifications"),
     "ok" : MessageLookupByLibrary.simpleMessage("Ok"),
     "passwordInput" : MessageLookupByLibrary.simpleMessage("password"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("Personal Info"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("Product Collection"),
     "setting" : MessageLookupByLibrary.simpleMessage("Setting"),
+    "settingTheme" : m2,
+    "settingThemeAlert" : m3,
     "signup" : MessageLookupByLibrary.simpleMessage("Signup"),
     "signupFailure" : MessageLookupByLibrary.simpleMessage("Signup failure"),
     "signupLabel" : MessageLookupByLibrary.simpleMessage("Create"),

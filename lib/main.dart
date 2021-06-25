@@ -176,11 +176,11 @@ class _AppPage extends State<MyApp> {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(
-        context.read<ConfigNotifier>().languageCode,
-        context.read<ConfigNotifier>().countryCode,
+        context.watch<ConfigNotifier>().languageCode,
+        context.watch<ConfigNotifier>().countryCode,
       ),
       title: 'Flutter Demo',
-      theme: context.read<ConfigNotifier>().currentTheme,
+      theme: context.watch<ConfigNotifier>().currentTheme,
       home: SimpleShopping(),
     );
   }

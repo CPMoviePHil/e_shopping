@@ -405,13 +405,33 @@ class S {
     );
   }
 
-  /// `normal mode`
-  String get normalMode {
+  /// `light mode`
+  String get lightTheme {
     return Intl.message(
-      'normal mode',
-      name: 'normalMode',
+      'light mode',
+      name: 'lightTheme',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `set theme to {theme}`
+  String settingTheme(Object theme) {
+    return Intl.message(
+      'set theme to $theme',
+      name: 'settingTheme',
+      desc: '',
+      args: [theme],
+    );
+  }
+
+  /// `{theme} already been set!`
+  String settingThemeAlert(Object theme) {
+    return Intl.message(
+      '$theme already been set!',
+      name: 'settingThemeAlert',
+      desc: '',
+      args: [theme],
     );
   }
 }

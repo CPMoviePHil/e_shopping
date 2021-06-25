@@ -1,3 +1,4 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 
 enum ViewStatus { user, visitor, }
@@ -17,6 +18,26 @@ class ConfigLanguage {
     @required this.afterChangeMsg,
   });
 }
+class ConfigTheme {
+  final String themeCode;
+  final String themeName;
+
+  const ConfigTheme({
+    @required this.themeCode,
+    @required this.themeName,
+  });
+}
+
+final List<ConfigTheme> configThemes = [
+  ConfigTheme(
+    themeCode: "lightTheme",
+    themeName: S.current.lightTheme,
+  ),
+  ConfigTheme(
+    themeCode: "darkMode",
+    themeName: S.current.darkMode,
+  ),
+];
 
 const List<ConfigLanguage> kLanguages = [
   ConfigLanguage(

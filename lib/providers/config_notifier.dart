@@ -13,6 +13,7 @@ class ConfigNotifier with ChangeNotifier {
   String countryCode = "TW";
   String languageCode = "zh";
   ThemeData currentTheme;
+  String currentThemeCode;
 
   void setCurrentUser ({
     @required UserModel user,
@@ -77,11 +78,35 @@ class ConfigNotifier with ChangeNotifier {
 
   Future<void> getTheme() async {
     currentTheme = buildLightTheme(languageCode);
+    currentThemeCode = "lightTheme";
     MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
-    if (prefs.getBool(key: "darkMode") != null) {
-      if (prefs.getBool(key: "darkMode")) {
-        currentTheme = buildDarkTheme(languageCode);
+    if (prefs.getString(key: "themeCode") != null) {
+      switch (prefs.getString(key: "themeCode")) {
+        case "darkMode":
+          currentThemeCode = "darkMode";
+          currentTheme = buildDarkTheme(languageCode);
+          break;
+        case "lightTheme":
+          currentThemeCode = "lightTheme";
+          currentTheme = buildLightTheme(languageCode);
+          break;
       }
     }
+  }
+
+  Future<void> setTheme({@required String themeCode}) async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
+    prefs.setString(key: "themeCode", value: themeCode);
+    switch (themeCode) {
+      case "darkMode":
+        currentTheme = buildDarkTheme(languageCode);
+        currentThemeCode = "darkMode";
+        break;
+      case "lightTheme":
+        currentTheme = buildLightTheme(languageCode);
+        currentThemeCode = "lightTheme";
+        break;
+    }
+    notifyListeners();
   }
 }

@@ -36,5 +36,7 @@
   "ok": "Ok",
   "cancel": "Cancel",
   "darkMode": "dark mode",
-  "normalMode": "normal mode"
+  "lightTheme": "light mode",
+  "settingTheme": "set theme to {theme}",
+  "settingThemeAlert": "{theme} already been set!"
 }

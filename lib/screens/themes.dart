@@ -1,3 +1,4 @@
+import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/utils/app_libs.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 class Themes extends StatelessWidget {
 
   Widget themeOption ({
-    @required Locale locale,
+    @required ConfigTheme theme,
   }) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 25, 0, 15,),
@@ -21,21 +22,37 @@ class Themes extends StatelessWidget {
         builder: (context, config, child,){
           return GestureDetector(
             onTap: () async {
-              config.changeLanguage(locale: locale);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: AppLibScreen.appText(text: ""),
-                ),
-              );
-              await Future.delayed(Duration(microseconds: 1200,));
-              int count = 0;
-              Navigator.of(context).popUntil((_) => count++ >= 3);
+              if (context.read<ConfigNotifier>().currentThemeCode != theme.themeCode) {
+                config.setTheme(themeCode: theme.themeCode,);
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: AppLibScreen.appText(
+                        text: S.current.settingTheme(theme.themeName),
+                      ),
+                    ),
+                  );
+                await Future.delayed(Duration(microseconds: 1200,));
+                int count = 0;
+                Navigator.of(context).popUntil((_) => count++ >= 3);
+              } else {
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: AppLibScreen.appText(
+                        text: S.current.settingThemeAlert(theme.themeName),
+                      ),
+                    ),
+                  );
+              }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 AppLibScreen.appText(
-                  text: "",
+                  text: theme.themeName,
                 ),
               ],
             ),
@@ -53,9 +70,7 @@ class Themes extends StatelessWidget {
       page: Container(
         padding: EdgeInsets.symmetric(horizontal: 20,),
         child: ListView(
-          children: [
-
-          ],
+          children: configThemes.map((e) => themeOption(theme: e)).toList(),
         ),
       ),
     );

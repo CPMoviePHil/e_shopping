@@ -23,6 +23,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m1(username) => "${username}";
 
+  static m2(theme) => "更改成${theme}";
+
+  static m3(theme) => "已經是${theme}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "accountInput" : MessageLookupByLibrary.simpleMessage("輸入會員帳號"),
@@ -34,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hotProduct" : MessageLookupByLibrary.simpleMessage("熱門商品"),
     "language" : MessageLookupByLibrary.simpleMessage("語系"),
     "latestNews" : MessageLookupByLibrary.simpleMessage("最新消息"),
+    "lightTheme" : MessageLookupByLibrary.simpleMessage("一般主題"),
     "loggingOut" : MessageLookupByLibrary.simpleMessage("登出中.."),
     "login" : MessageLookupByLibrary.simpleMessage("登入"),
     "loginAccount" : m0,
@@ -50,13 +55,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "memberSignup" : MessageLookupByLibrary.simpleMessage("會員註冊"),
     "nameInput" : MessageLookupByLibrary.simpleMessage("輸入名字"),
     "needSignupMsg" : MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
-    "normalMode" : MessageLookupByLibrary.simpleMessage("一般主題"),
     "notification" : MessageLookupByLibrary.simpleMessage("訊息通知"),
     "ok" : MessageLookupByLibrary.simpleMessage("確認"),
     "passwordInput" : MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("個人資料"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("收藏商品"),
     "setting" : MessageLookupByLibrary.simpleMessage("設定"),
+    "settingTheme" : m2,
+    "settingThemeAlert" : m3,
     "signup" : MessageLookupByLibrary.simpleMessage("註冊"),
     "signupFailure" : MessageLookupByLibrary.simpleMessage("會員建立失敗"),
     "signupLabel" : MessageLookupByLibrary.simpleMessage("建立會員"),
