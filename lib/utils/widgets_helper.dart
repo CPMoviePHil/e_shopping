@@ -24,7 +24,7 @@ class WidgetsHelper {
                   ElevatedButton(
                     style: TextButton.styleFrom(
                       primary: Colors.white,
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Theme.of(context).highlightColor,
                     ),
                     onPressed: () => Navigator.of(context).pop(false),
                     child: AppLibScreen.appText(
@@ -34,7 +34,7 @@ class WidgetsHelper {
                   ElevatedButton(
                     style: TextButton.styleFrom(
                       primary: Colors.white,
-                      backgroundColor: Theme.of(context).primaryColor,
+                      backgroundColor: Theme.of(context).highlightColor,
                     ),
                     onPressed: () => Navigator.of(context).pop(true),
                     child: AppLibScreen.appText(

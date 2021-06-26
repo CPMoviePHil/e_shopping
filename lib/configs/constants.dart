@@ -1,4 +1,3 @@
-import 'package:e_shopping/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 
 enum ViewStatus { user, visitor, }
@@ -18,6 +17,7 @@ class ConfigLanguage {
     @required this.afterChangeMsg,
   });
 }
+
 class ConfigTheme {
   final String themeCode;
   final String themeName;
@@ -29,14 +29,14 @@ class ConfigTheme {
 }
 
 const List<ConfigLanguage> kLanguages = [
-  ConfigLanguage(
+  const ConfigLanguage(
     countryCode: "TW",
     languageCode: "zh",
     lang: "繁體中文(TW)",
     alertMsg: "現在已經是繁體中文",
     afterChangeMsg: "語系跟改成繁體中文",
   ),
-  ConfigLanguage(
+  const ConfigLanguage(
     countryCode: null,
     languageCode: "en",
     lang: "English",
