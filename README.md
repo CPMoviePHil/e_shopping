@@ -20,3 +20,4 @@
   修正方法是用Navigator.pop的方式，然後把Load Data的Notifier建立最上層。<br/>
   要否載入User值就用configNotifier的isLogin做判斷。<br/>
   (不知道這解法484好解法。感覺程式變得又塞在一起)<br/>
+  分支測試<br/>
