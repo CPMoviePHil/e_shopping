@@ -1,6 +1,6 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/main.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
-import 'package:e_shopping/providers/loading_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/screens/user_data_loading.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,31 +11,16 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoadingNotifier>(
-      builder: (context, loading, _loading) {
-        if (loading.currentStatus == LoadingStatus.success) {
-          if (loading.isLogin) {
-            return Builder(
-              builder: (context) => ChangeNotifierProvider(
-                create: (context) => LoadingDataNotifier()..loadingUserDataProcess(
-                  context: context,
-                ),
-                child: UserDataLoading(),
-              ),
-            );
-          } else {
-            context.read<ConfigNotifier>()..setVisitor();
-            return HomeScreen();
-          }
+    return Consumer<ConfigNotifier>(
+      builder: (context, config, _child,) {
+        if (config.isLogin) {
+          context.read<LoadingDataNotifier>().setStatusToInitial();
+          context.read<LoadingDataNotifier>().loadingUserDataProcess(context: context);
+          return UserDataLoading();
+        } else {
+          context.read<ConfigNotifier>()..setVisitor();
         }
-        return Scaffold(
-          body: Container(
-            color: Colors.white,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
-        );
+        return HomeScreen();
       },
     );
   }

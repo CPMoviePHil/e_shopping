@@ -14,6 +14,7 @@ class ConfigNotifier with ChangeNotifier {
   String languageCode = "zh";
   ThemeData currentTheme;
   String currentThemeCode;
+  bool isLogin;
 
   void setCurrentUser ({
     @required UserModel user,
@@ -44,10 +45,11 @@ class ConfigNotifier with ChangeNotifier {
       if (prefs.getString(key: "profile") != null) {
         process = await prefs.removeKey(key: "profile");
       }
-      if (prefs.getBool(key: "login") != null) {
-        prefs.setBool(key: "login", value: false,);
+      if (prefs.getBool(key: "isLogin") != null) {
+        prefs.setBool(key: "isLogin", value: false,);
       }
       currentUser = null;
+      isLogin = false;
       notifyListeners();
     }
     if (process) {
@@ -129,5 +131,21 @@ class ConfigNotifier with ChangeNotifier {
   void setViewStatusToDefault() {
     currentStatus = ViewStatus.visitor;
     notifyListeners();
+  }
+
+  Future<void> getLoginStatus() async {
+    MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance(),);
+    if (prefs.getBool(key: 'isLogin',) == null) {
+      isLogin = false;
+    } else {
+      isLogin = prefs.getBool(key: 'isLogin',);
+    }
+  }
+
+  void setLogin() {
+    if (!isLogin) {
+      isLogin = !isLogin;
+      notifyListeners();
+    }
   }
 }

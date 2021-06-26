@@ -1,4 +1,5 @@
 import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/providers/signup_notifier.dart';
@@ -108,17 +109,8 @@ class Login extends StatelessWidget {
                             );
                           }
                           if (context.read<LoginNotifier>().currentStatus == LoginStatus.success) {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ChangeNotifierProvider(
-                                  create: (context) => LoadingDataNotifier()..loadingUserDataProcess(
-                                    context: context,
-                                  ),
-                                  child: UserDataLoading(),
-                                ),
-                              ), (r) => false,
-                            );
+                            context.read<ConfigNotifier>().setLogin();
+                            Navigator.of(context).pop();
                           }
                         },
                         child: Container(

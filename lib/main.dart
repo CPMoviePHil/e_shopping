@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
+import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/screens/left_list.dart';
 import 'package:e_shopping/screens/loading.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,17 +50,25 @@ Future<void> main() async {
     provisional: false,
     sound: true,
   );
-
-  print('User granted permission: ${settings.authorizationStatus}');
   String token = await messaging.getToken();
-
+  ConfigNotifier myConfig = ConfigNotifier();
+  await myConfig.getLocale();
+  await myConfig.getTheme();
+  await myConfig.getLoginStatus();
   runApp(
-    ChangeNotifierProvider<ConfigNotifier>(
-      create: (context) => ConfigNotifier()
-        ..getLocale()
-        ..getTheme(),
+    ChangeNotifierProvider<ConfigNotifier>.value(
+      value: myConfig,
+      child: MultiProvider(
+      providers: [
+        ChangeNotifierProvider<LoadingNotifier>(
+          create: (context) => LoadingNotifier()..loadingProcess(),
+        ),
+        ChangeNotifierProvider<LoadingDataNotifier>(
+          create: (context) => LoadingDataNotifier(),
+        ),
+      ],
       child: MyApp(token: token,),
-    ),
+    ),),
   );
 }
 
@@ -193,10 +202,7 @@ Cart cart = Cart();
 class SimpleShopping extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => LoadingNotifier()..loadingProcess(),
-      child: Loading(),
-    );
+    return Loading();
   }
 }
 

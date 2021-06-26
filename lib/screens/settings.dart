@@ -88,6 +88,9 @@ class Settings extends StatelessWidget {
                       dialogTitle: S.current.logout,
                       dialogMsg: S.current.logoutMsg,
                     );
+                    if (choiceResult == null) {
+                      choiceResult = false;
+                    }
                     if (choiceResult) {
                       WidgetsHelper.showSnackBar(
                         context: context,
@@ -102,8 +105,6 @@ class Settings extends StatelessWidget {
                           context: context,
                           msg: S.current.logoutSuccessfully,
                         );
-                        print("currentView:${context.read<ConfigNotifier>().currentStatus}");
-                        print("config:${config.currentStatus}");
                         Navigator.of(context).pop();
                       } else {
                         WidgetsHelper.showSnackBar(

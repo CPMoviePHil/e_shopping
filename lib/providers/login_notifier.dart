@@ -20,7 +20,7 @@ class LoginNotifier with ChangeNotifier {
     notifyListeners();
     if (await accountInput(account: account) && await passwordInput(password: password)) {
       MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
-      if (await prefs.setBool(key: "login", value: true,)) {
+      if (await prefs.setBool(key: "isLogin", value: true,)) {
         currentStatus = LoginStatus.success;
         notifyListeners();
       } else {

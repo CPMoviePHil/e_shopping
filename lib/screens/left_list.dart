@@ -174,7 +174,6 @@ class LeftList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("context:${context.watch<ConfigNotifier>().currentStatus}");
     List<Widget> barLists = <Widget>[];
     Widget listViewSpace = const SizedBox(height: 10,);
     return SingleChildScrollView(

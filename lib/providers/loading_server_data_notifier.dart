@@ -16,8 +16,6 @@ class LoadingDataNotifier with ChangeNotifier {
   Future<void> loadingUserDataProcess({
     @required BuildContext context,
   }) async {
-    currentStatus = LoadingDataStatus.initial;
-    notifyListeners();
     String data = await DefaultAssetBundle.of(context).loadString("assets/json/user.json");
     final jsonResult = json.decode(data);
     if (jsonResult['result']) {
@@ -37,5 +35,9 @@ class LoadingDataNotifier with ChangeNotifier {
       currentStatus = LoadingDataStatus.failure;
       notifyListeners();
     }
+  }
+
+  void setStatusToInitial() {
+    currentStatus = LoadingDataStatus.initial;
   }
 }
