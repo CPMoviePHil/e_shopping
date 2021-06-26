@@ -38,5 +38,6 @@
   "darkMode": "暗黑主題",
   "lightTheme": "一般主題",
   "settingTheme": "更改成{theme}",
-  "settingThemeAlert": "已經是{theme}"
+  "settingThemeAlert": "已經是{theme}",
+  "productName": "產品名稱"
 }

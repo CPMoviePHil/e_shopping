@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordInput" : MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("個人資料"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("收藏商品"),
+    "productName" : MessageLookupByLibrary.simpleMessage("產品名稱"),
     "setting" : MessageLookupByLibrary.simpleMessage("設定"),
     "settingTheme" : m2,
     "settingThemeAlert" : m3,

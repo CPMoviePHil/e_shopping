@@ -60,6 +60,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordInput" : MessageLookupByLibrary.simpleMessage("password"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("Personal Info"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("Product Collection"),
+    "productName" : MessageLookupByLibrary.simpleMessage("product name"),
     "setting" : MessageLookupByLibrary.simpleMessage("Setting"),
     "settingTheme" : m2,
     "settingThemeAlert" : m3,

@@ -38,5 +38,6 @@
   "darkMode": "dark mode",
   "lightTheme": "light mode",
   "settingTheme": "set theme to {theme}",
-  "settingThemeAlert": "{theme} already been set!"
+  "settingThemeAlert": "{theme} already been set!",
+  "productName": "product name"
 }

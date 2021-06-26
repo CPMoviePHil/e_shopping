@@ -434,6 +434,16 @@ class S {
       args: [theme],
     );
   }
+
+  /// `product name`
+  String get productName {
+    return Intl.message(
+      'product name',
+      name: 'productName',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
