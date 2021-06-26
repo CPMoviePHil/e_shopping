@@ -13,12 +13,10 @@ class _CartScreenState extends State<CartScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<CartNotifier>().addListener(updateState);
   }
 
   @override
   void dispose() {
-    context.read<CartNotifier>().removeListener(updateState);
     super.dispose();
   }
 
@@ -27,8 +25,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     List<Widget> orderItemRows = context.watch<CartNotifier>().itemsInCart
-        .map(
-          (item) => Row(
+        .map((item) => Row(
         children: [
           SizedBox(
             width: 125,
@@ -66,14 +63,13 @@ class _CartScreenState extends State<CartScreen> {
           )
         ],
       ),
-    )
-        .toList();
+    ).toList();
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.close),
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
         title: Column(

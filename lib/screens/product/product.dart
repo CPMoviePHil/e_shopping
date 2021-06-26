@@ -1,7 +1,3 @@
-import 'dart:math';
-
-import 'package:carousel_slider/carousel_options.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_shopping/configs/theme/colors.dart';
 import 'package:e_shopping/data/category.dart';
 import 'package:e_shopping/data/product.dart';
@@ -12,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../temp_data.dart';
 import 'call_action.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -51,38 +46,6 @@ class _ProductScreenState extends State<ProductScreen> {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
   }
 
-  Widget relatedProductsSlider ({
-    @required Category cate,
-  }) {
-    List<Product> relatedProducts = filterProducts(products: products, category: cate,);
-    final int number = Random().nextInt(relatedProducts.length);
-    return CarouselSlider(
-      options: CarouselOptions(height: 190.0, initialPage: number,),
-      items: relatedProducts.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                height: 190,
-                child: Column(
-                  children: [
-                    Container(
-                      child: Image.network(i.imageUrls[0],),
-                    ),
-                    Container(
-                      child: Text(i.name),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      }).toList(),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Widget> imagePreviews = product.imageUrls
@@ -109,43 +72,7 @@ class _ProductScreenState extends State<ProductScreen> {
           ),
         ),
       ),
-    )
-        .toList();
-
-    List<Widget> sizeSelectionWidgets = product.sizes
-        ?.map(
-          (s) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: GestureDetector(
-          onTap: () {
-            setSelectedSize(s);
-          },
-          child: Container(
-            height: 42,
-            width: 38,
-            decoration: BoxDecoration(
-              color: selectedSize == s
-                  ? Theme.of(context).accentColor
-                  : null,
-              border: Border.all(
-                color: Colors.grey[350],
-                width: 1.25,
-              ),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Center(
-              child: Text(
-                s,
-                style: Theme.of(context).textTheme.caption.copyWith(
-                    color: selectedSize == s ? Colors.white : null),
-              ),
-            ),
-          ),
-        ),
-      ),
-    )
-        ?.toList() ??
-        [];
+    ).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -199,9 +126,6 @@ class _ProductScreenState extends State<ProductScreen> {
                     ),
                   ),
                   SizedBox(height: 12),
-                  /*Container(
-                    child: relatedProductsSlider(cate: widget.product.category,),
-                  ),*/
                   Center(
                     child: CallToActionButton(
                       onPressed: () => context.read<CartNotifier>().add(

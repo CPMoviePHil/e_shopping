@@ -14,164 +14,56 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:async';
-import 'dart:io' show Platform;
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'data/product.dart';
 import 'generated/l10n.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
-}
 
-/// Create a [AndroidNotificationChannel] for heads up notifications
-AndroidNotificationChannel channel;
-
-/// Initialize the [FlutterLocalNotificationsPlugin] package.
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  NotificationSettings settings = await messaging.requestPermission(
-    alert: true,
-    announcement: false,
-    badge: true,
-    carPlay: false,
-    criticalAlert: false,
-    provisional: false,
-    sound: true,
-  );
-  String token = await messaging.getToken();
   ConfigNotifier myConfig = ConfigNotifier();
   await myConfig.getLocale();
   await myConfig.getTheme();
   await myConfig.getLoginStatus();
+
   runApp(
     ChangeNotifierProvider<ConfigNotifier>.value(
       value: myConfig,
       child: MultiProvider(
-      providers: [
-        ChangeNotifierProvider<LoadingNotifier>(
-          create: (context) => LoadingNotifier()..loadingProcess(),
-        ),
-        ChangeNotifierProvider<LoadingDataNotifier>(
-          create: (context) => LoadingDataNotifier(),
-        ),
-        ChangeNotifierProvider<CartNotifier>(
-          create: (context)=> CartNotifier(),
-        ),
-      ],
-      child: MyApp(token: token,),
-    ),),
+        providers: [
+          ChangeNotifierProvider<LoadingNotifier>(
+            create: (context) => LoadingNotifier()..loadingProcess(),
+          ),
+          ChangeNotifierProvider<LoadingDataNotifier>(
+            create: (context) => LoadingDataNotifier(),
+          ),
+          ChangeNotifierProvider<CartNotifier>(
+            create: (context) => CartNotifier(),
+          ),
+        ],
+        child: MyApp(),
+      ),
+    ),
   );
 }
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  final String token;
-  const MyApp({@required this.token,});
+
+  const MyApp();
 
   @override createState() => _AppPage();
 }
 
 class _AppPage extends State<MyApp> {
 
-  configureFirebaseListeners(){
-    var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = new IOSInitializationSettings(
-        requestSoundPermission: false,
-        requestBadgePermission: false,
-        requestAlertPermission: false,
-        onDidReceiveLocalNotification: onDidReceiveLocalNotification
-    );
-    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid,iOS: initializationSettingsIOS);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,);
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
-      if (message != null) {
-        if (message.data['type'] == "sign_out") {
-
-        } else if (message.data['type'] == "leave") {
-
-        }
-      }
-    });
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-
-      // 判定型號
-      if (Platform.isAndroid) {
-        print("remote:${message.data['type'] }");
-        if (message.data['type'] == "sign_out") {
-
-        } else if (message.data['type'] == "leave") {
-
-        } else {
-          showNotification(message.notification.title, message.notification.body, message.data['id']);
-        }
-      } else if (Platform.isIOS) {
-        if (message.data['type'] == "sign_out") {
-
-        } else if (message.data['type'] == "leave") {
-
-        } else {
-          showNotification(message.notification.title, message.notification.body, message.data['google.c.sender.id']);
-        }
-      }
-    });
-  }
-
-  Future onDidReceiveLocalNotification(int id, String title, String body, String payload) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            child: Text('Ok'),
-            onPressed: () async {
-              Navigator.of(context, rootNavigator: true).pop();
-              await Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Text(payload),
-                ),
-              );
-            },
-          )
-        ],
-      ),
-    );
-  }
-
-  void showNotification(String title, String body, String id) async {
-    await _demoNotification(title, body, id);
-  }
-
-  Future<void> _demoNotification(String title, String body, String id) async {
-    var android = AndroidNotificationDetails(
-        'id', 'channel ', 'description',
-        priority: Priority.high, importance: Importance.max);
-    var iOS = IOSNotificationDetails();
-    var platform = new NotificationDetails(android:android, iOS: iOS);
-    await flutterLocalNotificationsPlugin.show(0, title, body, platform, payload: id);
-  }
-
   @override
   void initState() {
-    // TODO: implement initState
-    configureFirebaseListeners();
     super.initState();
   }
 
@@ -190,7 +82,7 @@ class _AppPage extends State<MyApp> {
         context.watch<ConfigNotifier>().languageCode,
         context.watch<ConfigNotifier>().countryCode,
       ),
-      title: 'Flutter Demo',
+      title: 'e-shop',
       theme: context.watch<ConfigNotifier>().currentTheme,
       home: SimpleShopping(),
     );

@@ -12,22 +12,6 @@ class CartAppBarAction extends StatefulWidget {
 }
 
 class _CartAppBarActionState extends State<CartAppBarAction> {
-  // TODO: Setup cart to listen for changes based on your own state management. Could use riverpod, provider, bloc, etc..
-  @override
-  void initState() {
-    context.read<CartNotifier>().addListener(blankSetState);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    context.read<CartNotifier>().removeListener(blankSetState);
-    super.dispose();
-  }
-
-  void blankSetState() {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
