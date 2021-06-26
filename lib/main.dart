@@ -175,11 +175,6 @@ class _HomeScreenState extends State<HomeScreen> {
       ) : ListView(
         padding: listViewPadding,
         children: [
-          Text(
-            "Shop by Category",
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          //SizedBox(height: 16),
           CategoryTile(
             imageUrl: manLookRightImageUrl,
             category: menCategory,

@@ -28,17 +28,6 @@ class ConfigTheme {
   });
 }
 
-final List<ConfigTheme> configThemes = [
-  ConfigTheme(
-    themeCode: "lightTheme",
-    themeName: S.current.lightTheme,
-  ),
-  ConfigTheme(
-    themeCode: "darkMode",
-    themeName: S.current.darkMode,
-  ),
-];
-
 const List<ConfigLanguage> kLanguages = [
   ConfigLanguage(
     countryCode: "TW",

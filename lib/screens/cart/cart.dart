@@ -1,3 +1,4 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/product/call_action.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
@@ -74,9 +75,9 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         title: Column(
           children: [
-            Text("Cart"),
+            Text(S.current.cart),
             Text(
-              context.watch<CartNotifier>().itemsInCart.length.toString() + " items",
+              S.current.cartItems(context.watch<CartNotifier>().itemsInCart.length.toString()),
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.normal,
@@ -101,7 +102,7 @@ class _CartScreenState extends State<CartScreen> {
           else
             Expanded(
               child: Center(
-                child: Text("Your cart is empty"),
+                child: Text(S.current.emptyCart),
               ),
             ),
           Padding(
@@ -113,7 +114,7 @@ class _CartScreenState extends State<CartScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Total",
+                      S.current.total,
                       style: Theme.of(context).textTheme.caption,
                     ),
                     Text(
@@ -124,7 +125,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 CallToActionButton(
                   onPressed: () {},
-                  labelText: "Check Out",
+                  labelText: S.current.checkOut,
                   minSize: Size(220, 45),
                 ),
               ],

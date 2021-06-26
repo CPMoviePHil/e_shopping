@@ -39,5 +39,12 @@
   "lightTheme": "light mode",
   "settingTheme": "set theme to {theme}",
   "settingThemeAlert": "{theme} already been set!",
-  "productName": "product name"
+  "productName": "Product Name",
+  "productSearchHint": "Search for a product",
+  "cart": "Cart",
+  "addToCart": "Add To Cart",
+  "emptyCart": "Your cart is empty",
+  "total": "Total",
+  "checkOut": "Check Out",
+  "cartItems": "{number} items"
 }

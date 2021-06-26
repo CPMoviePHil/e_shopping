@@ -19,32 +19,39 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static m0(account) => "@${account}";
+  static m0(number) => "${number} items";
 
-  static m1(username) => "${username}";
+  static m1(account) => "@${account}";
 
-  static m2(theme) => "set theme to ${theme}";
+  static m2(username) => "${username}";
 
-  static m3(theme) => "${theme} already been set!";
+  static m3(theme) => "set theme to ${theme}";
+
+  static m4(theme) => "${theme} already been set!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "accountInput" : MessageLookupByLibrary.simpleMessage("account"),
+    "addToCart" : MessageLookupByLibrary.simpleMessage("Add To Cart"),
     "alreadyHaveAccount" : MessageLookupByLibrary.simpleMessage("Already Have an Account?"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "cart" : MessageLookupByLibrary.simpleMessage("Cart"),
+    "cartItems" : m0,
+    "checkOut" : MessageLookupByLibrary.simpleMessage("Check Out"),
     "creating" : MessageLookupByLibrary.simpleMessage("Creating..."),
     "customerService" : MessageLookupByLibrary.simpleMessage("Customer Service"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("dark mode"),
+    "emptyCart" : MessageLookupByLibrary.simpleMessage("Your cart is empty"),
     "hotProduct" : MessageLookupByLibrary.simpleMessage("Hot Product"),
     "language" : MessageLookupByLibrary.simpleMessage("Language"),
     "latestNews" : MessageLookupByLibrary.simpleMessage("Latest News"),
     "lightTheme" : MessageLookupByLibrary.simpleMessage("light mode"),
     "loggingOut" : MessageLookupByLibrary.simpleMessage("Logging out..."),
     "login" : MessageLookupByLibrary.simpleMessage("Login"),
-    "loginAccount" : m0,
+    "loginAccount" : m1,
     "loginFailure" : MessageLookupByLibrary.simpleMessage("Login Failure"),
     "loginFailureMsgOne" : MessageLookupByLibrary.simpleMessage("Login Data save failure, Please try again"),
-    "loginUsername" : m1,
+    "loginUsername" : m2,
     "logout" : MessageLookupByLibrary.simpleMessage("Logout"),
     "logoutFailure" : MessageLookupByLibrary.simpleMessage("Logout failure"),
     "logoutMsg" : MessageLookupByLibrary.simpleMessage("You sure want to log out this device?"),
@@ -60,14 +67,16 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordInput" : MessageLookupByLibrary.simpleMessage("password"),
     "personalInfo" : MessageLookupByLibrary.simpleMessage("Personal Info"),
     "productCollections" : MessageLookupByLibrary.simpleMessage("Product Collection"),
-    "productName" : MessageLookupByLibrary.simpleMessage("product name"),
+    "productName" : MessageLookupByLibrary.simpleMessage("Product Name"),
+    "productSearchHint" : MessageLookupByLibrary.simpleMessage("Search for a product"),
     "setting" : MessageLookupByLibrary.simpleMessage("Setting"),
-    "settingTheme" : m2,
-    "settingThemeAlert" : m3,
+    "settingTheme" : m3,
+    "settingThemeAlert" : m4,
     "signup" : MessageLookupByLibrary.simpleMessage("Signup"),
     "signupFailure" : MessageLookupByLibrary.simpleMessage("Signup failure"),
     "signupLabel" : MessageLookupByLibrary.simpleMessage("Create"),
     "theme" : MessageLookupByLibrary.simpleMessage("Theme"),
+    "total" : MessageLookupByLibrary.simpleMessage("Total"),
     "validating" : MessageLookupByLibrary.simpleMessage("Validating..."),
     "visitorGreeting" : MessageLookupByLibrary.simpleMessage("Hello, Visitor!")
   };

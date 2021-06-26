@@ -1,6 +1,7 @@
 import 'package:e_shopping/configs/theme/colors.dart';
 import 'package:e_shopping/data/category.dart';
 import 'package:e_shopping/data/product.dart';
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
@@ -134,7 +135,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           selectedSize: selectedSize,
                         ),
                       ),
-                      labelText: "Add to Cart",
+                      labelText: S.current.addToCart,
                     ),
                   )
                 ],

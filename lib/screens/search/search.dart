@@ -1,3 +1,4 @@
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -28,9 +29,6 @@ class _SearchBarState extends State<SearchBar> {
         borderRadius: BorderRadius.circular(18),
       ),
       child: TextFormField(
-        onChanged: (String text) {
-
-        },
         controller: _textEditingController,
         textAlignVertical: TextAlignVertical.center,
         textInputAction: TextInputAction.search,
@@ -45,7 +43,7 @@ class _SearchBarState extends State<SearchBar> {
           prefixIcon: Icon(
             Icons.search,
           ),
-          hintText: "Search for a product",
+          hintText: S.current.productSearchHint,
           suffixIconConstraints: BoxConstraints(
             minHeight: 36,
             minWidth: 36,

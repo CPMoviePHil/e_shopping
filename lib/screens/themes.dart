@@ -9,6 +9,17 @@ import 'package:provider/provider.dart';
 
 class Themes extends StatelessWidget {
 
+  final List<ConfigTheme> configThemes = [
+    ConfigTheme(
+      themeCode: "lightTheme",
+      themeName: S.current.lightTheme,
+    ),
+    ConfigTheme(
+      themeCode: "darkMode",
+      themeName: S.current.darkMode,
+    ),
+  ];
+
   Widget themeOption ({
     @required BuildContext context,
     @required ConfigTheme theme,

@@ -39,5 +39,12 @@
   "lightTheme": "一般主題",
   "settingTheme": "更改成{theme}",
   "settingThemeAlert": "已經是{theme}",
-  "productName": "產品名稱"
+  "productName": "產品名稱",
+  "productSearchHint": "產品搜尋",
+  "cart": "購物車",
+  "addToCart": "加入購物車",
+  "emptyCart": "購物車是空的",
+  "total": "總共",
+  "checkOut": "結帳",
+  "cartItems": "{number} 件商品"
 }

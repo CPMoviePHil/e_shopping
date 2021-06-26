@@ -435,13 +435,83 @@ class S {
     );
   }
 
-  /// `product name`
+  /// `Product Name`
   String get productName {
     return Intl.message(
-      'product name',
+      'Product Name',
       name: 'productName',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `Search for a product`
+  String get productSearchHint {
+    return Intl.message(
+      'Search for a product',
+      name: 'productSearchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cart`
+  String get cart {
+    return Intl.message(
+      'Cart',
+      name: 'cart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add To Cart`
+  String get addToCart {
+    return Intl.message(
+      'Add To Cart',
+      name: 'addToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your cart is empty`
+  String get emptyCart {
+    return Intl.message(
+      'Your cart is empty',
+      name: 'emptyCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Total`
+  String get total {
+    return Intl.message(
+      'Total',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Out`
+  String get checkOut {
+    return Intl.message(
+      'Check Out',
+      name: 'checkOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{number} items`
+  String cartItems(Object number) {
+    return Intl.message(
+      '$number items',
+      name: 'cartItems',
+      desc: '',
+      args: [number],
     );
   }
 }
