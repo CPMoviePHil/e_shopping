@@ -15,7 +15,7 @@ const kErrorRed = Color(0xFFe74c3c);
 const kColorRed = Color(0xFFF3090B);
 const kSurfaceWhite = Color(0xFFFFFBFA);
 const kRedColorHeart = 0xFFf22742;
-
+final kGreyBackground = Colors.grey[200];
 /// color for theme
 const kLightPrimary = Color(0xfffcfcff);
 const kLightAccent = Color(0xFF546E7A);
