@@ -19,37 +19,38 @@ class LeftList extends StatelessWidget {
     LeftBarItem(
       icon: Icons.shopping_bag_outlined,
       leftBarItemsName: S.current.hotProduct,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.collections_outlined,
       leftBarItemsName: S.current.productCollections,
-      routes: '',
+    ),
+    LeftBarItem(
+      icon: Icons.history_outlined,
+      leftBarItemsName: S.current.shoppingHistory,
+    ),
+    LeftBarItem(
+      icon: Icons.category_outlined,
+      leftBarItemsName: S.current.productCategory,
     ),
     LeftBarItem(
       icon: Icons.notifications_outlined,
       leftBarItemsName: S.current.notification,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.info_outline,
       leftBarItemsName: S.current.latestNews,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.shopping_cart_outlined,
-      leftBarItemsName: S.current.latestNews,
-      routes: '',
+      leftBarItemsName: S.current.cart,
     ),
     LeftBarItem(
       icon: Icons.person_outline,
       leftBarItemsName: S.current.personalInfo,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.chat_outlined,
       leftBarItemsName: S.current.customerService,
-      routes: '',
     ),
   ];
 
@@ -57,30 +58,25 @@ class LeftList extends StatelessWidget {
     LeftBarItem(
       icon: Icons.shopping_bag_outlined,
       leftBarItemsName: S.current.hotProduct,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.info_outline,
       leftBarItemsName: S.current.latestNews,
-      routes: '',
     ),
     LeftBarItem(
       icon: Icons.chat_outlined,
       leftBarItemsName: S.current.customerService,
-      routes: '',
     ),
   ];
 
   final LeftBarItem loginLeftBarItem = LeftBarItem(
     icon: Icons.login,
     leftBarItemsName: S.current.login,
-    routes: '',
   );
 
   final LeftBarItem settingLeftBarItem = LeftBarItem(
     icon: Icons.settings,
     leftBarItemsName: S.current.setting,
-    routes: '',
   );
 
   Widget personalProfile() {
@@ -138,7 +134,7 @@ class LeftList extends StatelessWidget {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
         return AppLibScreen.appText(
-          text: config.currentUser!.account,
+          text: "@${config.currentUser!.account}",
           textSize: "small",
         );
       },

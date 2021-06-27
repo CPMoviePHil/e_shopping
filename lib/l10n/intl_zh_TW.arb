@@ -6,6 +6,8 @@
   "memberCenter": "紀錄中心",
   "personalInfo": "個人資料",
   "customerService": "客服中心",
+  "shoppingHistory": "購物紀錄",
+  "productCategory": "產品分類",
   "login": "登入",
   "loginFailure": "登入失敗",
   "loginFailureMsgOne": "登入資料儲存失敗，請在試一次",

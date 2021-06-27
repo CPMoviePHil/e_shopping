@@ -16,6 +16,10 @@ class ConfigNotifier with ChangeNotifier {
   String? currentThemeCode;
   bool? isLogin;
 
+  void initData() {
+
+  }
+
   void setCurrentUser ({
     required UserModel? user,
   }) {

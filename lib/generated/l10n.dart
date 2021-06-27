@@ -120,6 +120,26 @@ class S {
     );
   }
 
+  /// `Shopping History`
+  String get shoppingHistory {
+    return Intl.message(
+      'Shopping History',
+      name: 'shoppingHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Category`
+  String get productCategory {
+    return Intl.message(
+      'Product Category',
+      name: 'productCategory',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get login {
     return Intl.message(

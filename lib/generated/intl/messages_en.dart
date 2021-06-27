@@ -72,6 +72,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "passwordInput": MessageLookupByLibrary.simpleMessage("password"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
+        "productCategory":
+            MessageLookupByLibrary.simpleMessage("Product Category"),
         "productCollections":
             MessageLookupByLibrary.simpleMessage("Product Collection"),
         "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
@@ -80,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "settingTheme": m3,
         "settingThemeAlert": m4,
+        "shoppingHistory":
+            MessageLookupByLibrary.simpleMessage("Shopping History"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),
         "signupFailure": MessageLookupByLibrary.simpleMessage("Signup failure"),
         "signupLabel": MessageLookupByLibrary.simpleMessage("Create"),

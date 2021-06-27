@@ -6,6 +6,8 @@
   "memberCenter": "Member Center",
   "personalInfo": "Personal Info",
   "customerService": "Customer Service",
+  "shoppingHistory": "Shopping History",
+  "productCategory": "Product Category",
   "login": "Login",
   "loginFailure": "Login Failure",
   "loginFailureMsgOne": "Login Data save failure, Please try again",
