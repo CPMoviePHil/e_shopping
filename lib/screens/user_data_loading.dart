@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home/homepage.dart';
+import 'navigation/navigation.dart';
 
 class UserDataLoading extends StatelessWidget {
 
@@ -20,7 +20,7 @@ class UserDataLoading extends StatelessWidget {
             if (loading.currentStatus == LoadingDataStatus.success) {
               context.read<ConfigNotifier>()..setCurrentUser(user: loading.user,);
               return Builder(
-                builder: (context) => HomeScreen(),
+                builder: (context) => Navigation(),
               );
             }
             return Center(

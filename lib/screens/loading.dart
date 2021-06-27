@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'home/homepage.dart';
+import 'navigation/navigation.dart';
 
 class Loading extends StatelessWidget {
 
@@ -20,7 +20,7 @@ class Loading extends StatelessWidget {
         } else {
           context.read<ConfigNotifier>()..setVisitor();
         }
-        return HomeScreen();
+        return Navigation();
       },
     );
   }

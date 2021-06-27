@@ -17,36 +17,12 @@ class LeftList extends StatelessWidget {
 
   final List<LeftBarItem> leftBarItems = [
     LeftBarItem(
-      icon: Icons.shopping_bag_outlined,
-      leftBarItemsName: S.current.hotProduct,
-    ),
-    LeftBarItem(
-      icon: Icons.collections_outlined,
-      leftBarItemsName: S.current.productCollections,
-    ),
-    LeftBarItem(
-      icon: Icons.history_outlined,
-      leftBarItemsName: S.current.shoppingHistory,
-    ),
-    LeftBarItem(
-      icon: Icons.category_outlined,
-      leftBarItemsName: S.current.productCategory,
-    ),
-    LeftBarItem(
-      icon: Icons.notifications_outlined,
-      leftBarItemsName: S.current.notification,
-    ),
-    LeftBarItem(
       icon: Icons.info_outline,
       leftBarItemsName: S.current.latestNews,
     ),
     LeftBarItem(
       icon: Icons.shopping_cart_outlined,
       leftBarItemsName: S.current.cart,
-    ),
-    LeftBarItem(
-      icon: Icons.person_outline,
-      leftBarItemsName: S.current.personalInfo,
     ),
     LeftBarItem(
       icon: Icons.chat_outlined,

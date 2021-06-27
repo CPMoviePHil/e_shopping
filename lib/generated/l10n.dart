@@ -50,6 +50,26 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Home`
+  String get homepage {
+    return Intl.message(
+      'Home',
+      name: 'homepage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Search`
+  String get search {
+    return Intl.message(
+      'Product Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Hot Product`
   String get hotProduct {
     return Intl.message(

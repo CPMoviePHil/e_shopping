@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "darkMode": MessageLookupByLibrary.simpleMessage("dark mode"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
+        "homepage": MessageLookupByLibrary.simpleMessage("Home"),
         "hotProduct": MessageLookupByLibrary.simpleMessage("Hot Product"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "latestNews": MessageLookupByLibrary.simpleMessage("Latest News"),
@@ -79,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
         "productSearchHint":
             MessageLookupByLibrary.simpleMessage("Search for a product"),
+        "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "settingTheme": m3,
         "settingThemeAlert": m4,

@@ -1,4 +1,6 @@
 {
+  "homepage": "Home",
+  "search": "Product Search",
   "hotProduct": "Hot Product",
   "productCollections": "Product Collection",
   "notification": "Notifications",
