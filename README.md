@@ -11,11 +11,12 @@
 <br/>
 2021.06.27<br/>
   dart語法成升級2.12.0<br/>
-  1. 先確定所有package已經支援null-safety
-  2. 用dart migrate的command
-  3. 在apply migrations
-  4. 參考https://dart.dev/null-safety/migration-guide
-
+  1. 先確定所有package已經支援null-safety<br/>
+  2. 用dart migrate的command<br/>
+  3. 在apply migrations<br/>
+  4. 參考https://dart.dev/null-safety/migration-guide<br/>
+  
+<br/>
 2021.06.26<br/>
   登入登出機制修正，原本訪客身分的使用者要登入的時候會進到另外一個畫面<br/>
   我用的是Navigator進到另一個畫面。當使用者帳密輸入都OK確定的時候再用<br/>
