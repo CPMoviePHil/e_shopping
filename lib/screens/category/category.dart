@@ -2,6 +2,7 @@ import 'package:e_shopping/data/category.dart';
 import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/product/product_row.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,12 +39,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
       products: _products
           .where((p) => p.productType!.toLowerCase() == s.toLowerCase())
           .toList(),
-    ))
-        .toList();
+    )).toList();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(category!.title),
+        title: AppLibScreen.appText(
+          text: category!.title,
+          fontColor: Theme.of(context).accentColor,
+        ),
         actions: [
           CartAppBarAction(),
         ],

@@ -132,6 +132,7 @@ class AppLibScreen {
       centerTitle: true,
       title: AppLibScreen.appText(
         text: appBarMsg,
+        fontColor: Theme.of(context).accentColor,
       ),
     );
   }

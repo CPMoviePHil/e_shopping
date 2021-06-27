@@ -5,6 +5,7 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -77,6 +78,11 @@ class _ProductScreenState extends State<ProductScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        title: AppLibScreen.appText(
+          text: product.name,
+          fontColor: Theme.of(context).accentColor,
+        ),
+        centerTitle: true,
         actions: [
           CartAppBarAction(),
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class SearchNotifier with ChangeNotifier {
-  String? searchString;
+  String searchString = '';
   bool sortByPrice = true;
   int priceSort = 0; //0,1
 

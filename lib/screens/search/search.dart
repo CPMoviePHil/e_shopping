@@ -59,7 +59,10 @@ class _SearchBarState extends State<SearchBar> {
             ),
             onPressed: () {
               _textEditingController!.clear();
-              FocusScope.of(context).unfocus();
+              context.read<SearchNotifier>().changeString(
+                search: '',
+              );
+              FocusScope.of(context).requestFocus(FocusNode());
             },
           ),
         ),

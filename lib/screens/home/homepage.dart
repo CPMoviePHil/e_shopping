@@ -29,8 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     EdgeInsets listViewPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 24);
     List<Widget> searchResultTiles = <Widget>[];
-    if (context.watch<SearchNotifier>().searchString != null) {
-      if (context.watch<SearchNotifier>().searchString!.isNotEmpty) {
+    if (context.watch<SearchNotifier>().searchString != '') {
+      if (context.watch<SearchNotifier>().searchString.length != 0) {
         if (context.watch<SearchNotifier>().sortByPrice) {
           late List<Product> productsToSort = products;
           if (context.watch<SearchNotifier>().priceSort == 0) {
@@ -39,67 +39,70 @@ class _HomeScreenState extends State<HomeScreen> {
             productsToSort.sort((a, b) => b.cost!.compareTo(a.cost!),);
           }
           searchResultTiles = products.where((p)
-          => p.name!.toLowerCase().contains(context.watch<SearchNotifier>().searchString!.toLowerCase())).map((p)
+          => p.name!.toLowerCase().contains(context.watch<SearchNotifier>().searchString.toLowerCase())).map((p)
           => ProductTile(product: p),
           ).toList();
         }
       }
     }
-    return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => scaffoldKey.currentState!.openDrawer(),
-          child: const Icon(Icons.menu),  // add custom icons also),
+    return InkWell(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () => scaffoldKey.currentState!.openDrawer(),
+            child: const Icon(Icons.menu),  // add custom icons also),
+          ),
+          title: SearchBar(),
+          actions: [
+            CartAppBarAction(),
+          ],
         ),
-        title: SearchBar(),
-        actions: [
-          CartAppBarAction(),
-        ],
-      ),
-      drawer: Drawer(
-        child: Container(
-          color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
-              ? Colors.white
-              : Theme.of(context).primaryColor,
-          width: MediaQuery.of(context).size.width * 0.7,
-          child: SafeArea(
-            child: Container(
-              height: double.infinity,
-              child: LeftList(),
+        drawer: Drawer(
+          child: Container(
+            color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
+                ? Colors.white
+                : Theme.of(context).primaryColor,
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: SafeArea(
+              child: Container(
+                height: double.infinity,
+                child: LeftList(),
+              ),
             ),
           ),
         ),
-      ),
-      key: scaffoldKey,
-      body: (context.watch<SearchNotifier>().searchString != null && context.watch<SearchNotifier>().searchString!.isNotEmpty) ?
-      GridView.count(
-        padding: listViewPadding,
-        crossAxisCount: 2,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 24,
-        childAspectRatio: .78,
-        children: searchResultTiles,
-      ) :
-      ListView(
-        padding: listViewPadding,
-        children: [
-          CategoryTile(
-            imageUrl: manLookRightImageUrl,
-            category: menCategory,
-            imageAlignment: Alignment.topCenter,
-          ),
-          SizedBox(height: 16),
-          CategoryTile(
-            imageUrl: womanLookLeftImageUrl,
-            category: womenCategory,
-            imageAlignment: Alignment.topCenter,
-          ),
-          SizedBox(height: 16),
-          CategoryTile(
-            imageUrl: dogImageUrl, // TODO: Replace with your own image
-            category: petCategory,
-          ),
-        ],
+        key: scaffoldKey,
+        body: (context.watch<SearchNotifier>().searchString.isNotEmpty) ?
+        GridView.count(
+          padding: listViewPadding,
+          crossAxisCount: 2,
+          mainAxisSpacing: 24,
+          crossAxisSpacing: 24,
+          childAspectRatio: .78,
+          children: searchResultTiles,
+        ) :
+        ListView(
+          padding: listViewPadding,
+          children: [
+            CategoryTile(
+              imageUrl: manLookRightImageUrl,
+              category: menCategory,
+              imageAlignment: Alignment.topCenter,
+            ),
+            SizedBox(height: 16),
+            CategoryTile(
+              imageUrl: womanLookLeftImageUrl,
+              category: womenCategory,
+              imageAlignment: Alignment.topCenter,
+            ),
+            SizedBox(height: 16),
+            CategoryTile(
+              imageUrl: dogImageUrl, // TODO: Replace with your own image
+              category: petCategory,
+            ),
+          ],
+        ),
       ),
     );
   }

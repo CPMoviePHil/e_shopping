@@ -2,6 +2,7 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/product/call_action.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,14 +76,15 @@ class _CartScreenState extends State<CartScreen> {
         centerTitle: true,
         title: Column(
           children: [
-            Text(S.current.cart),
-            Text(
-              S.current.cartItems(context.watch<CartNotifier>().itemsInCart.length.toString()),
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.normal,
-              ),
-            )
+            AppLibScreen.appText(
+              text: S.current.cart,
+              fontColor: Theme.of(context).accentColor,
+            ),
+            AppLibScreen.appText(
+              text: S.current.cartItems(context.watch<CartNotifier>().itemsInCart.length),
+              fontColor: Theme.of(context).accentColor,
+              textSize: "small",
+            ),
           ],
         ),
       ),

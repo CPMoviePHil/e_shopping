@@ -17,6 +17,7 @@ class CallToActionButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed as void Function()?,
       style: ElevatedButton.styleFrom(
+        primary: Theme.of(context).highlightColor,
         minimumSize: minSize,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14),
