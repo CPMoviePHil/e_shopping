@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 
 class ProductRow extends StatelessWidget {
   const ProductRow({this.products, this.productType});
-  final String productType;
-  final List<Product> products;
+  final String? productType;
+  final List<Product>? products;
 
   @override
   Widget build(BuildContext context) {
     List<ProductTile> _productTiles =
-    products.map((p) => ProductTile(product: p)).toList();
+    products!.map((p) => ProductTile(product: p)).toList();
 
     return _productTiles.isEmpty
         ? SizedBox.shrink()
@@ -23,7 +23,7 @@ class ProductRow extends StatelessWidget {
             horizontal: 18.0,
           ),
           child: Text(
-            productType,
+            productType!,
             style: Theme.of(context).textTheme.headline5,
           ),
         ),

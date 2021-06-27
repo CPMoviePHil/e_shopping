@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({
-    @required this.product,
+    required this.product,
   });
 
   final Product product;
@@ -33,7 +33,7 @@ class ProductTile extends StatelessWidget {
               height: 8,
             ),
             Text(
-              product.name,
+              product.name!,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.subtitle2,
@@ -43,7 +43,7 @@ class ProductTile extends StatelessWidget {
               "\$${product.cost.toString()}",
               style: Theme.of(context)
                   .textTheme
-                  .subtitle2
+                  .subtitle2!
                   .copyWith(color: Theme.of(context).accentColor),
             )
           ],

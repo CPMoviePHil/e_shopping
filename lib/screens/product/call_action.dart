@@ -8,14 +8,14 @@ class CallToActionButton extends StatelessWidget {
     this.labelText,
     this.minSize = const Size(266, 45),
   });
-  final Function onPressed;
-  final String labelText;
+  final Function? onPressed;
+  final String? labelText;
   final Size minSize;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: onPressed as void Function()?,
       style: ElevatedButton.styleFrom(
         minimumSize: minSize,
         shape: RoundedRectangleBorder(
@@ -23,7 +23,7 @@ class CallToActionButton extends StatelessWidget {
         ),
       ),
       child: Text(
-        labelText,
+        labelText!,
         style: TextStyle(
           fontSize: 16,
         ),

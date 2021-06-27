@@ -9,7 +9,7 @@ import '../../temp_data.dart';
 
 class CategoryScreen extends StatefulWidget {
   CategoryScreen({this.category});
-  final Category category;
+  final Category? category;
 
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
@@ -18,10 +18,10 @@ class CategoryScreen extends StatefulWidget {
 enum Filters { popular, recent, sale }
 
 class _CategoryScreenState extends State<CategoryScreen> {
-  Category get category => widget.category;
+  Category? get category => widget.category;
   //Filters filterValue = Filters.popular;
   //String selection;
-  List<Product> _products;
+  late List<Product> _products;
 
   @override
   void initState() {
@@ -32,18 +32,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<ProductRow> productRows = category.selections
+    List<ProductRow> productRows = category!.selections!
         .map((s) => ProductRow(
       productType: s,
       products: _products
-          .where((p) => p.productType.toLowerCase() == s.toLowerCase())
+          .where((p) => p.productType!.toLowerCase() == s.toLowerCase())
           .toList(),
     ))
         .toList();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(category.title),
+        title: Text(category!.title),
         actions: [
           CartAppBarAction(),
         ],

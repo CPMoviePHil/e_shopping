@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'call_action.dart';
 
 class ProductScreen extends StatefulWidget {
-  ProductScreen({@required this.product});
+  ProductScreen({required this.product});
   final Product product;
 
   @override
@@ -21,12 +21,12 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   Product get product => widget.product;
-  String selectedImageUrl;
-  String selectedSize;
+  String? selectedImageUrl;
+  String? selectedSize;
 
   @override
   void initState() {
-    selectedImageUrl = product.imageUrls.first;
+    selectedImageUrl = product.imageUrls!.first;
     selectedSize = product.sizes?.first;
     super.initState();
   }
@@ -43,13 +43,13 @@ class _ProductScreenState extends State<ProductScreen> {
     });
   }
 
-  List<Product> filterProducts ({@required List<Product> products, @required Category category,}) {
+  List<Product> filterProducts ({required List<Product> products, required Category category,}) {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> imagePreviews = product.imageUrls
+    List<Widget> imagePreviews = product.imageUrls!
         .map(
           (url) => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -93,7 +93,7 @@ class _ProductScreenState extends State<ProductScreen> {
               children: [
                 Expanded(
                   child: Image.network(
-                    selectedImageUrl,
+                    selectedImageUrl!,
                     fit: BoxFit.cover,
                     color: kGreyBackground,
                     colorBlendMode: BlendMode.multiply,
@@ -114,7 +114,7 @@ class _ProductScreenState extends State<ProductScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.name!,
                     style: Theme.of(context).textTheme.headline6,
                   ),
                   SizedBox(
@@ -122,7 +122,7 @@ class _ProductScreenState extends State<ProductScreen> {
                   ),
                   Text(
                     "\$" + product.cost.toString(),
-                    style: Theme.of(context).textTheme.subtitle2.copyWith(
+                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
                       color: Theme.of(context).accentColor,
                     ),
                   ),

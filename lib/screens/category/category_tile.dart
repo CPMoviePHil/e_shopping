@@ -13,8 +13,8 @@ class CategoryTile extends StatelessWidget {
   final Alignment imageAlignment;
 
   const CategoryTile({
-    @required this.category,
-    @required this.imageUrl,
+    required this.category,
+    required this.imageUrl,
     this.imageAlignment = Alignment.center,
   });
 
@@ -47,7 +47,7 @@ class CategoryTile extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 category.title.toUpperCase(),
-                style: Theme.of(context).textTheme.headline4.copyWith(
+                style: Theme.of(context).textTheme.headline4!.copyWith(
                   color: Colors.white,
                 ),
               ),

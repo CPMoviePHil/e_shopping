@@ -7,7 +7,7 @@ class CartNotifier with ChangeNotifier {
   double get totalCost {
     double total = 0;
     itemsInCart.forEach((item) {
-      total += item.product.cost;
+      total += item.product.cost!;
     });
     return total;
   }

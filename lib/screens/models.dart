@@ -6,8 +6,8 @@ class LeftBarItem {
   final String routes;
 
   const LeftBarItem({
-    @required this.icon,
-    @required this.leftBarItemsName,
-    @required this.routes,
+    required this.icon,
+    required this.leftBarItemsName,
+    required this.routes,
   });
 }

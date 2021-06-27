@@ -9,12 +9,12 @@ enum LoadingDataStatus { initial, success, failure, }
 
 class LoadingDataNotifier with ChangeNotifier {
 
-  LoadingDataStatus currentStatus;
+  LoadingDataStatus? currentStatus;
 
-  UserModel user;
+  UserModel? user;
 
   Future<void> loadingUserDataProcess({
-    @required BuildContext context,
+    required BuildContext context,
   }) async {
     String data = await DefaultAssetBundle.of(context).loadString("assets/json/user.json");
     final jsonResult = json.decode(data);

@@ -6,14 +6,14 @@ import 'package:flutter/foundation.dart';
 class SearchBar extends StatefulWidget {
   const SearchBar({this.onChanged});
 
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
 
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  TextEditingController _textEditingController;
+  TextEditingController? _textEditingController;
 
   @override
   void initState() {
@@ -58,8 +58,8 @@ class _SearchBarState extends State<SearchBar> {
               Icons.clear,
             ),
             onPressed: () {
-              _textEditingController.clear();
-              widget.onChanged(_textEditingController.text);
+              _textEditingController!.clear();
+              widget.onChanged!(_textEditingController!.text);
               FocusScope.of(context).unfocus();
             },
           ),

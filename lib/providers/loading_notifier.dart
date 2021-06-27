@@ -17,7 +17,7 @@ class LoadingNotifier with ChangeNotifier {
       notifyListeners();
     } else {
       currentStatus = LoadingStatus.success;
-      if (prefs.getBool(key: 'login',)) {
+      if (prefs.getBool(key: 'login',)!) {
         isLogin = true;
       }
       notifyListeners();

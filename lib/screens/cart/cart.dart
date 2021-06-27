@@ -42,7 +42,7 @@ class _CartScreenState extends State<CartScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.product.name,
+                  item.product.name!,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
                 SizedBox(
@@ -50,7 +50,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 Text(
                   "\$" + item.product.cost.toString(),
-                  style: Theme.of(context).textTheme.subtitle2.copyWith(
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
                     color: Theme.of(context).accentColor,
                   ),
                 ),
@@ -88,7 +88,7 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: Column(
         children: [
-          if (orderItemRows != null && orderItemRows.isNotEmpty)
+          if (orderItemRows.isNotEmpty)
             Expanded(
               child: ListView.separated(
                 padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),

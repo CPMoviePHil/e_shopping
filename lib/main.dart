@@ -79,7 +79,7 @@ class _AppPage extends State<MyApp> {
       ],
       supportedLocales: S.delegate.supportedLocales,
       locale: Locale(
-        context.watch<ConfigNotifier>().languageCode,
+        context.watch<ConfigNotifier>().languageCode!,
         context.watch<ConfigNotifier>().countryCode,
       ),
       title: 'e-shop',
@@ -102,8 +102,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String searchString;
-  bool isLowToHigh;
+  late String searchString;
+  late bool isLowToHigh;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -124,14 +124,14 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> searchResultTiles = [];
     if (searchString.isNotEmpty) {
       if (isLowToHigh) {
-        List<Product> productsToSort;
+        late List<Product> productsToSort = [];
         for( int i = 0; i < products.length; i++) {
-          if (products[i].cost > products[i+1].cost) {
+          if (products[i].cost! > products[i+1].cost!) {
             productsToSort.add(products[i]);
           }
         }
         searchResultTiles = products.where((p)
-        => p.name.toLowerCase().contains(searchString.toLowerCase())).map((p)
+        => p.name!.toLowerCase().contains(searchString.toLowerCase())).map((p)
         => ProductTile(product: p),
         ).toList();
       }
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
-          onTap: () => scaffoldKey.currentState.openDrawer(),
+          onTap: () => scaffoldKey.currentState!.openDrawer(),
           child: const Icon(Icons.menu),  // add custom icons also),
         ),
         title: SearchBar(

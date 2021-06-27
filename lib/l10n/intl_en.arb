@@ -25,7 +25,7 @@
   "memberSignup": "Member Signup",
   "setting": "Setting",
   "loginAccount": "@{account}",
-  "loginUsername": "{username}",
+  "loginUsername": "@{username}",
   "visitorGreeting": "Hello, Visitor!",
   "validating": "Validating...",
   "accountInput": "account",

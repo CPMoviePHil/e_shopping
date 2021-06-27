@@ -3,7 +3,6 @@ import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/screens/settings.dart';
 import 'package:e_shopping/utils/app_libs.dart';
-import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +102,7 @@ class LeftList extends StatelessWidget {
           onTap: () async {
             await WidgetsHelper.imageViewerDialog(
               context: context,
-              path: config.currentUser.profile,
+              path: config.currentUser!.profile,
             );
           },
           child: Container(
@@ -115,7 +114,7 @@ class LeftList extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: AppLibScreen.imageContent(
-                imageOnePath: config.currentUser.profile,
+                imageOnePath: config.currentUser!.profile!,
               ),
             ),
           ),
@@ -128,7 +127,7 @@ class LeftList extends StatelessWidget {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
         return AppLibScreen.appText(
-          text: config.currentUser.userName,
+          text: config.currentUser!.userName,
           textSize: "large",
         );
       },
@@ -139,7 +138,7 @@ class LeftList extends StatelessWidget {
     return Consumer<ConfigNotifier>(
       builder: (context, config, _config,) {
         return AppLibScreen.appText(
-          text: S.current.loginAccount(config.currentUser.account),
+          text: config.currentUser!.account,
           textSize: "small",
         );
       },
@@ -147,8 +146,8 @@ class LeftList extends StatelessWidget {
   }
 
   Widget leftBarItemWidget({
-    @required BuildContext context,
-    @required LeftBarItem item,
+    required BuildContext context,
+    required LeftBarItem item,
   }) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 25,),

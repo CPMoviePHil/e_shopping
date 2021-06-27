@@ -1,9 +1,9 @@
 
 class UserModel {
-  int id;
-  String account;
-  String userName;
-  String profile;
+  int? id;
+  String? account;
+  String? userName;
+  String? profile;
 
   UserModel({this.id, this.account, this.userName, this.profile});
 

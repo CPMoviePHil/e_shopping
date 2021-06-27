@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Utils {
 
-  static void pushScreen({@required BuildContext context, @required Widget screen}) {
+  static void pushScreen({required BuildContext context, required Widget screen}) {
     ThemeData themeData = Theme.of(context);
     Navigator.push(
       context,

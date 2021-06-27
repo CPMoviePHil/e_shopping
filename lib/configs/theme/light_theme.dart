@@ -4,31 +4,31 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'fonts.dart';
 
-TextTheme buildTextTheme(TextTheme base, String language) {
+TextTheme buildTextTheme(TextTheme base, String? language) {
   var newBase = kTextTheme(base, language);
   return newBase
       .copyWith(
-        headline3: newBase.headline3.copyWith(
+        headline3: newBase.headline3!.copyWith(
           fontWeight: FontWeight.w700,
           fontFamily: 'SF Pro Display',
         ),
-        headline4: newBase.headline4.copyWith(
+        headline4: newBase.headline4!.copyWith(
           fontWeight: FontWeight.w700,
           fontFamily: 'SF Pro Display',
         ),
-        headline5: newBase.headline5.copyWith(
+        headline5: newBase.headline5!.copyWith(
           fontWeight: FontWeight.w500,
         ),
-        headline6: newBase.headline6.copyWith(fontSize: 18.0),
-        caption: newBase.caption.copyWith(
+        headline6: newBase.headline6!.copyWith(fontSize: 18.0),
+        caption: newBase.caption!.copyWith(
           fontWeight: FontWeight.w400,
           fontSize: 14.0,
         ),
-        subtitle1: newBase.subtitle1.copyWith(
+        subtitle1: newBase.subtitle1!.copyWith(
           fontWeight: FontWeight.w400,
           fontSize: 16.0,
         ),
-        button: newBase.button.copyWith(
+        button: newBase.button!.copyWith(
           fontWeight: FontWeight.w400,
           fontSize: 14.0,
         ),
@@ -38,10 +38,10 @@ TextTheme buildTextTheme(TextTheme base, String language) {
         bodyColor: kGrey900,
       )
       .copyWith(
-        headline1: kHeadlineTheme(newBase).headline1.copyWith(),
-        headline2: kHeadlineTheme(newBase).headline2.copyWith(),
-        headline5: kHeadlineTheme(newBase).headline5.copyWith(),
-        headline6: kHeadlineTheme(newBase).headline6.copyWith(),
+        headline1: kHeadlineTheme(newBase).headline1!.copyWith(),
+        headline2: kHeadlineTheme(newBase).headline2!.copyWith(),
+        headline5: kHeadlineTheme(newBase).headline5!.copyWith(),
+        headline6: kHeadlineTheme(newBase).headline6!.copyWith(),
       );
 }
 
@@ -65,7 +65,7 @@ const ColorScheme kColorScheme = ColorScheme(
   brightness: Brightness.light,
 );
 
-ThemeData buildLightTheme(String language) {
+ThemeData buildLightTheme(String? language) {
   final base = ThemeData.light().copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
       builders: {

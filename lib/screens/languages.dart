@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 class Languages extends StatelessWidget {
 
   Widget languageOption ({
-    @required BuildContext context,
-    @required Locale locale,
+    required BuildContext context,
+    required Locale locale,
   }) {
     ConfigLanguage lang = kLanguages.firstWhere((element) =>
     element.languageCode == locale.languageCode && element.countryCode == locale.countryCode,);
@@ -28,12 +28,7 @@ class Languages extends StatelessWidget {
         builder: (context, config, child,){
           return GestureDetector(
             onTap: () async {
-              if(config.languageCode == locale.languageCode && config.countryCode == lang.countryCode) {
-                WidgetsHelper.showSnackBar(
-                  context: context,
-                  msg: lang.alertMsg,
-                );
-              } else {
+              if(config.languageCode != locale.languageCode && config.countryCode != lang.countryCode) {
                 config.changeLanguage(locale: locale);
                 WidgetsHelper.showSnackBar(
                   context: context,
@@ -42,7 +37,12 @@ class Languages extends StatelessWidget {
                 await S.load(locale);
                 await Future.delayed(Duration(microseconds: 1200,));
                 int count = 0;
-                Navigator.of(context).popUntil((_) => count++ >= 3);
+                Navigator.of(context).popUntil((_) => count++ >= 2);
+              } else {
+                WidgetsHelper.showSnackBar(
+                  context: context,
+                  msg: lang.alertMsg,
+                );
               }
             },
             child: Row(

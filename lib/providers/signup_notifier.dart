@@ -8,9 +8,9 @@ class SignupNotifier with ChangeNotifier {
   bool hidePassword = true;
 
   Future<void> formValidation ({
-    @required String name,
-    @required String account,
-    @required String password,
+    required String name,
+    required String account,
+    required String password,
   }) async {
     currentStatus = SignupStatus.validating;
     notifyListeners();
@@ -27,7 +27,7 @@ class SignupNotifier with ChangeNotifier {
     }
   }
 
-  Future<bool> accountInput ({@required String account}) async {
+  Future<bool> accountInput ({required String account}) async {
     if (account.length > 5) {
       await Future.delayed(Duration(seconds: 1));
       return true;
@@ -35,7 +35,7 @@ class SignupNotifier with ChangeNotifier {
     return false;
   }
 
-  Future<bool> nameInput ({@required String name}) async {
+  Future<bool> nameInput ({required String name}) async {
     if (name.length > 5) {
       await Future.delayed(Duration(seconds: 1));
       return true;
@@ -43,7 +43,7 @@ class SignupNotifier with ChangeNotifier {
     return false;
   }
 
-  Future<bool> passwordInput ({@required String password}) async {
+  Future<bool> passwordInput ({required String password}) async {
     if (password.length > 5) {
       await Future.delayed(Duration(seconds: 1));
       return true;

@@ -5,9 +5,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 class AppLibScreen {
 
   static BorderSide appBorder ({
-    @required BuildContext context,
+    required BuildContext context,
     double width = 0.2,
-    Color color,
+    Color? color,
   }) {
     if (color == null) {
       color = Theme.of(context).highlightColor;
@@ -19,8 +19,8 @@ class AppLibScreen {
   }
 
   static Widget appIcon ({
-    @required IconData icon,
-    Color iconColor,
+    required IconData icon,
+    Color? iconColor,
     double size = 20,
     String iconSize = "medium",
   }) {
@@ -49,8 +49,8 @@ class AppLibScreen {
   }
 
   static Widget appText ({
-    @required String text,
-    Color fontColor,
+    required String? text,
+    Color? fontColor,
     String textSize = 'medium',
   }) {
     double fontSize = 18;
@@ -76,7 +76,7 @@ class AppLibScreen {
   }
 
   static Widget imageContent ({
-    @required String imageOnePath,
+    required String imageOnePath,
   }) {
     return CachedNetworkImage(
       imageUrl: imageOnePath,
@@ -94,11 +94,11 @@ class AppLibScreen {
   }
 
   static InputDecoration inputDecoration ({
-    @required String hintText,
-    Color fontColor,
+    required String hintText,
+    Color? fontColor,
     double fontSize = 15,
-    IconData suffixIcon,
-    VoidCallback suffixIconPress,
+    IconData? suffixIcon,
+    VoidCallback? suffixIconPress,
   }) {
     if (fontColor == null) {
       fontColor = Colors.grey[200];
@@ -119,8 +119,8 @@ class AppLibScreen {
   }
 
   static AppBar commonAppBar ({
-    @required BuildContext context,
-    @required String appBarMsg,
+    required BuildContext context,
+    required String appBarMsg,
   }) {
     return AppBar(
       leading: IconButton(
@@ -137,9 +137,9 @@ class AppLibScreen {
   }
 
   static Widget pageWidget ({
-    @required BuildContext context,
-    @required String pageName,
-    @required Widget page,
+    required BuildContext context,
+    required String pageName,
+    required Widget page,
   }) {
     return Scaffold(
       appBar: commonAppBar(context: context, appBarMsg: pageName,),

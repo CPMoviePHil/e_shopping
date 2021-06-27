@@ -8,16 +8,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfigNotifier with ChangeNotifier {
 
-  ViewStatus currentStatus;
-  UserModel currentUser;
-  String countryCode = "TW";
-  String languageCode = "zh";
-  ThemeData currentTheme;
-  String currentThemeCode;
-  bool isLogin;
+  ViewStatus? currentStatus;
+  UserModel? currentUser;
+  String? countryCode = "TW";
+  String? languageCode = "zh";
+  ThemeData? currentTheme;
+  String? currentThemeCode;
+  bool? isLogin;
 
   void setCurrentUser ({
-    @required UserModel user,
+    required UserModel? user,
   }) {
     if (currentUser != user) {
       currentUser = user;
@@ -58,7 +58,7 @@ class ConfigNotifier with ChangeNotifier {
     return false;
   }
 
-  Future<void> changeLanguage ({@required Locale locale}) async {
+  Future<void> changeLanguage ({required Locale locale}) async {
     MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
     prefs.setString(key: "languageCode", value: locale.languageCode,);
     prefs.setString(key: "countryCode", value: locale.countryCode??'',);
@@ -104,7 +104,7 @@ class ConfigNotifier with ChangeNotifier {
     }
   }
 
-  Future<void> setTheme({@required String themeCode}) async {
+  Future<void> setTheme({required String themeCode}) async {
     MainPrefs prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
     prefs.setString(key: "themeCode", value: themeCode);
     switch (themeCode) {
@@ -143,8 +143,8 @@ class ConfigNotifier with ChangeNotifier {
   }
 
   void setLogin() {
-    if (!isLogin) {
-      isLogin = !isLogin;
+    if (!isLogin!) {
+      isLogin = !isLogin!;
       notifyListeners();
     }
   }

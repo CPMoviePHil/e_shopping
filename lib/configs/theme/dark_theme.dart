@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'colors.dart';
 import 'light_theme.dart';
 
-ThemeData buildDarkTheme(String language) {
+ThemeData buildDarkTheme(String? language) {
   final base = ThemeData.dark();
   return base.copyWith(
     textTheme: buildTextTheme(base.textTheme, language).apply(

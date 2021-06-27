@@ -21,8 +21,8 @@ class Themes extends StatelessWidget {
   ];
 
   Widget themeOption ({
-    @required BuildContext context,
-    @required ConfigTheme theme,
+    required BuildContext context,
+    required ConfigTheme theme,
   }) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 25, 0, 15,),
@@ -45,7 +45,7 @@ class Themes extends StatelessWidget {
                 );
                 await Future.delayed(Duration(microseconds: 1200,));
                 int count = 0;
-                Navigator.of(context).popUntil((_) => count++ >= 3);
+                Navigator.of(context).popUntil((_) => count++ >= 2);
               } else {
                 WidgetsHelper.showSnackBar(
                   context: context,

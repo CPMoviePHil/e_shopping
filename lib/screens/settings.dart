@@ -12,10 +12,10 @@ import 'package:provider/provider.dart';
 class Settings extends StatelessWidget {
 
   Widget settingOption ({
-    @required BuildContext context,
-    @required IconData icon,
-    @required String option,
-    @required AsyncCallback onTap,
+    required BuildContext context,
+    required IconData icon,
+    required String option,
+    required AsyncCallback onTap,
   }) {
     return Container(
       padding: const EdgeInsets.fromLTRB(10, 25, 0, 15,),
@@ -83,7 +83,7 @@ class Settings extends StatelessWidget {
                   icon: Icons.logout,
                   option: S.current.logout,
                   onTap: () async {
-                    bool choiceResult = await WidgetsHelper.choiceDialog(
+                    bool? choiceResult = await WidgetsHelper.choiceDialog(
                       context: context,
                       dialogTitle: S.current.logout,
                       dialogMsg: S.current.logoutMsg,

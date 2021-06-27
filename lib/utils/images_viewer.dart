@@ -6,12 +6,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 class ImageViewer extends StatelessWidget {
 
-  final String imagePath;
+  final String? imagePath;
   final CarouselController buttonCarouselController = CarouselController();
 
   ImageViewer({
-    Key key,
-    @required this.imagePath,
+    Key? key,
+    required this.imagePath,
   }) : super(key: key);
 
   @override
@@ -56,9 +56,9 @@ class ImageViewer extends StatelessWidget {
 
 class ImageContent extends StatelessWidget {
 
-  final String imagePath;
+  final String? imagePath;
 
-  ImageContent({Key key, @required this.imagePath}) : super(key: key);
+  ImageContent({Key? key, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class ImageContent extends StatelessWidget {
           initialScale: PhotoViewComputedScale.contained * 1,
           minScale: PhotoViewComputedScale.contained * 1,
           imageProvider: CachedNetworkImageProvider(
-            imagePath,
+            imagePath!,
           ),
         ),
       ),

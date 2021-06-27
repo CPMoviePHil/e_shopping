@@ -4,10 +4,10 @@ import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsHelper {
-  static Future<bool> choiceDialog ({
-    @required BuildContext context,
-    @required String dialogTitle,
-    @required String dialogMsg,
+  static Future<bool?> choiceDialog ({
+    required BuildContext context,
+    required String dialogTitle,
+    required String dialogMsg,
   }) async {
     return await showDialog<bool>(
       context: context,
@@ -51,8 +51,8 @@ class WidgetsHelper {
   }
 
   static Future<void> imageViewerDialog ({
-    @required BuildContext context,
-    @required String path,
+    required BuildContext context,
+    required String? path,
   }) {
     return showDialog(
       context: context,
@@ -61,8 +61,8 @@ class WidgetsHelper {
   }
 
   static void showSnackBar ({
-    @required BuildContext context,
-    @required String msg,
+    required BuildContext context,
+    required String msg,
   }) {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()

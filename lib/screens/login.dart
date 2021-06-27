@@ -1,10 +1,8 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
-import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 import 'package:e_shopping/providers/login_notifier.dart';
 import 'package:e_shopping/providers/signup_notifier.dart';
 import 'package:e_shopping/screens/signup.dart';
-import 'package:e_shopping/screens/user_data_loading.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';

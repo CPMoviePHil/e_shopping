@@ -1,20 +1,18 @@
-import 'package:flutter/cupertino.dart';
-
 enum ViewStatus { user, visitor, }
 
 class ConfigLanguage {
-  final String countryCode;
+  final String? countryCode;
   final String languageCode;
   final String lang;
   final String alertMsg;
   final String afterChangeMsg;
 
   const ConfigLanguage({
-    @required this.languageCode,
-    @required this.countryCode,
-    @required this.lang,
-    @required this.alertMsg,
-    @required this.afterChangeMsg,
+    required this.languageCode,
+    required this.countryCode,
+    required this.lang,
+    required this.alertMsg,
+    required this.afterChangeMsg,
   });
 }
 
@@ -23,8 +21,8 @@ class ConfigTheme {
   final String themeName;
 
   const ConfigTheme({
-    @required this.themeCode,
-    @required this.themeName,
+    required this.themeCode,
+    required this.themeName,
   });
 }
 
