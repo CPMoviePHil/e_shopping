@@ -1,6 +1,7 @@
 import 'package:e_shopping/configs/constants.dart';
 import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
+import 'package:e_shopping/providers/search_provider.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/category/category_tile.dart';
 import 'package:e_shopping/screens/product/product_tile.dart';
@@ -16,38 +17,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late String searchString;
-  late bool isLowToHigh;
+
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    searchString = '';
     super.initState();
-  }
-
-  void setSearchString(String value) {
-    setState(() {
-      searchString = value;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     EdgeInsets listViewPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 24);
     List<Widget> searchResultTiles = <Widget>[];
-    if (searchString.isNotEmpty) {
-      if (isLowToHigh) {
-        late List<Product> productsToSort = [];
-        for( int i = 0; i < products.length; i++) {
-          if (products[i].cost! > products[i+1].cost!) {
-            productsToSort.add(products[i]);
+    if (context.watch<SearchNotifier>().searchString != null) {
+      if (context.watch<SearchNotifier>().searchString!.isNotEmpty) {
+        if (context.watch<SearchNotifier>().sortByPrice) {
+          late List<Product> productsToSort = products;
+          if (context.watch<SearchNotifier>().priceSort == 0) {
+            productsToSort.sort((a, b) => a.cost!.compareTo(b.cost!),);
+          } else {
+            productsToSort.sort((a, b) => b.cost!.compareTo(a.cost!),);
           }
+          searchResultTiles = products.where((p)
+          => p.name!.toLowerCase().contains(context.watch<SearchNotifier>().searchString!.toLowerCase())).map((p)
+          => ProductTile(product: p),
+          ).toList();
         }
-        searchResultTiles = products.where((p)
-        => p.name!.toLowerCase().contains(searchString.toLowerCase())).map((p)
-        => ProductTile(product: p),
-        ).toList();
       }
     }
     return Scaffold(
@@ -56,9 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           onTap: () => scaffoldKey.currentState!.openDrawer(),
           child: const Icon(Icons.menu),  // add custom icons also),
         ),
-        title: SearchBar(
-          onChanged: setSearchString,
-        ),
+        title: SearchBar(),
         actions: [
           CartAppBarAction(),
         ],
@@ -78,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       key: scaffoldKey,
-      body: searchString.isNotEmpty ?
+      body: (context.watch<SearchNotifier>().searchString != null && context.watch<SearchNotifier>().searchString!.isNotEmpty) ?
       GridView.count(
         padding: listViewPadding,
         crossAxisCount: 2,
@@ -86,7 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisSpacing: 24,
         childAspectRatio: .78,
         children: searchResultTiles,
-      ) : ListView(
+      ) :
+      ListView(
         padding: listViewPadding,
         children: [
           CategoryTile(

@@ -1,4 +1,5 @@
 import 'package:e_shopping/providers/config_notifier.dart';
+import 'package:e_shopping/providers/search_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:e_shopping/screens/shopping.dart';
@@ -21,22 +22,27 @@ class _AppPage extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SearchNotifier>(create: (context) => SearchNotifier(),),
       ],
-      supportedLocales: S.delegate.supportedLocales,
-      locale: Locale(
-        context.watch<ConfigNotifier>().languageCode!,
-        context.watch<ConfigNotifier>().countryCode,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        locale: Locale(
+          context.watch<ConfigNotifier>().languageCode!,
+          context.watch<ConfigNotifier>().countryCode,
+        ),
+        title: 'e-shop',
+        theme: context.watch<ConfigNotifier>().currentTheme,
+        home: Shopping(),
       ),
-      title: 'e-shop',
-      theme: context.watch<ConfigNotifier>().currentTheme,
-      home: Shopping(),
     );
   }
 }

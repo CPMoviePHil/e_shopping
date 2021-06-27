@@ -1,15 +1,12 @@
 import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/providers/search_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({this.onChanged});
-
-  final Function(String)? onChanged;
-
-  @override
-  _SearchBarState createState() => _SearchBarState();
+  @override _SearchBarState createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
@@ -30,6 +27,9 @@ class _SearchBarState extends State<SearchBar> {
       ),
       child: TextFormField(
         controller: _textEditingController,
+        onChanged: (String currentText) {
+          context.read<SearchNotifier>().changeString(search: currentText);
+        },
         textAlignVertical: TextAlignVertical.center,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
@@ -59,7 +59,6 @@ class _SearchBarState extends State<SearchBar> {
             ),
             onPressed: () {
               _textEditingController!.clear();
-              widget.onChanged!(_textEditingController!.text);
               FocusScope.of(context).unfocus();
             },
           ),
