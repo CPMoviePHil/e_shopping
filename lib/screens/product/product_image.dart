@@ -18,8 +18,8 @@ class ProductImage extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          color: kGreyBackground,
+          borderRadius: BorderRadius.circular(4),
+          color: Theme.of(context).primaryColor,
         ),
         clipBehavior: Clip.hardEdge,
         child: Image.network(
@@ -27,7 +27,7 @@ class ProductImage extends StatelessWidget {
           loadingBuilder: (_, child, loadingProgress) => loadingProgress == null
               ? child
               : Center(child: CircularProgressIndicator()),
-          color: kGreyBackground,
+          color: Theme.of(context).primaryColor,
           colorBlendMode: BlendMode.multiply,
         ),
       ),

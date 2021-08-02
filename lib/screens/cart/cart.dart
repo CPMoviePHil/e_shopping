@@ -1,5 +1,6 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
+import 'package:e_shopping/screens/order/order.dart';
 import 'package:e_shopping/screens/product/call_action.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/app_libs.dart';
@@ -24,58 +25,123 @@ class _CartScreenState extends State<CartScreen> {
 
   void updateState() => setState(() {});
 
+  Widget choiceSheet ({
+    required String title,
+    required String value,
+  }) {
+    return Container(
+      width: 90,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(5,)),
+        border: Border.all(
+          width: 1,
+          color: Theme.of(context).accentColor,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          SizedBox(width: 8,),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 5,),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppLibScreen.appText(
+                    text: title,
+                    fontColor: Theme.of(context).accentColor,
+                  ),
+                  SizedBox(height: 10,),
+                  AppLibScreen.appText(
+                    text: value,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          AppLibScreen.appIcon(
+            icon: Icons.arrow_drop_down_sharp,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget sheets ({required Order order,}) {
+    if (order.item!.selectedSize != null) {
+      return Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: [
+          choiceSheet(
+            title: S.current.size,
+            value: order.item!.selectedSize!,
+          ),
+          choiceSheet(
+            title: S.current.count,
+            value: "${order.count}",
+          ),
+        ],
+      );
+    }
+    return choiceSheet(
+      title: S.current.count,
+      value: "${order.count}",
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> orderItemRows = context.watch<CartNotifier>().cartItems
-        .map((order) => Row(
-        children: [
-          SizedBox(
-            width: 125,
-            child: ProductImage(
-              product: order.item!.product,
+        .map((order) => Stack(
+      children: [
+        Row(
+          children: [
+            SizedBox(
+              width: 125,
+              child: ProductImage(
+                product: order.item!.product,
+              ),
             ),
-          ),
-          SizedBox(
-            width: 16,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  order.item!.product.name!,
-                  style: Theme.of(context).textTheme.subtitle1,
-                ),
-                if (order.item!.selectedSize != null)
-                  Text(
-                    S.current.productSize(order.item!.selectedSize!),
-                    style: Theme.of(context).textTheme.subtitle1,
+            SizedBox(width: 16,),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Text(
+                      order.item!.product.name!,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
                   ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  "\$" + order.item!.product.cost.toString(),
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: Theme.of(context).accentColor,
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 8),
+                    child: sheets(order: order),
                   ),
-                ),
-                Text(
-                  S.current.orderCount(order.count),
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: Theme.of(context).accentColor,
+                  Container(
+                    padding: EdgeInsets.only(top: 8),
+                    child: Text(
+                      "\$" + order.item!.product.cost.toString(),
+                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () => context.read<CartNotifier>().remove(order),
-            color: Colors.red,
-          )
-        ],
-      ),
+            Container(
+              height: 18,
+              width: 18,
+              child: GestureDetector(
+                child: Icon(Icons.close, size: 18, color: Colors.red,),
+                onTap: () => context.read<CartNotifier>().remove(order),
+              ),
+            ),
+          ],
+        )
+      ],),
     ).toList();
 
     return Scaffold(

@@ -52,5 +52,7 @@
   "checkOut": "Check Out",
   "cartItems": "{number} items",
   "productSize": "Size: {size}",
-  "orderCount": "Count: {count}"
+  "orderCount": "Count: {count}",
+  "count": "Count",
+  "size": "Size"
 }

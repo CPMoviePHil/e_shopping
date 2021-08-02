@@ -589,6 +589,26 @@ class S {
       args: [count],
     );
   }
+
+  /// `Count`
+  String get count {
+    return Intl.message(
+      'Count',
+      name: 'count',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Size`
+  String get size {
+    return Intl.message(
+      'Size',
+      name: 'size',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
