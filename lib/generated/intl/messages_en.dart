@@ -25,11 +25,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(username) => "@${username}";
 
-  static String m3(size) => "Size: ${size}";
+  static String m3(count) => "Count: ${count}";
 
-  static String m4(theme) => "set theme to ${theme}";
+  static String m4(size) => "Size: ${size}";
 
-  static String m5(theme) => "${theme} already been set!";
+  static String m5(theme) => "set theme to ${theme}";
+
+  static String m6(theme) => "${theme} already been set!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -73,6 +75,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
+        "orderCount": m3,
         "passwordInput": MessageLookupByLibrary.simpleMessage("password"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "productCategory":
@@ -82,11 +85,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
         "productSearchHint":
             MessageLookupByLibrary.simpleMessage("Search for a product"),
-        "productSize": m3,
+        "productSize": m4,
         "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "settingTheme": m4,
-        "settingThemeAlert": m5,
+        "settingTheme": m5,
+        "settingThemeAlert": m6,
         "shoppingHistory":
             MessageLookupByLibrary.simpleMessage("Shopping History"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),

@@ -22,7 +22,7 @@ class _CartAppBarActionState extends State<CartAppBarAction> {
           Icon(
             Icons.shopping_cart,
           ),
-          if (context.watch<CartNotifier>().itemsInCart.length > 0)
+          if (context.watch<CartNotifier>().cartItems.length > 0)
             Align(
               alignment: Alignment.topRight,
               child: Container(
@@ -39,14 +39,6 @@ class _CartAppBarActionState extends State<CartAppBarAction> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.red,
-                    ),
-                    child: Center(
-                      child: Text(
-                        context.watch<CartNotifier>().itemsInCart.length.toString(),
-                        style: TextStyle(
-                          fontSize: 8,
-                        ),
-                      ),
                     ),
                   ),
                 ),

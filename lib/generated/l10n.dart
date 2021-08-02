@@ -579,6 +579,16 @@ class S {
       args: [size],
     );
   }
+
+  /// `Count: {count}`
+  String orderCount(Object count) {
+    return Intl.message(
+      'Count: $count',
+      name: 'orderCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

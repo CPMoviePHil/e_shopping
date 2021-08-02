@@ -177,6 +177,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           OrderItem(
                             product: product,
                             selectedSize: selectedSize,
+                            selectedColor: null,
                           ),
                         ),
                         labelText: S.current.addToCart,

@@ -26,13 +26,13 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> orderItemRows = context.watch<CartNotifier>().itemsInCart
-        .map((item) => Row(
+    List<Widget> orderItemRows = context.watch<CartNotifier>().cartItems
+        .map((order) => Row(
         children: [
           SizedBox(
             width: 125,
             child: ProductImage(
-              product: item.product,
+              product: order.item!.product,
             ),
           ),
           SizedBox(
@@ -43,19 +43,25 @@ class _CartScreenState extends State<CartScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  item.product.name!,
+                  order.item!.product.name!,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
-                if (item.selectedSize != null)
+                if (order.item!.selectedSize != null)
                   Text(
-                    S.current.productSize(item.selectedSize!),
+                    S.current.productSize(order.item!.selectedSize!),
                     style: Theme.of(context).textTheme.subtitle1,
                   ),
                 SizedBox(
                   height: 8,
                 ),
                 Text(
-                  "\$" + item.product.cost.toString(),
+                  "\$" + order.item!.product.cost.toString(),
+                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                    color: Theme.of(context).accentColor,
+                  ),
+                ),
+                Text(
+                  S.current.orderCount(order.count),
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
                     color: Theme.of(context).accentColor,
                   ),
@@ -65,7 +71,7 @@ class _CartScreenState extends State<CartScreen> {
           ),
           IconButton(
             icon: Icon(Icons.close),
-            onPressed: () => context.read<CartNotifier>().remove(item),
+            onPressed: () => context.read<CartNotifier>().remove(order),
             color: Colors.red,
           )
         ],
@@ -85,11 +91,11 @@ class _CartScreenState extends State<CartScreen> {
               text: S.current.cart,
               fontColor: Theme.of(context).accentColor,
             ),
-            AppLibScreen.appText(
+            /*AppLibScreen.appText(
               text: S.current.cartItems(context.watch<CartNotifier>().itemsInCart.length),
               fontColor: Theme.of(context).accentColor,
               textSize: "small",
-            ),
+            ),*/
           ],
         ),
       ),

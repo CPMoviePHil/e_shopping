@@ -25,11 +25,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(username) => "@${username}";
 
-  static String m3(size) => "大小: ${size}";
+  static String m3(count) => "數量: ${count}";
 
-  static String m4(theme) => "更改成${theme}";
+  static String m4(size) => "大小: ${size}";
 
-  static String m5(theme) => "已經是${theme}";
+  static String m5(theme) => "更改成${theme}";
+
+  static String m6(theme) => "已經是${theme}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -68,17 +70,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "needSignupMsg": MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
         "notification": MessageLookupByLibrary.simpleMessage("訊息通知"),
         "ok": MessageLookupByLibrary.simpleMessage("確認"),
+        "orderCount": m3,
         "passwordInput": MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
         "productCategory": MessageLookupByLibrary.simpleMessage("產品分類"),
         "productCollections": MessageLookupByLibrary.simpleMessage("收藏商品"),
         "productName": MessageLookupByLibrary.simpleMessage("產品名稱"),
         "productSearchHint": MessageLookupByLibrary.simpleMessage("產品搜尋"),
-        "productSize": m3,
+        "productSize": m4,
         "search": MessageLookupByLibrary.simpleMessage("產品搜尋"),
         "setting": MessageLookupByLibrary.simpleMessage("設定"),
-        "settingTheme": m4,
-        "settingThemeAlert": m5,
+        "settingTheme": m5,
+        "settingThemeAlert": m6,
         "shoppingHistory": MessageLookupByLibrary.simpleMessage("購物紀錄"),
         "signup": MessageLookupByLibrary.simpleMessage("註冊"),
         "signupFailure": MessageLookupByLibrary.simpleMessage("會員建立失敗"),

@@ -51,5 +51,6 @@
   "total": "總共",
   "checkOut": "結帳",
   "cartItems": "{number} 件商品",
-  "productSize": "大小: {size}"
+  "productSize": "大小: {size}",
+  "orderCount": "數量: {count}"
 }
