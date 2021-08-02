@@ -569,6 +569,16 @@ class S {
       args: [number],
     );
   }
+
+  /// `Size: {size}`
+  String productSize(Object size) {
+    return Intl.message(
+      'Size: $size',
+      name: 'productSize',
+      desc: '',
+      args: [size],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

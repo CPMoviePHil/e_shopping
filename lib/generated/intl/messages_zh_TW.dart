@@ -25,9 +25,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(username) => "@${username}";
 
-  static String m3(theme) => "更改成${theme}";
+  static String m3(size) => "大小: ${size}";
 
-  static String m4(theme) => "已經是${theme}";
+  static String m4(theme) => "更改成${theme}";
+
+  static String m5(theme) => "已經是${theme}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -72,10 +74,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "productCollections": MessageLookupByLibrary.simpleMessage("收藏商品"),
         "productName": MessageLookupByLibrary.simpleMessage("產品名稱"),
         "productSearchHint": MessageLookupByLibrary.simpleMessage("產品搜尋"),
+        "productSize": m3,
         "search": MessageLookupByLibrary.simpleMessage("產品搜尋"),
         "setting": MessageLookupByLibrary.simpleMessage("設定"),
-        "settingTheme": m3,
-        "settingThemeAlert": m4,
+        "settingTheme": m4,
+        "settingThemeAlert": m5,
         "shoppingHistory": MessageLookupByLibrary.simpleMessage("購物紀錄"),
         "signup": MessageLookupByLibrary.simpleMessage("註冊"),
         "signupFailure": MessageLookupByLibrary.simpleMessage("會員建立失敗"),

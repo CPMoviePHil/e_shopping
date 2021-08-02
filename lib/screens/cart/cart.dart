@@ -46,6 +46,11 @@ class _CartScreenState extends State<CartScreen> {
                   item.product.name!,
                   style: Theme.of(context).textTheme.subtitle1,
                 ),
+                if (item.selectedSize != null)
+                  Text(
+                    S.current.productSize(item.selectedSize!),
+                    style: Theme.of(context).textTheme.subtitle1,
+                  ),
                 SizedBox(
                   height: 8,
                 ),

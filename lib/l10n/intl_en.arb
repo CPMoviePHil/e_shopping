@@ -50,5 +50,6 @@
   "emptyCart": "Your cart is empty",
   "total": "Total",
   "checkOut": "Check Out",
-  "cartItems": "{number} items"
+  "cartItems": "{number} items",
+  "productSize": "Size: {size}"
 }

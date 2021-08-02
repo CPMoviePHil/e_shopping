@@ -13,12 +13,13 @@ class Product {
   /// Represents type of product such as shirt, jeans, pet treats, etc.
   final String? productType;
 
-  Product(
-      {this.name,
-        this.imageUrls,
-        this.cost,
-        this.description,
-        this.sizes,
-        this.category,
-        this.productType});
+  Product({
+    this.name,
+    this.imageUrls,
+    this.cost,
+    this.description,
+    this.sizes,
+    this.category,
+    this.productType,
+  });
 }

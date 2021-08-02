@@ -48,6 +48,30 @@ class _ProductScreenState extends State<ProductScreen> {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
   }
 
+  Widget sizeItem({
+    required bool isSelected,
+    required String size,
+  }) {
+    return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(20,)),
+      onTap: () => setSelectedSize(size),
+      child: Container(
+        decoration: isSelected ? BoxDecoration(
+          color: Theme.of(context).colorScheme.onSecondary,
+          borderRadius: const BorderRadius.all(Radius.circular(20,)),
+          /*border: Border.all(
+            width: 1,
+          ),*/
+        ) : null,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5,),
+        child: AppLibScreen.appText(
+          text: size,
+          fontColor: isSelected ? Theme.of(context).primaryColor : null,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> imagePreviews = product.imageUrls!
@@ -87,68 +111,83 @@ class _ProductScreenState extends State<ProductScreen> {
           CartAppBarAction(),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: MediaQuery.of(context).size.height * .35,
-            color: kGreyBackground,
-            padding: EdgeInsets.symmetric(vertical: 18),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Image.network(
-                    selectedImageUrl!,
-                    fit: BoxFit.cover,
-                    color: kGreyBackground,
-                    colorBlendMode: BlendMode.multiply,
-                  ),
-                ),
-                SizedBox(height: 18),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: imagePreviews,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(16),
+      body: Container(
+        //padding: EdgeInsets.symmetric(horizontal: 20,),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * .35,
+              color: kGreyBackground,
+              padding: EdgeInsets.symmetric(vertical: 18),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    product.name!,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Text(
-                    "\$" + product.cost.toString(),
-                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                      color: Theme.of(context).accentColor,
+                  Expanded(
+                    child: Image.network(
+                      selectedImageUrl!,
+                      fit: BoxFit.cover,
+                      color: kGreyBackground,
+                      colorBlendMode: BlendMode.multiply,
                     ),
                   ),
-                  SizedBox(height: 12),
-                  Center(
-                    child: CallToActionButton(
-                      onPressed: () => context.read<CartNotifier>().add(
-                        OrderItem(
-                          product: product,
-                          selectedSize: selectedSize,
-                        ),
-                      ),
-                      labelText: S.current.addToCart,
-                    ),
-                  )
+                  SizedBox(height: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: imagePreviews,
+                  ),
                 ],
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      product.name!,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      "\$" + product.cost.toString(),
+                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                        color: Theme.of(context).accentColor,
+                      ),
+                    ),
+                    if (product.sizes != null)
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: 12,),
+                        child: Wrap(
+                          runSpacing: 12,
+                          spacing: 20,
+                          children: product.sizes!.map((e) => sizeItem(
+                            isSelected: e == selectedSize,
+                            size: e,
+                          ),).toList(),
+                        ),
+                      ),
+                    SizedBox(height: 12),
+                    Center(
+                      child: CallToActionButton(
+                        onPressed: () => context.read<CartNotifier>().add(
+                          OrderItem(
+                            product: product,
+                            selectedSize: selectedSize,
+                          ),
+                        ),
+                        labelText: S.current.addToCart,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

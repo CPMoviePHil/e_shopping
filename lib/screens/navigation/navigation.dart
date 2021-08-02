@@ -22,7 +22,8 @@ class _NavigationState extends State<Navigation> {
   int pageIndex = 0;
 
   final List<Widget> pageList = <Widget>[
-    Home(),
+    /*Home(),*/
+    Search(),
     Search(),
   ];
 
@@ -46,43 +47,40 @@ class _NavigationState extends State<Navigation> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: Scaffold(
-        appBar: AppBar(
-          leading: GestureDetector(
-            onTap: () => scaffoldKey.currentState!.openDrawer(),
-            child: const Icon(Icons.menu),  // add custom icons also),
-          ),
-          title: SearchBar(),
-          actions: [
-            CartAppBarAction(),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () => scaffoldKey.currentState!.openDrawer(),
+          child: const Icon(Icons.menu),  // add custom icons also),
         ),
-        drawer: Drawer(
-          child: Container(
-            color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
-                ? Colors.white
-                : Theme.of(context).primaryColor,
-            width: MediaQuery.of(context).size.width * 0.7,
-            child: SafeArea(
-              child: Container(
-                height: double.infinity,
-                child: LeftList(),
-              ),
+        title: SearchBar(),
+        actions: [
+          CartAppBarAction(),
+        ],
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: context.watch<ConfigNotifier>().currentStatus == ViewStatus.visitor
+              ? Colors.white
+              : Theme.of(context).primaryColor,
+          width: MediaQuery.of(context).size.width * 0.7,
+          child: SafeArea(
+            child: Container(
+              height: double.infinity,
+              child: LeftList(),
             ),
           ),
         ),
-        key: scaffoldKey,
-        body: PageView(
-          children: pageList,
-          controller: pageController,
-          onPageChanged: onPageChanged,
-        ),
-        bottomNavigationBar: BottomNavigator(
-          pageIndex: pageIndex,
-          onTap: bottomNavigator,
-        ),
+      ),
+      key: scaffoldKey,
+      body: PageView(
+        children: pageList,
+        controller: pageController,
+        onPageChanged: onPageChanged,
+      ),
+      bottomNavigationBar: BottomNavigator(
+        pageIndex: pageIndex,
+        onTap: bottomNavigator,
       ),
     );
   }

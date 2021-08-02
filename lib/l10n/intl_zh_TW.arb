@@ -50,5 +50,6 @@
   "emptyCart": "購物車是空的",
   "total": "總共",
   "checkOut": "結帳",
-  "cartItems": "{number} 件商品"
+  "cartItems": "{number} 件商品",
+  "productSize": "大小: {size}"
 }
