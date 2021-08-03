@@ -36,7 +36,9 @@ class _CartScreenState extends State<CartScreen> {
     return GestureDetector(
       onTap: title == S.current.size ? () async => await showSizeSheets(
         order: order,
-      ) : null,
+      ) : () async => await showCountSheets(
+        order: order,
+      ),
       child: Container(
         width: 90,
         decoration: BoxDecoration(
@@ -77,6 +79,104 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  Future<void> showCountSheets ({
+    required Order order,
+  }) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(3),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            height: 10 * 50,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(3)),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 10,
+                  ),
+                  child: Row(
+                    children: [
+                      AppLibScreen.appText(
+                        text: S.current.countHint,
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  thickness: 2,
+                  color: Colors.black,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: List.generate(
+                      10, (index) {
+                      return selectCount(
+                        order: order,
+                        index: index,
+                        currentCount: order.count,
+                      );
+                    },).toList(),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget selectCount ({
+    required Order order,
+    required int index,
+    required int currentCount,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        print(currentCount);
+        print(index+1);
+        if (currentCount != index + 1) {
+          context.read<CartNotifier>().changeCount(order: order, count: index + 1,);
+        }
+        Navigator.of(context).pop();
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(width: 0.5,),
+          )
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            AppLibScreen.appText(
+              text: "${index + 1}",
+            ),
+            if (currentCount == index + 1)
+              AppLibScreen.appIcon(
+                icon: Icons.check_sharp,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<void> showSizeSheets ({
     required Order order,
   }) async {
@@ -85,12 +185,12 @@ class _CartScreenState extends State<CartScreen> {
       builder: (context) {
         return Dialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(3),
           ),
           elevation: 0,
           backgroundColor: Colors.transparent,
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * order.item!.product.sizes!.length / 4  * 0.15,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -98,8 +198,9 @@ class _CartScreenState extends State<CartScreen> {
             child: Column(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10, horizontal: 10
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 10,
                   ),
                   child: Row(
                     children: [
@@ -110,8 +211,8 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Divider(
-                  height: 2,
-                  color: Theme.of(context).accentColor,
+                  thickness: 2,
+                  color: Colors.black,
                 ),
                 Expanded(
                   child: Column(

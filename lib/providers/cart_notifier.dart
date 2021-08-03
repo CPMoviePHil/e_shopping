@@ -46,6 +46,15 @@ class CartNotifier with ChangeNotifier {
     }
   }
 
+  void changeCount ({required Order order, required int count,}) {
+    final index = cartItems.indexWhere((element) => element == order);
+    cartItems[index] = cartItems[index].copyWith(
+      count: count,
+      item: cartItems[index].item,
+    );
+    notifyListeners();
+  }
+
   void add(OrderItem orderItem) {
     if (cartContainOrder(item: orderItem)) {
       final index = cartItems.indexWhere((element) => element.item == orderItem);
