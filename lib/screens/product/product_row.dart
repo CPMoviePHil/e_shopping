@@ -21,24 +21,27 @@ class ProductRow extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: 18.0,
+            vertical: 18,
           ),
           child: Text(
             productType!,
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        SizedBox(
-          height: 8,
-        ),
-        SizedBox(
-          height: 205,
-          child: ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 18),
-            itemCount: _productTiles.length,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) => _productTiles[index],
-            separatorBuilder: (_, index) => SizedBox(
-              width: 24,
+        Expanded(
+          child: Container(
+            alignment: Alignment.topCenter,
+            width: MediaQuery.of(context).size.width,
+            //decoration: BoxDecoration(border: Border.all(width: 0.5)),
+            child: Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: _productTiles.map((e) => Expanded(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: e,
+                ),
+              ),).toList(),
             ),
           ),
         ),

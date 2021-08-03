@@ -40,23 +40,26 @@ class _CategoryScreenState extends State<CategoryScreen> {
           .where((p) => p.productType!.toLowerCase() == s.toLowerCase())
           .toList(),
     )).toList();
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: AppLibScreen.appText(
-          text: category!.title,
-          fontColor: Theme.of(context).accentColor,
+    return DefaultTabController(
+      length: productRows.length,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: AppLibScreen.appText(
+            text: category!.title,
+            fontColor: Theme.of(context).accentColor,
+          ),
+          actions: [
+            CartAppBarAction(),
+          ],
+          bottom: TabBar(
+            tabs: productRows.map((e) => Tab(
+              text: e.productType,
+            )).toList(),
+          ),
         ),
-        actions: [
-          CartAppBarAction(),
-        ],
-      ),
-      body: ListView.separated(
-        padding: EdgeInsets.symmetric(vertical: 18),
-        itemCount: productRows.length,
-        itemBuilder: (_, index) => productRows[index],
-        separatorBuilder: (_, index) => SizedBox(
-          height: 18,
+        body: TabBarView(
+          children: productRows,
         ),
       ),
     );
