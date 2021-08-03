@@ -27,23 +27,24 @@ class CartNotifier with ChangeNotifier {
     required OrderItem oldOrderItem,
     required OrderItem newOrderItem,
   }) {
+    final Order oldOrder = cartItems.firstWhere((element) => element.item == oldOrderItem);
     if (cartContainOrder(item: newOrderItem)) {
       final index = cartItems.indexWhere((element) => element.item == newOrderItem);
       cartItems[index] = cartItems[index].copyWith(
-        count: cartItems[index].count + 1,
+        count: cartItems[index].count + oldOrder.count,
         item: cartItems[index].item,
       );
-      notifyListeners();
     } else {
       cartItems.add(
         Order(
           orderID: cartItems.last.orderID + 1,
-          count: 1,
+          count: oldOrder.count,
           item: newOrderItem,
         ),
       );
-      notifyListeners();
     }
+    cartItems.remove(oldOrder);
+    notifyListeners();
   }
 
   void changeCount ({required Order order, required int count,}) {

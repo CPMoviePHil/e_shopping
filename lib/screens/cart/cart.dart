@@ -144,8 +144,6 @@ class _CartScreenState extends State<CartScreen> {
   }) {
     return GestureDetector(
       onTap: () {
-        print(currentCount);
-        print(index+1);
         if (currentCount != index + 1) {
           context.read<CartNotifier>().changeCount(order: order, count: index + 1,);
         }
