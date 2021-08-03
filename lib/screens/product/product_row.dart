@@ -32,7 +32,6 @@ class ProductRow extends StatelessWidget {
           child: Container(
             alignment: Alignment.topCenter,
             width: MediaQuery.of(context).size.width,
-            //decoration: BoxDecoration(border: Border.all(width: 0.5)),
             child: Wrap(
               spacing: 10,
               runSpacing: 10,

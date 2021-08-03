@@ -24,7 +24,6 @@ class ProductTile extends StatelessWidget {
         );
       },
       child: Column(
-        //crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ProductImage(product: product),
           SizedBox(

@@ -53,6 +53,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             CartAppBarAction(),
           ],
           bottom: TabBar(
+            indicatorColor: Theme.of(context).accentColor,
             tabs: productRows.map((e) => Tab(
               text: e.productType,
             )).toList(),
