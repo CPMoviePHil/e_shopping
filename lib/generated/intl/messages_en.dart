@@ -44,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cartItems": m0,
         "checkOut": MessageLookupByLibrary.simpleMessage("Check Out"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
+        "countHint": MessageLookupByLibrary.simpleMessage("Select Number"),
         "creating": MessageLookupByLibrary.simpleMessage("Creating..."),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
@@ -97,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "signupFailure": MessageLookupByLibrary.simpleMessage("Signup failure"),
         "signupLabel": MessageLookupByLibrary.simpleMessage("Create"),
         "size": MessageLookupByLibrary.simpleMessage("Size"),
+        "sizeHint": MessageLookupByLibrary.simpleMessage("Select Size"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "validating": MessageLookupByLibrary.simpleMessage("Validating..."),

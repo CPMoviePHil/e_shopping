@@ -6,6 +6,7 @@ import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,11 +14,11 @@ import 'package:provider/provider.dart';
 import 'call_action.dart';
 
 class ProductScreen extends StatefulWidget {
-  ProductScreen({required this.product});
+  ProductScreen({
+    required this.product,
+  });
   final Product product;
-
-  @override
-  _ProductScreenState createState() => _ProductScreenState();
+  @override _ProductScreenState createState() => _ProductScreenState();
 }
 
 class _ProductScreenState extends State<ProductScreen> {
@@ -46,30 +47,6 @@ class _ProductScreenState extends State<ProductScreen> {
 
   List<Product> filterProducts ({required List<Product> products, required Category category,}) {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
-  }
-
-  Widget sizeItem({
-    required bool isSelected,
-    required String size,
-  }) {
-    return InkWell(
-      borderRadius: const BorderRadius.all(Radius.circular(20,)),
-      onTap: () => setSelectedSize(size),
-      child: Container(
-        decoration: isSelected ? BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius: const BorderRadius.all(Radius.circular(20,)),
-          /*border: Border.all(
-            width: 1,
-          ),*/
-        ) : null,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5,),
-        child: AppLibScreen.appText(
-          text: size,
-          fontColor: isSelected ? Theme.of(context).primaryColor : null,
-        ),
-      ),
-    );
   }
 
   @override
@@ -164,9 +141,11 @@ class _ProductScreenState extends State<ProductScreen> {
                         child: Wrap(
                           runSpacing: 12,
                           spacing: 20,
-                          children: product.sizes!.map((e) => sizeItem(
+                          children: product.sizes!.map((e) => WidgetsHelper.sizeItem(
+                            context: context,
                             isSelected: e == selectedSize,
                             size: e,
+                            onTap: () => setSelectedSize(e),
                           ),).toList(),
                         ),
                       ),

@@ -54,5 +54,7 @@
   "productSize": "大小: {size}",
   "orderCount": "數量: {count}",
   "count": "數量",
-  "size": "尺寸"
+  "size": "尺寸",
+  "sizeHint": "選擇尺寸",
+  "countHint": "選擇數量"
 }

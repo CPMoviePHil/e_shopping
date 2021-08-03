@@ -4,6 +4,7 @@ import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:flutter/material.dart';
 
 class WidgetsHelper {
+
   static Future<bool?> choiceDialog ({
     required BuildContext context,
     required String dialogTitle,
@@ -73,5 +74,36 @@ class WidgetsHelper {
           ),
         ),
       );
+  }
+
+  static Widget sizeItem ({
+    required BuildContext context,
+    required bool isSelected,
+    required String size,
+    required VoidCallback? onTap,
+  }) {
+    return InkWell(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(20,),
+      ),
+      onTap: onTap,
+      child: Container(
+        decoration: isSelected ?
+        BoxDecoration(
+          color: Theme.of(context).colorScheme.onSecondary,
+          borderRadius: const BorderRadius.all(Radius.circular(20,)),
+        ) : null,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 5,
+        ),
+        child: AppLibScreen.appText(
+          text: size,
+          fontColor: isSelected
+              ? Theme.of(context).primaryColor
+              : null,
+        ),
+      ),
+    );
   }
 }

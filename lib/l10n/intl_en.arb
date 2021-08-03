@@ -54,5 +54,7 @@
   "productSize": "Size: {size}",
   "orderCount": "Count: {count}",
   "count": "Count",
-  "size": "Size"
+  "size": "Size",
+  "sizeHint": "Select Size",
+  "countHint": "Select Number"
 }

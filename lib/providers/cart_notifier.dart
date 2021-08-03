@@ -23,6 +23,29 @@ class CartNotifier with ChangeNotifier {
     return false;
   }
 
+  void changeSize ({
+    required OrderItem oldOrderItem,
+    required OrderItem newOrderItem,
+  }) {
+    if (cartContainOrder(item: newOrderItem)) {
+      final index = cartItems.indexWhere((element) => element.item == newOrderItem);
+      cartItems[index] = cartItems[index].copyWith(
+        count: cartItems[index].count + 1,
+        item: cartItems[index].item,
+      );
+      notifyListeners();
+    } else {
+      cartItems.add(
+        Order(
+          orderID: cartItems.last.orderID + 1,
+          count: 1,
+          item: newOrderItem,
+        ),
+      );
+      notifyListeners();
+    }
+  }
+
   void add(OrderItem orderItem) {
     if (cartContainOrder(item: orderItem)) {
       final index = cartItems.indexWhere((element) => element.item == orderItem);

@@ -1,9 +1,11 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/order/order.dart';
+import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/screens/product/call_action.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,6 +15,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
   @override
   void initState() {
     super.initState();
@@ -28,43 +31,124 @@ class _CartScreenState extends State<CartScreen> {
   Widget choiceSheet ({
     required String title,
     required String value,
+    required Order order,
   }) {
-    return Container(
-      width: 90,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(5,)),
-        border: Border.all(
-          width: 1,
-          color: Theme.of(context).accentColor,
+    return GestureDetector(
+      onTap: title == S.current.size ? () async => await showSizeSheets(
+        order: order,
+      ) : null,
+      child: Container(
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(3,)),
+          border: Border.all(
+            width: 1,
+            color: Theme.of(context).accentColor,
+          ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SizedBox(width: 8,),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.symmetric(vertical: 5,),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppLibScreen.appText(
-                    text: title,
-                    fontColor: Theme.of(context).accentColor,
-                  ),
-                  SizedBox(height: 10,),
-                  AppLibScreen.appText(
-                    text: value,
-                  ),
-                ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 8,),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(vertical: 5,),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppLibScreen.appText(
+                      text: title,
+                      fontColor: Theme.of(context).accentColor,
+                    ),
+                    SizedBox(height: 10,),
+                    AppLibScreen.appText(
+                      text: value,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          AppLibScreen.appIcon(
-            icon: Icons.arrow_drop_down_sharp,
-          ),
-        ],
+            AppLibScreen.appIcon(
+              icon: Icons.arrow_drop_down_sharp,
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Future<void> showSizeSheets ({
+    required Order order,
+  }) async {
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.15,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10, horizontal: 10
+                  ),
+                  child: Row(
+                    children: [
+                      AppLibScreen.appText(
+                        text: S.current.sizeHint,
+                      ),
+                    ],
+                  ),
+                ),
+                Divider(
+                  height: 2,
+                  color: Theme.of(context).accentColor,
+                ),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Wrap(
+                          runSpacing: 12,
+                          spacing: 20,
+                          children: order.item!.product.sizes!.map((e) => WidgetsHelper.sizeItem(
+                            context: context,
+                            onTap: () {
+                              if (e != order.item!.selectedSize) {
+                                context.read<CartNotifier>().changeSize(
+                                  oldOrderItem: order.item!,
+                                  newOrderItem: OrderItem(
+                                    product: order.item!.product,
+                                    selectedSize: e,
+                                    selectedColor: null,
+                                  ),
+                                );
+                              }
+                              Navigator.of(context).pop();
+                            },
+                            isSelected: e == order.item!.selectedSize,
+                            size: e,
+                          ),).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -77,10 +161,12 @@ class _CartScreenState extends State<CartScreen> {
           choiceSheet(
             title: S.current.size,
             value: order.item!.selectedSize!,
+            order: order,
           ),
           choiceSheet(
             title: S.current.count,
             value: "${order.count}",
+            order: order,
           ),
         ],
       );
@@ -88,6 +174,7 @@ class _CartScreenState extends State<CartScreen> {
     return choiceSheet(
       title: S.current.count,
       value: "${order.count}",
+      order: order,
     );
   }
 
@@ -119,15 +206,12 @@ class _CartScreenState extends State<CartScreen> {
                     padding: EdgeInsets.symmetric(vertical: 8),
                     child: sheets(order: order),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(top: 8),
-                    child: Text(
-                      "\$" + order.item!.product.cost.toString(),
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                        color: Theme.of(context).accentColor,
-                      ),
+                  Text(
+                    "\$" + order.item!.product.cost.toString(),
+                    style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      color: Theme.of(context).accentColor,
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

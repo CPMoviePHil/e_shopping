@@ -609,6 +609,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Size`
+  String get sizeHint {
+    return Intl.message(
+      'Select Size',
+      name: 'sizeHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Number`
+  String get countHint {
+    return Intl.message(
+      'Select Number',
+      name: 'countHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
