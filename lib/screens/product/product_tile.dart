@@ -1,10 +1,14 @@
 import 'package:e_shopping/data/product.dart';
+import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/product/product.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class ProductTile extends StatelessWidget {
   const ProductTile({
@@ -23,27 +27,59 @@ class ProductTile extends StatelessWidget {
           screen: ProductScreen(product: product),
         );
       },
-      child: Column(
+      child: Stack(
         children: [
-          ProductImage(product: product),
-          SizedBox(
-            height: 8,
+          Column(
+            children: [
+              ProductImage(product: product),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                product.name!,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.subtitle2,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "\$${product.cost.toString()}",
+                style: Theme.of(context)
+                    .textTheme
+                    .subtitle2!
+                    .copyWith(color: Theme.of(context).accentColor),
+              ),
+
+            ],
           ),
-          Text(
-            product.name!,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle2,
+          Consumer<FavoriteProvider>(
+            builder: (context, favorite, child,) {
+              if (favorite.products.contains(product)) {
+                return Positioned(
+                  right: 10,
+                  top: 5,
+                  child: AppLibScreen.favoriteWidget(
+                    context: context,
+                    message: S.current.removeFromFavorite,
+                    onTap: () => favorite.remove(product: product),
+                    isAdded: true,
+                  ),
+                );
+              } else {
+                return Positioned(
+                  right: 10,
+                  top: 5,
+                  child: AppLibScreen.favoriteWidget(
+                    context: context,
+                    message: S.current.addToFavorite,
+                    onTap: () => favorite.add(product: product),
+                    isAdded: false,
+                  ),
+                );
+              }
+            },
           ),
-          SizedBox(
-            height: 8,
-          ),
-          Text(
-            "\$${product.cost.toString()}",
-            style: Theme.of(context)
-                .textTheme
-                .subtitle2!
-                .copyWith(color: Theme.of(context).accentColor),
-          )
         ],
       ),
     );

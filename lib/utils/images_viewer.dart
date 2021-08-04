@@ -65,6 +65,7 @@ class ImageViewer extends StatelessWidget {
               top: MediaQuery.of(context).size.width * 0.1 - 20 / 2,
               left: 20,
               child: Container(
+                padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Theme.of(context).primaryColor,

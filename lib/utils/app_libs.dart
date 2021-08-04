@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AppLibScreen {
 
@@ -93,6 +94,27 @@ class AppLibScreen {
     );
   }
 
+  static Widget onlineImage ({
+    required String onlineImage,
+    double? size,
+  }) {
+    return CachedNetworkImage(
+      imageUrl: onlineImage,
+      imageBuilder: (context, imageProvider) => Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: imageProvider,
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      placeholder: (context, url) => CircularProgressIndicator(),
+      errorWidget: (context, url, error) => Icon(Icons.error),
+    );
+  }
+
   static InputDecoration inputDecoration ({
     required String hintText,
     Color? fontColor,
@@ -165,6 +187,22 @@ class AppLibScreen {
           icon: isAdded ? Icons.favorite_sharp : Icons.favorite_border_sharp,
           size: 16,
         ),
+      ),
+    );
+  }
+
+  static Widget starsWidget ({
+    required double stars,
+    double? size,
+  }) {
+    return RatingBarIndicator(
+      itemSize: size ?? 24,
+      rating: stars,
+      direction: Axis.horizontal,
+      itemCount: 5,
+      itemBuilder: (context, _) => Icon(
+        Icons.star,
+        color: Colors.amber,
       ),
     );
   }

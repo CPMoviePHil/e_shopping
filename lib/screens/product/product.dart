@@ -7,7 +7,7 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/cart/cart.dart';
-import 'package:e_shopping/screens/comment/comment.dart';
+import 'package:e_shopping/screens/comment/product_comments.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/temp_data.dart';
 import 'package:e_shopping/utils/app_libs.dart';
@@ -16,7 +16,6 @@ import 'package:e_shopping/utils/utils.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -65,19 +64,6 @@ class _ProductScreenState extends State<ProductScreen> {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
   }
 
-  Widget productStars({required double stars}) {
-    return RatingBarIndicator(
-      itemSize: 24,
-      rating: stars,
-      direction: Axis.horizontal,
-      itemCount: 5,
-      itemBuilder: (context, _) => Icon(
-        Icons.star,
-        color: Colors.amber,
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     List<CommentModel> productComments = comments.where((element) => element.productID == product.productID).toList();
@@ -93,212 +79,206 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
       );
     } else {
-      productComments.map((e) => stars + e.star / 5).toList();
+      productComments.map((e) {
+        stars = stars + e.star;
+      },).toList();
+      stars = stars / productComments.length;
       commentWidget = ProductCommentsScreen(comments: productComments);
     }
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 16,),
-            Stack(
+        child: Container(
+          height: double.infinity,
+          child:  SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * .35,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: CarouselSlider(
-                          options: CarouselOptions(
-                            viewportFraction: 1,
-                            height: MediaQuery.of(context).size.height * .35,
-                          ),
-                          items: product.imageUrls!.map(
-                                (e) {
-                              return GestureDetector(
-                                onTap: () {
-                                  if (product.imageUrls!.length > 1) {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => ImageViewer(
-                                        imagePath: e,
-                                        initialPage: product.imageUrls!.indexOf(e),
-                                        images: product.imageUrls!,
+                SizedBox(height: 16,),
+                Stack(
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * .35,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                viewportFraction: 1,
+                                height: MediaQuery.of(context).size.height * .35,
+                              ),
+                              items: product.imageUrls!.map(
+                                    (e) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (product.imageUrls!.length > 1) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => ImageViewer(
+                                            imagePath: e,
+                                            initialPage: product.imageUrls!.indexOf(e),
+                                            images: product.imageUrls!,
+                                          ),
+                                        );
+                                      } else {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => ImageViewer(
+                                            imagePath: e,
+                                            initialPage: null,
+                                            images: null,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Container(
+                                      color: Theme.of(context).backgroundColor,
+                                      child: Image.network(
+                                        e,
+                                        fit: BoxFit.cover,
+                                        color: kGreyBackground,
+                                        colorBlendMode: BlendMode.multiply,
                                       ),
-                                    );
-                                  } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => ImageViewer(
-                                        imagePath: e,
-                                        initialPage: null,
-                                        images: null,
-                                      ),
-                                    );
-                                  }
+                                    ),
+                                  );
                                 },
-                                child: Container(
-                                  color: Theme.of(context).backgroundColor,
-                                  child: Image.network(
-                                    e,
-                                    fit: BoxFit.cover,
-                                    color: kGreyBackground,
-                                    colorBlendMode: BlendMode.multiply,
+                              ).toList(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 10,
+                      top: 0,
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: AppLibScreen.appIcon(icon: Icons.arrow_back_sharp),
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    SizedBox(height: 16,),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                      ),
+                      padding: EdgeInsets.only(left: 11, top: 10,),
+                      child: Row(
+                        children: [
+                          AppLibScreen.starsWidget(stars: stars),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).backgroundColor,
+                        border: Border(
+                          bottom: BorderSide(
+                            width: 0.5,
+                            color: kGrey400,
+                          ),
+                        ),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            product.name!,
+                            style: Theme.of(context).textTheme.headline6,
+                          ),
+                          SizedBox(
+                            height: 4,
+                          ),
+                          Text(
+                            "\$" + product.cost.toString(),
+                            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                              color: Theme.of(context).accentColor,
+                            ),
+                          ),
+                          if (product.sizes != null)
+                            Container(
+                              padding: EdgeInsets.only(top: 12,),
+                              child: Row(
+                                children: [
+                                  AppLibScreen.appText(text: S.current.size),
+                                ],
+                              ),
+                            ),
+                          if (product.sizes != null)
+                            Container(
+                              padding: EdgeInsets.symmetric(vertical: 12,),
+                              child: Wrap(
+                                runSpacing: 12,
+                                spacing: 20,
+                                children: product.sizes!.map((e) => WidgetsHelper.sizeItem(
+                                  context: context,
+                                  isSelected: e == selectedSize,
+                                  size: e,
+                                  onTap: () => setSelectedSize(e),
+                                ),).toList(),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).backgroundColor
+                      ),
+                      child: Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).backgroundColor,
+                              border: Border(
+                                bottom: BorderSide(
+                                  width: 0.5,
+                                  color: kGrey400,
+                                ),
+                              ),
+                            ),
+                            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 15,),
+                                  child: Row(
+                                    children: [
+                                      AppLibScreen.appText(text: S.current.comments),
+                                    ],
                                   ),
                                 ),
-                              );
-                            },
-                          ).toList(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  left: 10,
-                  top: 0,
-                  child: GestureDetector(
-                    onTap: () => Navigator.of(context).pop(),
-                    child: AppLibScreen.appIcon(icon: Icons.arrow_back_sharp),
-                  ),
-                ),
-              ],
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  SizedBox(height: 16,),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
-                      /*border: Border(
-                        top: BorderSide(
-                          width: 0.5,
-                          color: kGrey400,
-                        ),
-                      ),*/
-                    ),
-                    padding: EdgeInsets.only(left: 11, top: 10,),
-                    child: Row(
-                      children: [
-                        productStars(stars: stars),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor,
-                      border: Border(
-                        bottom: BorderSide(
-                          width: 0.5,
-                          color: kGrey400,
-                        ),
-                      ),
-                    ),
-                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          product.name!,
-                          style: Theme.of(context).textTheme.headline6,
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "\$" + product.cost.toString(),
-                          style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                            color: Theme.of(context).accentColor,
-                          ),
-                        ),
-                        if (product.sizes != null)
-                          Container(
-                            padding: EdgeInsets.only(top: 12,),
-                            child: Row(
-                              children: [
-                                AppLibScreen.appText(text: S.current.size),
+                                Divider(
+                                  color: kGrey400,
+                                  thickness: 0.5,
+                                ),
+                                commentWidget,
                               ],
                             ),
                           ),
-                        if (product.sizes != null)
-                          Container(
-                            padding: EdgeInsets.symmetric(vertical: 12,),
-                            child: Wrap(
-                              runSpacing: 12,
-                              spacing: 20,
-                              children: product.sizes!.map((e) => WidgetsHelper.sizeItem(
-                                context: context,
-                                isSelected: e == selectedSize,
-                                size: e,
-                                onTap: () => setSelectedSize(e),
-                              ),).toList(),
-                            ),
-                          ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container(
-                    height: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).backgroundColor
-                    ),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).backgroundColor,
-                            border: Border(
-                              bottom: BorderSide(
-                                width: 0.5,
-                                color: kGrey400,
-                              ),
-                            ),
-                          ),
-                          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.symmetric(vertical: 15,),
-                                child: Row(
-                                  children: [
-                                    AppLibScreen.appText(text: S.current.comments),
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                color: kGrey400,
-                                thickness: 0.5,
-                              ),
-                              commentWidget,
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
-          /*border: Border(
-            top: BorderSide(
-              width: 0.5,
-              color: kGrey400
-            ),
-          ),*/
         ),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15,),
         child: Row(
