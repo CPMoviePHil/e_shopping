@@ -76,6 +76,13 @@ class WidgetsHelper {
       );
   }
 
+  static void hideSnackBar ({
+    required BuildContext context,
+  }) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar();
+  }
+
   static Widget sizeItem ({
     required BuildContext context,
     required bool isSelected,

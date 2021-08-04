@@ -150,4 +150,22 @@ class AppLibScreen {
       ),
     );
   }
+
+  static Widget favoriteWidget ({
+    required BuildContext context,
+    required String message,
+    required VoidCallback onTap,
+    required bool isAdded,
+  }) {
+    return Tooltip(
+      message: message,
+      child: GestureDetector(
+        onTap: onTap,
+        child: AppLibScreen.appIcon(
+          icon: isAdded ? Icons.favorite_sharp : Icons.favorite_border_sharp,
+          size: 16,
+        ),
+      ),
+    );
+  }
 }

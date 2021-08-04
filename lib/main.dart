@@ -1,5 +1,6 @@
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
+import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
 import 'package:e_shopping/providers/loading_server_data_notifier.dart';
 
@@ -12,8 +13,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +36,9 @@ Future<void> main() async {
           ),
           ChangeNotifierProvider<CartNotifier>(
             create: (context) => CartNotifier(),
+          ),
+          ChangeNotifierProvider<FavoriteProvider>(
+            create: (context) => FavoriteProvider(),
           ),
         ],
         child: MyApp(),

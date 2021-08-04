@@ -629,6 +629,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Go To Cart`
+  String get goToCart {
+    return Intl.message(
+      'Go To Cart',
+      name: 'goToCart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add To Favorite`
+  String get addToFavorite {
+    return Intl.message(
+      'Add To Favorite',
+      name: 'addToFavorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove Favorite`
+  String get removeFromFavorite {
+    return Intl.message(
+      'Remove Favorite',
+      name: 'removeFromFavorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `此產品已加入到購物車`
+  String get addedToCart {
+    return Intl.message(
+      '此產品已加入到購物車',
+      name: 'addedToCart',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

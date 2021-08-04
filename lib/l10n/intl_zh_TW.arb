@@ -56,5 +56,9 @@
   "count": "數量",
   "size": "尺寸",
   "sizeHint": "選擇尺寸",
-  "countHint": "選擇數量"
+  "countHint": "選擇數量",
+  "goToCart": "前往購物車",
+  "addToFavorite": "加到我的最愛",
+  "removeFromFavorite": "移除我的最愛",
+  "addedToCart": "此產品已加入到購物車"
 }

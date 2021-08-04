@@ -37,6 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "accountInput": MessageLookupByLibrary.simpleMessage("account"),
         "addToCart": MessageLookupByLibrary.simpleMessage("Add To Cart"),
+        "addToFavorite":
+            MessageLookupByLibrary.simpleMessage("Add To Favorite"),
+        "addedToCart": MessageLookupByLibrary.simpleMessage("此產品已加入到購物車"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("Already Have an Account?"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
@@ -50,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "darkMode": MessageLookupByLibrary.simpleMessage("dark mode"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
+        "goToCart": MessageLookupByLibrary.simpleMessage("Go To Cart"),
         "homepage": MessageLookupByLibrary.simpleMessage("Home"),
         "hotProduct": MessageLookupByLibrary.simpleMessage("Hot Product"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
@@ -88,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "productSearchHint":
             MessageLookupByLibrary.simpleMessage("Search for a product"),
         "productSize": m4,
+        "removeFromFavorite":
+            MessageLookupByLibrary.simpleMessage("Remove Favorite"),
         "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "settingTheme": m5,

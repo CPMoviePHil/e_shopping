@@ -35,11 +35,9 @@ class ProductRow extends StatelessWidget {
             child: Wrap(
               spacing: 10,
               runSpacing: 10,
-              children: _productTiles.map((e) => Expanded(
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  child: e,
-                ),
+              children: _productTiles.map((e) => SizedBox(
+                width: MediaQuery.of(context).size.width * 0.45,
+                child: e,
               ),).toList(),
             ),
           ),

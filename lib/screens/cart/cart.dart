@@ -385,11 +385,11 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                CallToActionButton(
+                /*CallToActionButton(
                   onPressed: () {},
                   labelText: S.current.checkOut,
                   minSize: Size(220, 45),
-                ),
+                ),*/
               ],
             ),
           ),
