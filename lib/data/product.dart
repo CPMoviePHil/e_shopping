@@ -1,6 +1,7 @@
 import 'category.dart';
 
 class Product {
+  final int productID;
   final String? name;
   final List<String>? imageUrls;
   final double? cost;
@@ -14,6 +15,7 @@ class Product {
   final String? productType;
 
   Product({
+    required this.productID,
     this.name,
     this.imageUrls,
     this.cost,

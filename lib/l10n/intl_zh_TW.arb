@@ -63,5 +63,7 @@
   "addedToCart": "此產品已加入到購物車",
   "favorite": "我的最愛",
   "emptyFavorite": "尚無產品加入我的最愛",
-  "shareHint": "社群分享"
+  "shareHint": "社群分享",
+  "comments": "商品評論",
+  "emptyComments": "此商品尚無評論"
 }

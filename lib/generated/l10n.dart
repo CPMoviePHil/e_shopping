@@ -699,6 +699,26 @@ class S {
       args: [],
     );
   }
+
+  /// `商品評論`
+  String get comments {
+    return Intl.message(
+      '商品評論',
+      name: 'comments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `此商品尚無評論`
+  String get emptyComments {
+    return Intl.message(
+      '此商品尚無評論',
+      name: 'emptyComments',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

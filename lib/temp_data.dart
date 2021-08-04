@@ -1,3 +1,6 @@
+import 'package:e_shopping/data/comment.dart';
+import 'package:e_shopping/data/user.dart';
+
 import 'data/category.dart';
 import 'data/product.dart';
 
@@ -19,8 +22,60 @@ Category petCategory = Category(title: "Pets", selections: [
   "Treats",
 ]);
 
+List<UserModel> users = [
+  UserModel.fromJson({
+    "id": 3,
+    "account": "GiGiTsaDa",
+    "user_name": "Neymar.jr",
+    "profile": "https://i.pinimg.com/564x/9c/fb/37/9cfb37c80e718075e261fadc212aade7.jpg",
+  }),
+  UserModel.fromJson({
+    "id": 4,
+    "account": "t021wqd",
+    "user_name": "Sasha",
+    "profile": "https://i.pinimg.com/564x/85/d7/76/85d776c6a75b4ba98e98b631bdda7852.jpg",
+  }),
+  UserModel.fromJson({
+    "id": 5,
+    "account": "jcCrazy23",
+    "user_name": "智輝",
+    "profile": "https://64.media.tumblr.com/5d5183c5210f4fa06d80a9925b1f1e86/e973c9806d4e5c96-1e/s1280x1920/6dfa401cae85c837ddf3a1865741f23b057ce6a4.jpg",
+  }),
+  UserModel.fromJson({
+    "id": 6,
+    "account": "zombie235",
+    "user_name": "Zombie",
+    "profile": "https://upload.wikimedia.org/wikipedia/commons/5/58/CheHigh.jpg",
+  }),
+];
+
+List<CommentModel> comments = [
+  CommentModel(
+    user: users[1],
+    createTime: "2021/04/06 15:22:23",
+    productID: 1,
+    comment: "這衣服好醜",
+    star: 2,
+  ),
+  CommentModel(
+    user: users[2],
+    createTime: "2021/04/06 08:53:14",
+    productID: 1,
+    comment: "台灣獨立!",
+    star: 5,
+  ),
+  CommentModel(
+    user: users[3],
+    createTime: "2021/05/21 11:24:20",
+    productID: 1,
+    comment: "還不錯只是穿起來有新疆的味道",
+    star: 4,
+  ),
+];
+
 List<Product> products = [
   Product(
+    productID: 1,
     name: "2-Pack Crewneck T-Shirts - Black",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/91ieWhKe9AL._AC_UX569_.jpg",
@@ -34,6 +89,7 @@ List<Product> products = [
     sizes: ["S", "M", "L", "XL"],
   ),
   Product(
+    productID: 2,
     name: "Short Sleeve Henley - Blue",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/81tpGc13OgL._AC_UX522_.jpg",
@@ -47,6 +103,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 3,
     name: "Polo RL V-Neck",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/61m68nuygSL._AC_UX522_.jpg",
@@ -58,6 +115,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 4,
     name: "Athletic-Fit Stretch Jeans",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/91SIuLNN%2BlL._AC_UY679_.jpg",
@@ -69,6 +127,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 5,
     name: "Levi's Original Jeans",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/91L4zjZKF-L._AC_UX522_.jpg",
@@ -80,6 +139,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 6,
     name: "2-Pack Performance Shorts",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/A1lTY32j6gL._AC_UX679_.jpg",
@@ -91,6 +151,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 7,
     name: "Levi's Cargo Shorts",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/915Io2JEUPL._AC_UX679_.jpg",
@@ -102,6 +163,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 8,
     name: "2-Pack Short-Sleeve Crewneck",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/911mb8PkHSL._AC_UX522_.jpg",
@@ -113,6 +175,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 9,
     name: "Waffle Knit Tunic Blouse",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/71lDML8KDQL._AC_UX522_.jpg",
@@ -124,6 +187,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 10,
     name: "Mid-Rise Skinny Jeans",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/71canaWSlAL._AC_UX522_.jpg",
@@ -135,6 +199,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 11,
     name: "Levi's Straight 505 Jeans",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/51D4eXuwKaL._AC_UX679_.jpg",
@@ -146,6 +211,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 12,
     name: "Levi's 715 Bootcut Jeans",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/81QwSgeXHTL._AC_UX522_.jpg",
@@ -157,6 +223,7 @@ List<Product> products = [
     sizes: ["XS", "S", "M", "L", "XL"],
   ),
   Product(
+    productID: 13,
     name: "3-Pack - Squeaky Plush Dog Toy",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/712YaF31-3L._AC_SL1000_.jpg",
@@ -167,6 +234,7 @@ List<Product> products = [
     productType: "toys",
   ),
   Product(
+    productID: 14,
     name: "Wobble Wag Giggle Ball",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/81XyqDXVwCL._AC_SX355_.jpg",
@@ -177,6 +245,7 @@ List<Product> products = [
     productType: "toys",
   ),
   Product(
+    productID: 15,
     name: "Duck Hide Twists",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/51dS9c0xIdL._SX342_.jpg",
@@ -187,6 +256,7 @@ List<Product> products = [
     productType: "treats",
   ),
   Product(
+    productID: 16,
     name: "Zuke's Mini Training Treats",
     imageUrls: [
       "https://images-na.ssl-images-amazon.com/images/I/81LV2CHtGKL._AC_SY355_.jpg",

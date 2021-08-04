@@ -55,7 +55,7 @@ const ColorScheme kColorScheme = ColorScheme(
   secondary: kTeal50,
   secondaryVariant: kGrey900,
   surface: kSurfaceWhite,
-  background: Colors.white,
+  background: kGrey600,
   error: kErrorRed,
   onPrimary: kDarkBG,
   onSecondary: kGrey900,
