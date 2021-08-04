@@ -8,6 +8,7 @@ import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/cart/cart.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:e_shopping/utils/utils.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,12 +84,35 @@ class _ProductScreenState extends State<ProductScreen> {
                           ),
                           items: product.imageUrls!.map(
                                 (e) {
-                              return Container(
-                                child: Image.network(
-                                  e,
-                                  fit: BoxFit.cover,
-                                  color: kGreyBackground,
-                                  colorBlendMode: BlendMode.multiply,
+                              return GestureDetector(
+                                onTap: () {
+                                  if (product.imageUrls!.length > 1) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ImageViewer(
+                                        imagePath: e,
+                                        initialPage: product.imageUrls!.indexOf(e),
+                                        images: product.imageUrls!,
+                                      ),
+                                    );
+                                  } else {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => ImageViewer(
+                                        imagePath: e,
+                                        initialPage: null,
+                                        images: null,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  child: Image.network(
+                                    e,
+                                    fit: BoxFit.cover,
+                                    color: kGreyBackground,
+                                    colorBlendMode: BlendMode.multiply,
+                                  ),
                                 ),
                               );
                             },

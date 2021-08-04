@@ -57,7 +57,9 @@ class WidgetsHelper {
   }) {
     return showDialog(
       context: context,
-      builder: (context) => ImageViewer(imagePath: path,),
+      builder: (context) => ImageViewer(
+        imagePath: path, initialPage: null, images: null,
+      ),
     );
   }
 
