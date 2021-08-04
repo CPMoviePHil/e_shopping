@@ -65,5 +65,6 @@
   "emptyFavorite": "尚無產品加入我的最愛",
   "shareHint": "Share",
   "comments": "商品評論",
-  "emptyComments": "此商品尚無評論"
+  "emptyComments": "此商品尚無評論",
+  "commentDay": "{days} 天前"
 }

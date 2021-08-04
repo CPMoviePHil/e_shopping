@@ -719,6 +719,16 @@ class S {
       args: [],
     );
   }
+
+  /// `{days} 天前`
+  String commentDay(Object days) {
+    return Intl.message(
+      '$days 天前',
+      name: 'commentDay',
+      desc: '',
+      args: [days],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

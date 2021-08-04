@@ -2,6 +2,7 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/images_viewer.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class WidgetsHelper {
 
@@ -111,5 +112,38 @@ class WidgetsHelper {
         ),
       ),
     );
+  }
+
+  static DateTime strToDateTime ({required String str}) {
+    DateTime dateTime = DateFormat("yyyy-MM-dd hh:mm:ss").parse(str);
+    return dateTime;
+  }
+
+  static String dateTimeToStr ({
+    required DateTime datetime,
+    String? format,
+  }) {
+    String dateTime = "";
+    switch (format) {
+      case "onlyDate":
+        dateTime = DateFormat("yyyy-MM-dd").format(datetime);
+        return dateTime;
+      case "onlyTime":
+        dateTime = DateFormat("hh:mm").format(datetime);
+        return dateTime;
+      default:
+        dateTime = DateFormat("yyyy-MM-dd hh:mm:ss").format(datetime);
+        return dateTime;
+    }
+  }
+
+  static String strToStrTime ({required String datetime,}) {
+    final dateTime = strToDateTime(str: datetime);
+    return dateTimeToStr(datetime: dateTime, format: "onlyTime",);
+  }
+
+  static String strToStrDate ({required String datetime,}) {
+    final dateTime = strToDateTime(str: datetime);
+    return dateTimeToStr(datetime: dateTime, format: "onlyDate",);
   }
 }

@@ -27,7 +27,7 @@ List<UserModel> users = [
     "id": 3,
     "account": "GiGiTsaDa",
     "user_name": "Neymar.jr",
-    "profile": "https://i.pinimg.com/564x/9c/fb/37/9cfb37c80e718075e261fadc212aade7.jpg",
+    "profile": "https://www.personality-database.com/profile_images/44140.png",
   }),
   UserModel.fromJson({
     "id": 4,
@@ -52,24 +52,31 @@ List<UserModel> users = [
 List<CommentModel> comments = [
   CommentModel(
     user: users[1],
-    createTime: "2021/04/06 15:22:23",
+    createTime: "2021-04-06 15:22:23",
     productID: 1,
     comment: "這衣服好醜",
     star: 2,
   ),
   CommentModel(
     user: users[2],
-    createTime: "2021/04/06 08:53:14",
+    createTime: "2021-04-29 08:53:14",
     productID: 1,
     comment: "台灣獨立!",
     star: 5,
   ),
   CommentModel(
     user: users[3],
-    createTime: "2021/05/21 11:24:20",
+    createTime: "2021-05-21 11:24:20",
     productID: 1,
     comment: "還不錯只是穿起來有新疆的味道",
     star: 4,
+  ),
+  CommentModel(
+    user: users[0],
+    createTime: "2021-08-05 06:24:20",
+    productID: 1,
+    comment: "好啦，給你個好評",
+    star: 5,
   ),
 ];
 

@@ -30,7 +30,7 @@ class AppLibScreen {
         size = 30;
         break;
       case "small":
-        size = 15;
+        size = 18;
         break;
       case "medium":
         size = 25;

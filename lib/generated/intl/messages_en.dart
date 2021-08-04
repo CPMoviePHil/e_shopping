@@ -21,17 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(number) => "${number} items";
 
-  static String m1(account) => "@${account}";
+  static String m1(days) => "${days} 天前";
 
-  static String m2(username) => "@${username}";
+  static String m2(account) => "@${account}";
 
-  static String m3(count) => "Count: ${count}";
+  static String m3(username) => "@${username}";
 
-  static String m4(size) => "Size: ${size}";
+  static String m4(count) => "Count: ${count}";
 
-  static String m5(theme) => "set theme to ${theme}";
+  static String m5(size) => "Size: ${size}";
 
-  static String m6(theme) => "${theme} already been set!";
+  static String m6(theme) => "set theme to ${theme}";
+
+  static String m7(theme) => "${theme} already been set!";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -46,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "cartItems": m0,
         "checkOut": MessageLookupByLibrary.simpleMessage("Check Out"),
+        "commentDay": m1,
         "comments": MessageLookupByLibrary.simpleMessage("商品評論"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
         "countHint": MessageLookupByLibrary.simpleMessage("Select Number"),
@@ -65,11 +68,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightTheme": MessageLookupByLibrary.simpleMessage("light mode"),
         "loggingOut": MessageLookupByLibrary.simpleMessage("Logging out..."),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "loginAccount": m1,
+        "loginAccount": m2,
         "loginFailure": MessageLookupByLibrary.simpleMessage("Login Failure"),
         "loginFailureMsgOne": MessageLookupByLibrary.simpleMessage(
             "Login Data save failure, Please try again"),
-        "loginUsername": m2,
+        "loginUsername": m3,
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutFailure": MessageLookupByLibrary.simpleMessage("Logout failure"),
         "logoutMsg": MessageLookupByLibrary.simpleMessage(
@@ -85,7 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
-        "orderCount": m3,
+        "orderCount": m4,
         "passwordInput": MessageLookupByLibrary.simpleMessage("password"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "productCategory":
@@ -95,13 +98,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
         "productSearchHint":
             MessageLookupByLibrary.simpleMessage("Search for a product"),
-        "productSize": m4,
+        "productSize": m5,
         "removeFromFavorite":
             MessageLookupByLibrary.simpleMessage("Remove Favorite"),
         "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "settingTheme": m5,
-        "settingThemeAlert": m6,
+        "settingTheme": m6,
+        "settingThemeAlert": m7,
         "shareHint": MessageLookupByLibrary.simpleMessage("Share"),
         "shoppingHistory":
             MessageLookupByLibrary.simpleMessage("Shopping History"),

@@ -21,17 +21,19 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(number) => "${number} 件商品";
 
-  static String m1(account) => "@${account}";
+  static String m1(days) => "${days} 天前";
 
-  static String m2(username) => "@${username}";
+  static String m2(account) => "@${account}";
 
-  static String m3(count) => "數量: ${count}";
+  static String m3(username) => "@${username}";
 
-  static String m4(size) => "大小: ${size}";
+  static String m4(count) => "數量: ${count}";
 
-  static String m5(theme) => "更改成${theme}";
+  static String m5(size) => "大小: ${size}";
 
-  static String m6(theme) => "已經是${theme}";
+  static String m6(theme) => "更改成${theme}";
+
+  static String m7(theme) => "已經是${theme}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cart": MessageLookupByLibrary.simpleMessage("購物車"),
         "cartItems": m0,
         "checkOut": MessageLookupByLibrary.simpleMessage("結帳"),
+        "commentDay": m1,
         "comments": MessageLookupByLibrary.simpleMessage("商品評論"),
         "count": MessageLookupByLibrary.simpleMessage("數量"),
         "countHint": MessageLookupByLibrary.simpleMessage("選擇數量"),
@@ -62,11 +65,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightTheme": MessageLookupByLibrary.simpleMessage("一般主題"),
         "loggingOut": MessageLookupByLibrary.simpleMessage("登出中.."),
         "login": MessageLookupByLibrary.simpleMessage("登入"),
-        "loginAccount": m1,
+        "loginAccount": m2,
         "loginFailure": MessageLookupByLibrary.simpleMessage("登入失敗"),
         "loginFailureMsgOne":
             MessageLookupByLibrary.simpleMessage("登入資料儲存失敗，請在試一次"),
-        "loginUsername": m2,
+        "loginUsername": m3,
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutFailure": MessageLookupByLibrary.simpleMessage("登出失敗"),
         "logoutMsg": MessageLookupByLibrary.simpleMessage("確定登出此裝置嗎?"),
@@ -79,19 +82,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "needSignupMsg": MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
         "notification": MessageLookupByLibrary.simpleMessage("訊息通知"),
         "ok": MessageLookupByLibrary.simpleMessage("確認"),
-        "orderCount": m3,
+        "orderCount": m4,
         "passwordInput": MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
         "productCategory": MessageLookupByLibrary.simpleMessage("產品分類"),
         "productCollections": MessageLookupByLibrary.simpleMessage("收藏商品"),
         "productName": MessageLookupByLibrary.simpleMessage("產品名稱"),
         "productSearchHint": MessageLookupByLibrary.simpleMessage("產品搜尋"),
-        "productSize": m4,
+        "productSize": m5,
         "removeFromFavorite": MessageLookupByLibrary.simpleMessage("移除我的最愛"),
         "search": MessageLookupByLibrary.simpleMessage("產品搜尋"),
         "setting": MessageLookupByLibrary.simpleMessage("設定"),
-        "settingTheme": m5,
-        "settingThemeAlert": m6,
+        "settingTheme": m6,
+        "settingThemeAlert": m7,
         "shareHint": MessageLookupByLibrary.simpleMessage("社群分享"),
         "shoppingHistory": MessageLookupByLibrary.simpleMessage("購物紀錄"),
         "signup": MessageLookupByLibrary.simpleMessage("註冊"),

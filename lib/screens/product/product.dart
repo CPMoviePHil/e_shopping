@@ -269,6 +269,9 @@ class _ProductScreenState extends State<ProductScreen> {
                         ],
                       ),
                     ),
+                    Container(
+                      height: 10,
+                    ),
                   ],
                 ),
               ],
