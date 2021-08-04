@@ -90,19 +90,16 @@ class WidgetsHelper {
     required VoidCallback? onTap,
   }) {
     return InkWell(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(20,),
-      ),
       onTap: onTap,
       child: Container(
         decoration: isSelected ?
         BoxDecoration(
+          shape: BoxShape.circle,
           color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius: const BorderRadius.all(Radius.circular(20,)),
         ) : null,
         padding: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 5,
+          horizontal: 15,
+          vertical: 15,
         ),
         child: AppLibScreen.appText(
           text: size,

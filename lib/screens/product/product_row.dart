@@ -12,7 +12,6 @@ class ProductRow extends StatelessWidget {
   Widget build(BuildContext context) {
     List<ProductTile> _productTiles =
     products!.map((p) => ProductTile(product: p)).toList();
-
     return _productTiles.isEmpty
         ? SizedBox.shrink()
         : Column(

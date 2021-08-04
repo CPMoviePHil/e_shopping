@@ -60,5 +60,8 @@
   "goToCart": "Go To Cart",
   "addToFavorite": "Add To Favorite",
   "removeFromFavorite": "Remove Favorite",
-  "addedToCart": "此產品已加入到購物車"
+  "addedToCart": "此產品已加入到購物車",
+  "favorite": "Favorite",
+  "emptyFavorite": "尚無產品加入我的最愛",
+  "shareHint": "Share"
 }

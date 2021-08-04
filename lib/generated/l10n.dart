@@ -669,6 +669,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Favorite`
+  String get favorite {
+    return Intl.message(
+      'Favorite',
+      name: 'favorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `尚無產品加入我的最愛`
+  String get emptyFavorite {
+    return Intl.message(
+      '尚無產品加入我的最愛',
+      name: 'emptyFavorite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Share`
+  String get shareHint {
+    return Intl.message(
+      'Share',
+      name: 'shareHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

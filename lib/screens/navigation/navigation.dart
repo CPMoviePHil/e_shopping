@@ -1,9 +1,12 @@
 import 'package:e_shopping/configs/constants.dart';
+import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/navigation/bottom_navigator.dart';
+import 'package:e_shopping/screens/navigation/favorite/favorite.dart';
 import 'package:e_shopping/screens/navigation/search/search.dart';
 import 'package:e_shopping/screens/search/search.dart';
+import 'package:e_shopping/utils/app_libs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +25,25 @@ class _NavigationState extends State<Navigation> {
   int pageIndex = 0;
 
   final List<Widget> pageList = <Widget>[
-    /*Home(),*/
+    Home(),
     Search(),
-    Search(),
+    FavoriteScreen(),
   ];
 
   @override
   void initState() {
     super.initState();
+  }
+  
+  Widget pageTitle() {
+    switch (pageIndex) {
+      case 1:
+        return SearchBar();
+      case 2:
+        return AppLibScreen.appText(text: S.current.favorite,);
+      default:
+        return AppLibScreen.appText(text: "e-shopping");
+    }
   }
 
   void onPageChanged(int index) {
@@ -53,7 +67,8 @@ class _NavigationState extends State<Navigation> {
           onTap: () => scaffoldKey.currentState!.openDrawer(),
           child: const Icon(Icons.menu),  // add custom icons also),
         ),
-        title: SearchBar(),
+        title: pageTitle(),
+        centerTitle: true,
         actions: [
           CartAppBarAction(),
         ],

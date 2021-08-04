@@ -78,12 +78,12 @@ class _ProductScreenState extends State<ProductScreen> {
                       Expanded(
                         child: CarouselSlider(
                           options: CarouselOptions(
+                            viewportFraction: 1,
                             height: MediaQuery.of(context).size.height * .35,
                           ),
                           items: product.imageUrls!.map(
                                 (e) {
                               return Container(
-                                //padding: EdgeInsets.all(16),
                                 child: Image.network(
                                   e,
                                   fit: BoxFit.cover,
@@ -161,10 +161,13 @@ class _ProductScreenState extends State<ProductScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            GestureDetector(
-              onTap: () => Share.share('check out my website https://example.com'),
-              child: AppLibScreen.appIcon(
-                icon: Icons.share_outlined,
+            Tooltip(
+              message: S.current.shareHint,
+              child: GestureDetector(
+                onTap: () => Share.share('check out my website https://example.com'),
+                child: AppLibScreen.appIcon(
+                  icon: Icons.share_outlined,
+                ),
               ),
             ),
             Consumer<FavoriteProvider>(

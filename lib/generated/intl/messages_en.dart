@@ -53,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "darkMode": MessageLookupByLibrary.simpleMessage("dark mode"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
+        "emptyFavorite": MessageLookupByLibrary.simpleMessage("尚無產品加入我的最愛"),
+        "favorite": MessageLookupByLibrary.simpleMessage("Favorite"),
         "goToCart": MessageLookupByLibrary.simpleMessage("Go To Cart"),
         "homepage": MessageLookupByLibrary.simpleMessage("Home"),
         "hotProduct": MessageLookupByLibrary.simpleMessage("Hot Product"),
@@ -98,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "settingTheme": m5,
         "settingThemeAlert": m6,
+        "shareHint": MessageLookupByLibrary.simpleMessage("Share"),
         "shoppingHistory":
             MessageLookupByLibrary.simpleMessage("Shopping History"),
         "signup": MessageLookupByLibrary.simpleMessage("Signup"),

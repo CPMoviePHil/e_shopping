@@ -340,11 +340,6 @@ class _CartScreenState extends State<CartScreen> {
               text: S.current.cart,
               fontColor: Theme.of(context).accentColor,
             ),
-            /*AppLibScreen.appText(
-              text: S.current.cartItems(context.watch<CartNotifier>().itemsInCart.length),
-              fontColor: Theme.of(context).accentColor,
-              textSize: "small",
-            ),*/
           ],
         ),
       ),
@@ -385,11 +380,6 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                   ],
                 ),
-                /*CallToActionButton(
-                  onPressed: () {},
-                  labelText: S.current.checkOut,
-                  minSize: Size(220, 45),
-                ),*/
               ],
             ),
           ),

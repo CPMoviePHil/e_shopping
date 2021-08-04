@@ -46,9 +46,9 @@ class BottomNavigator extends StatelessWidget {
           pageName: S.current.search,
         ),
         barItem(
-          icon: Icons.shopping_bag_outlined,
-          activeIcon: Icons.shopping_bag,
-          pageName: S.current.hotProduct,
+          icon: Icons.favorite_outline_sharp,
+          activeIcon: Icons.favorite_sharp,
+          pageName: S.current.favorite,
         ),
         barItem(
           icon: Icons.notifications_outlined,
