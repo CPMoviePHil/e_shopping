@@ -165,10 +165,21 @@ class _ProductScreenState extends State<ProductScreen> {
                       decoration: BoxDecoration(
                         color: Theme.of(context).backgroundColor,
                       ),
-                      padding: EdgeInsets.only(left: 11, top: 10,),
+                      padding: EdgeInsets.only(left: 11, top: 10, right: 16),
                       child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           AppLibScreen.starsWidget(stars: stars),
+                          Tooltip(
+                            message: S.current.shareHint,
+                            child: GestureDetector(
+                              onTap: () => Share.share('check out my website https://example.com'),
+                              child: AppLibScreen.appIcon(
+                                icon: Icons.share_outlined,
+                                iconSize: "small"
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -287,26 +298,14 @@ class _ProductScreenState extends State<ProductScreen> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Tooltip(
-              message: S.current.shareHint,
-              child: GestureDetector(
-                onTap: () => Share.share('check out my website https://example.com'),
-                child: AppLibScreen.appIcon(
-                  icon: Icons.share_outlined,
-                ),
-              ),
-            ),
             Consumer<FavoriteProvider>(
               builder: (context, favorite, child,) {
                 if (favorite.products.contains(product)) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15,),
-                    child: AppLibScreen.favoriteWidget(
-                      context: context,
-                      message: S.current.removeFromFavorite,
-                      onTap: () => favorite.remove(product: product),
-                      isAdded: true,
-                    ),
+                  return AppLibScreen.favoriteWidget(
+                    context: context,
+                    message: S.current.removeFromFavorite,
+                    onTap: () => favorite.remove(product: product),
+                    isAdded: true,
                   );
                 } else {
                   return Padding(
@@ -320,6 +319,9 @@ class _ProductScreenState extends State<ProductScreen> {
                   );
                 }
               },
+            ),
+            AppLibScreen.appIcon(
+              icon: Icons.article_outlined,
             ),
             CartActionButton(
               labelText: S.current.addToCart,

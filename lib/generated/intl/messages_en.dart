@@ -49,13 +49,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "cartItems": m0,
         "checkOut": MessageLookupByLibrary.simpleMessage("Check Out"),
         "commentDay": m1,
+        "commentReportOption1": MessageLookupByLibrary.simpleMessage("仇恨言論"),
+        "commentReportOption2": MessageLookupByLibrary.simpleMessage("色情、暴力言論"),
+        "commentReportOption3":
+            MessageLookupByLibrary.simpleMessage("顛覆國家不正當政權、不負責的言論"),
         "comments": MessageLookupByLibrary.simpleMessage("商品評論"),
         "count": MessageLookupByLibrary.simpleMessage("Count"),
         "countHint": MessageLookupByLibrary.simpleMessage("Select Number"),
+        "createComment": MessageLookupByLibrary.simpleMessage("建立評論"),
         "creating": MessageLookupByLibrary.simpleMessage("Creating..."),
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "darkMode": MessageLookupByLibrary.simpleMessage("dark mode"),
+        "deleteComment": MessageLookupByLibrary.simpleMessage("刪除評論"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
         "emptyComments": MessageLookupByLibrary.simpleMessage("此商品尚無評論"),
         "emptyFavorite": MessageLookupByLibrary.simpleMessage("尚無產品加入我的最愛"),
@@ -83,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberLogin": MessageLookupByLibrary.simpleMessage("Member Login"),
         "memberLogout": MessageLookupByLibrary.simpleMessage("Member logout"),
         "memberSignup": MessageLookupByLibrary.simpleMessage("Member Signup"),
+        "more": MessageLookupByLibrary.simpleMessage("更多"),
         "nameInput": MessageLookupByLibrary.simpleMessage("name"),
         "needSignupMsg":
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
@@ -101,6 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "productSize": m5,
         "removeFromFavorite":
             MessageLookupByLibrary.simpleMessage("Remove Favorite"),
+        "report": MessageLookupByLibrary.simpleMessage("檢舉"),
         "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
         "settingTheme": m6,

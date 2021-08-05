@@ -66,5 +66,12 @@
   "shareHint": "Share",
   "comments": "商品評論",
   "emptyComments": "此商品尚無評論",
-  "commentDay": "{days} 天前"
+  "commentDay": "{days} 天前",
+  "report": "檢舉",
+  "more": "更多",
+  "commentReportOption1": "仇恨言論",
+  "commentReportOption2": "色情、暴力言論",
+  "commentReportOption3": "顛覆國家不正當政權、不負責的言論",
+  "createComment": "建立評論",
+  "deleteComment": "刪除評論"
 }

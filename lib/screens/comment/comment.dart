@@ -11,7 +11,17 @@ class CommentScreen extends StatelessWidget {
 
   final CommentModel comment;
 
-  const CommentScreen({required this.comment});
+  CommentScreen({required this.comment});
+
+  final List<String> reportsOptions = [
+    S.current.commentReportOption1,
+    S.current.commentReportOption2,
+    S.current.commentReportOption3,
+  ];
+
+  final List<String> commentOptions = [
+    S.current.report,
+  ];
 
   bool isToday ({required DateTime dateTime}) {
     return dateTime.day == DateTime.now().day;
@@ -23,6 +33,27 @@ class CommentScreen extends StatelessWidget {
     } else {
       return S.current.commentDay(DateTime.now().difference(createTime).inDays);
     }
+  }
+
+  Widget commentOption({required BuildContext context,}) {
+    return DropdownButtonHideUnderline(
+      child: DropdownButton(
+        elevation: 5,
+        icon: Icon(Icons.more_vert_sharp,),
+        iconSize: 16,
+        dropdownColor: Theme.of(context).scaffoldBackgroundColor,
+        items: commentOptions.map((value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: AppLibScreen.appText(
+              text: value,
+              textSize: "small",
+            ),
+          );
+        }).toList(),
+        onChanged: (value) => null,
+      ),
+    );
   }
 
   @override
@@ -81,11 +112,7 @@ class CommentScreen extends StatelessWidget {
               ),
             ],
           ),
-          AppLibScreen.appIcon(
-            icon: Icons.more_vert_sharp,
-            iconSize: "small",
-            iconColor: kGrey600,
-          ),
+          commentOption(context: context,),
         ],
       ),
     );

@@ -729,6 +729,76 @@ class S {
       args: [days],
     );
   }
+
+  /// `檢舉`
+  String get report {
+    return Intl.message(
+      '檢舉',
+      name: 'report',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `更多`
+  String get more {
+    return Intl.message(
+      '更多',
+      name: 'more',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `仇恨言論`
+  String get commentReportOption1 {
+    return Intl.message(
+      '仇恨言論',
+      name: 'commentReportOption1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `色情、暴力言論`
+  String get commentReportOption2 {
+    return Intl.message(
+      '色情、暴力言論',
+      name: 'commentReportOption2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `顛覆國家不正當政權、不負責的言論`
+  String get commentReportOption3 {
+    return Intl.message(
+      '顛覆國家不正當政權、不負責的言論',
+      name: 'commentReportOption3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `建立評論`
+  String get createComment {
+    return Intl.message(
+      '建立評論',
+      name: 'createComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `刪除評論`
+  String get deleteComment {
+    return Intl.message(
+      '刪除評論',
+      name: 'deleteComment',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
