@@ -2,7 +2,6 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/screens/order/order.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
-import 'package:e_shopping/screens/product/call_action.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/widgets_helper.dart';
@@ -113,7 +112,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.black,
                 ),
                 Expanded(
@@ -191,7 +190,7 @@ class _CartScreenState extends State<CartScreen> {
             height: MediaQuery.of(context).size.height * order.item!.product.sizes!.length / 4  * 0.15,
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(3)),
             ),
             child: Column(
               children: [
@@ -209,7 +208,7 @@ class _CartScreenState extends State<CartScreen> {
                   ),
                 ),
                 Divider(
-                  thickness: 2,
+                  thickness: 1,
                   color: Colors.black,
                 ),
                 Expanded(

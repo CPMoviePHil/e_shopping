@@ -7,6 +7,7 @@ import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/cart/cart.dart';
+import 'package:e_shopping/screens/comment/create.dart';
 import 'package:e_shopping/screens/comment/product_comments.dart';
 import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/temp_data.dart';
@@ -308,20 +309,23 @@ class _ProductScreenState extends State<ProductScreen> {
                     isAdded: true,
                   );
                 } else {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15,),
-                    child: AppLibScreen.favoriteWidget(
-                      context: context,
-                      message: S.current.addToFavorite,
-                      onTap: () => favorite.add(product: product),
-                      isAdded: false,
-                    ),
+                  return AppLibScreen.favoriteWidget(
+                    context: context,
+                    message: S.current.addToFavorite,
+                    onTap: () => favorite.add(product: product),
+                    isAdded: false,
                   );
                 }
               },
             ),
-            AppLibScreen.appIcon(
-              icon: Icons.article_outlined,
+            Tooltip(
+              message: S.current.createComment,
+              child: GestureDetector(
+                onTap: () => Utils.pushScreen(context: context, screen: CreateComment(product: product)),
+                child: AppLibScreen.appIcon(
+                  icon: Icons.article_outlined,
+                ),
+              ),
             ),
             CartActionButton(
               labelText: S.current.addToCart,

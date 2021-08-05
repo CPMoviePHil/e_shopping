@@ -206,4 +206,24 @@ class AppLibScreen {
       ),
     );
   }
+
+  static Widget ratingBar() {
+    return RatingBar.builder(
+      initialRating: 0,
+      minRating: 0,
+      direction: Axis.horizontal,
+      allowHalfRating: false,
+      glow: false,
+      itemCount: 5,
+      itemSize: 24,
+      //itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+      itemBuilder: (context, _) => Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      onRatingUpdate: (rating) {
+        print(rating);
+      },
+    );
+  }
 }
