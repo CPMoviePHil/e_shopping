@@ -208,9 +208,13 @@ class _ProductScreenState extends State<ProductScreen> {
                               SizedBox(
                                 height: 4,
                               ),
-                              Text(
-                                product.name!,
-                                style: Theme.of(context).textTheme.headline6,
+                              Row(
+                                children: [
+                                  Text(
+                                    product.name!,
+                                    style: Theme.of(context).textTheme.headline6,
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 height: 4,
