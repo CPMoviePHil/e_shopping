@@ -49,6 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cartItems": m0,
         "checkOut": MessageLookupByLibrary.simpleMessage("Check Out"),
         "commentDay": m1,
+        "commentHint": MessageLookupByLibrary.simpleMessage("請在這裡填寫你的商品評論"),
         "commentReportOption1": MessageLookupByLibrary.simpleMessage("仇恨言論"),
         "commentReportOption2": MessageLookupByLibrary.simpleMessage("色情、暴力言論"),
         "commentReportOption3":

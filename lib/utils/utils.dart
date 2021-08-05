@@ -12,5 +12,9 @@ class Utils {
       ),
     );
   }
+
+  static outOfScreen({required BuildContext context,}) {
+    FocusScope.of(context).requestFocus(FocusNode());
+  }
   
 }

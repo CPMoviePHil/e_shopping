@@ -799,6 +799,16 @@ class S {
       args: [],
     );
   }
+
+  /// `請在這裡填寫你的商品評論`
+  String get commentHint {
+    return Intl.message(
+      '請在這裡填寫你的商品評論',
+      name: 'commentHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
