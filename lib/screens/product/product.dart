@@ -32,7 +32,7 @@ class ProductScreen extends StatefulWidget {
   @override _ProductScreenState createState() => _ProductScreenState();
 }
 
-class _ProductScreenState extends State<ProductScreen> {
+class _ProductScreenState extends State<ProductScreen> with SingleTickerProviderStateMixin {
   Product get product => widget.product;
   String? selectedImageUrl;
   String? selectedSize;
@@ -40,26 +40,22 @@ class _ProductScreenState extends State<ProductScreen> {
   bool appBarVisible = false;
   double appBarHeight = 0;
   final ScrollController scrollController = ScrollController();
+  late AnimationController animationController;
 
   @override
   void initState() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    animationController.forward(from: 0.0);
     selectedImageUrl = product.imageUrls!.first;
     selectedSize = product.sizes?.first;
     scrollController.addListener(() {
-      if (scrollController.position.pixels > 50) {
-        if (!appBarVisible) {
-          setState(() {
-            appBarHeight = 50;
-            appBarVisible = true;
-          });
-        }
+      if (scrollController.position.pixels > 40) {
+        animationController.reverse();
       } else {
-        if (appBarVisible) {
-          setState(() {
-            appBarHeight = 0;
-            appBarVisible = false;
-          });
-        }
+        animationController.forward();
       }
     },);
     super.initState();
@@ -409,23 +405,31 @@ class _ProductScreenState extends State<ProductScreen> {
       commentWidget = ProductCommentsScreen(comments: productComments);
     }
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appBarHeight),
-        child: AppBar(
-          centerTitle: true,
-          title: AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            transitionBuilder: (Widget child, Animation<double> animation) {
-              return ScaleTransition(child: child, scale: animation);
-            },
-            child: AppLibScreen.appText(text: product.name,),
-          ),
-          actions: [
-            CartAppBarAction(),
+      body: AnimatedBuilder(
+        animation: animationController,
+        builder: (context, child) => Stack(
+          children: <Widget>[
+            pageWidget(stars: stars, commentWidget: commentWidget),
+            Transform.translate(
+              offset: Offset(0, -animationController.value * 64),
+              child: Container(
+                height: 80.0,
+                child: AppBar(
+                  title: AppLibScreen.appText(text: product.name),
+                  leading: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: AppLibScreen.appIcon(icon: Icons.arrow_back_sharp,),
+                  ),
+                  centerTitle: true,
+                  actions: [
+                    CartAppBarAction(),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
-      body: pageWidget(stars: stars, commentWidget: commentWidget),
       bottomNavigationBar: bottomWidget(),
     );
   }
