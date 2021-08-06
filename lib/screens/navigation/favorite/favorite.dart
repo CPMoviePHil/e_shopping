@@ -1,10 +1,12 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/favorite.dart';
+import 'package:e_shopping/screens/order/order_item.dart';
 import 'package:e_shopping/screens/product/product.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/utils.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -86,6 +88,30 @@ class FavoriteScreen extends StatelessWidget {
                                       Tooltip(
                                         message: S.current.addToCart,
                                         child: GestureDetector(
+                                          onTap: () async {
+                                            CartSelector? selector;
+                                            if (favorite.products[index].sizes != null) {
+                                              selector = await WidgetsHelper.cartDialogWithSizes(
+                                                context: context,
+                                                sizes: favorite.products[index].sizes!,
+                                                counts: List.generate(10, (index) => index + 1).toList(),
+                                              );
+                                            }
+                                            if (selector != null) {
+                                              context.read<CartNotifier>().add(
+                                                orderItem: OrderItem(
+                                                  product: favorite.products[index],
+                                                  selectedSize: selector.selectedSize,
+                                                  selectedColor: null,
+                                                ),
+                                                count: selector.selectedCount,
+                                              );
+                                              WidgetsHelper.showSnackBar(
+                                                context: context,
+                                                msg: S.current.addedToCart,
+                                              );
+                                            }
+                                          },
                                           child: AppLibScreen.appIcon(
                                             icon: Icons.shopping_cart_outlined,
                                           ),

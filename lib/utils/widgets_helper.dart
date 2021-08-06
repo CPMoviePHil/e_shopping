@@ -79,6 +79,168 @@ class WidgetsHelper {
       );
   }
 
+  static Future<CartSelector?> cartDialogWithSizes ({
+    required BuildContext context,
+    required List<String> sizes,
+    required List<int> counts,
+  }) async {
+    int selectCount = counts.first;
+    String selectSize = sizes.first;
+    return showDialog<CartSelector?>(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(3),
+              ),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(3)),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppLibScreen.appText(
+                                text: S.current.sizeHint,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: Colors.black,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          child: Wrap(
+                            spacing: 20,
+                            children: sizes.map((e) => WidgetsHelper.sizeItem(
+                              context: context,
+                              onTap: () {
+                                setState(() {
+                                  selectSize = e;
+                                });
+                              },
+                              isSelected: e == selectSize,
+                              size: e,
+                            ),).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AppLibScreen.appText(
+                                text: S.current.count,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: Colors.black,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(bottom: 12,),
+                              child: DropdownButton<int>(
+                                value: selectCount,
+                                items: counts.map<DropdownMenuItem<int>>((int index) {
+                                  return DropdownMenuItem<int>(
+                                    value: index,
+                                    child: Center(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 15,),
+                                        child: AppLibScreen.appText(text: "$index"),
+                                      ),
+                                    ),
+                                  );},
+                                ).toList(),
+                                onChanged: (value) {
+                                  setState((){
+                                    selectCount = value!;
+                                  });
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () => Navigator.of(context).pop(),
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).accentColor,
+                              ),
+                              child: AppLibScreen.appText(text: S.current.cancel),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pop(
+                                CartSelector(
+                                  selectedSize: selectSize,
+                                  selectedCount: selectCount,
+                                ),
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10,),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 0.5,
+                                ),
+                              ),
+                              child: AppLibScreen.appText(text: S.current.ok),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   static void hideSnackBar ({
     required BuildContext context,
   }) {
@@ -146,4 +308,14 @@ class WidgetsHelper {
     final dateTime = strToDateTime(str: datetime);
     return dateTimeToStr(datetime: dateTime, format: "onlyDate",);
   }
+}
+
+class CartSelector {
+  final String selectedSize;
+  final int selectedCount;
+
+  const CartSelector({
+    required this.selectedSize,
+    required this.selectedCount,
+  });
 }

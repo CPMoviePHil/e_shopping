@@ -278,6 +278,9 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsHelper.hideSnackBar(
+      context: context,
+    );
     List<Widget> orderItemRows = context.watch<CartNotifier>().cartItems
         .map((order) => Stack(
       children: [

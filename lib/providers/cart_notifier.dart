@@ -56,7 +56,10 @@ class CartNotifier with ChangeNotifier {
     notifyListeners();
   }
 
-  void add(OrderItem orderItem) {
+  void add({
+    required OrderItem orderItem,
+    int? count,
+  }) {
     if (cartContainOrder(item: orderItem)) {
       final index = cartItems.indexWhere((element) => element.item == orderItem);
       cartItems[index] = cartItems[index].copyWith(
@@ -73,7 +76,7 @@ class CartNotifier with ChangeNotifier {
       cartItems.add(
         Order(
           orderID: orderID,
-          count: 1,
+          count: count ?? 1,
           item: orderItem,
         ),
       );

@@ -39,6 +39,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
   bool isPressed = false;
   bool appBarVisible = false;
   double appBarHeight = 0;
+  int selectedCount = 1;
   final ScrollController scrollController = ScrollController();
   late AnimationController animationController;
 
@@ -67,6 +68,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
     });
   }
 
+
   void setSelectedSize(String size) {
     setState(() {
       selectedSize = size;
@@ -79,6 +81,14 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
     });
   }
 
+  void setCount({required int index,}) {
+    if (index != selectedCount) {
+      setState(() {
+        selectedCount = index;
+      });
+    }
+  }
+
   List<Product> filterProducts ({required List<Product> products, required Category category,}) {
     return products.where((e) => e.category == category && e.name != widget.product.name,).toList();
   }
@@ -86,8 +96,9 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
   Widget pageWidget ({
     required double stars,
     required Widget commentWidget,
+    required List<int> counts,
   }) {
-    return  CustomScrollView(
+    return CustomScrollView(
       controller: scrollController,
       slivers: [
         SliverList(
@@ -244,6 +255,36 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                                     ),).toList(),
                                   ),
                                 ),
+                              Row(
+                                children: [
+                                  AppLibScreen.appText(text: S.current.count),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(bottom: 12,),
+                                    child: DropdownButton<int>(
+                                      value: selectedCount,
+                                      items: counts.map<DropdownMenuItem<int>>((int index) {
+                                        return DropdownMenuItem<int>(
+                                          value: index,
+                                          child: Center(
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(horizontal: 15,),
+                                              child: AppLibScreen.appText(text: "$index"),
+                                            ),
+                                          ),
+                                        );},
+                                      ).toList(),
+                                      onChanged: (value) {
+                                        setCount(index: value!);
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -344,11 +385,12 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
             labelText: S.current.addToCart,
             onTap: () {
               context.read<CartNotifier>().add(
-                OrderItem(
+                orderItem: OrderItem(
                   product: product,
                   selectedSize: selectedSize,
                   selectedColor: null,
                 ),
+                count: selectedCount,
               );
               WidgetsHelper.showSnackBar(
                 context: context,
@@ -365,9 +407,6 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
           CartActionButton(
             labelText: S.current.goToCart,
             onTap: () {
-              WidgetsHelper.hideSnackBar(
-                context: context,
-              );
               Utils.pushScreen(
                 context: context,
                 screen: CartScreen(),
@@ -404,12 +443,17 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
       stars = stars / productComments.length;
       commentWidget = ProductCommentsScreen(comments: productComments);
     }
+    List<int> counts = List.generate(10, (index) => index + 1).toList();
     return Scaffold(
       body: AnimatedBuilder(
         animation: animationController,
         builder: (context, child) => Stack(
           children: <Widget>[
-            pageWidget(stars: stars, commentWidget: commentWidget),
+            pageWidget(
+              stars: stars,
+              commentWidget: commentWidget,
+              counts: counts,
+            ),
             Transform.translate(
               offset: Offset(0, -animationController.value * 64),
               child: Container(
