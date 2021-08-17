@@ -11,8 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class ProductTile extends StatelessWidget {
-  const ProductTile({
+class ProductTile2 extends StatelessWidget {
+
+  const ProductTile2({
     required this.product,
   });
 
@@ -38,26 +39,27 @@ class ProductTile extends StatelessWidget {
               ),
               Text(
                 product.name!,
-                textAlign: TextAlign.center,
+                textAlign: TextAlign.start,
+                overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.subtitle2,
               ),
               SizedBox(
                 height: 8,
               ),
-              Text(
-                "\$${product.cost.toString()}",
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle2!
-                    .copyWith(color: Theme.of(context).accentColor),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "\$${product.cost.toString()}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .subtitle2!
+                        .copyWith(color: Theme.of(context).accentColor),
+                  ),
+                  FavoriteWidget(product: product),
+                ],
               ),
-
             ],
-          ),
-          Positioned(
-            right: 10,
-            top: 5,
-            child: FavoriteWidget(product: product,),
           ),
         ],
       ),

@@ -52,6 +52,7 @@ class AppLibScreen {
   static Widget appText ({
     required String? text,
     Color? fontColor,
+    TextDecoration? decoration,
     String textSize = 'medium',
   }) {
     double fontSize = 18;
@@ -72,6 +73,7 @@ class AppLibScreen {
       style: TextStyle(
         fontSize: fontSize,
         color: fontColor,
+        decoration: decoration,
       ),
     );
   }
