@@ -4,9 +4,9 @@ import 'package:e_shopping/data/user.dart';
 import 'data/category.dart';
 import 'data/product.dart';
 
-const String manLookRightImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
-const String dogImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/pet.jpg';
-const String womanLookLeftImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/woman-look-left.jpg';
+const String menLookRightImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/man-look-right.jpg';
+const String petsImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/pet.jpg';
+const String womenLookLeftImageUrl = 'https://flutter-ui.s3.us-east-2.amazonaws.com/ecommerce/woman-look-left.jpg';
 
 Category menCategory = Category(title: "Men", selections: [
   "Shirts",

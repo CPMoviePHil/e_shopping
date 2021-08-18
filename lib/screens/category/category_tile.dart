@@ -8,13 +8,13 @@ import 'category.dart';
 
 class CategoryTile extends StatelessWidget {
 
-  final String imageUrl;
+  final ImageProvider cateImageProvider;
   final Category category;
   final Alignment imageAlignment;
 
   const CategoryTile({
     required this.category,
-    required this.imageUrl,
+    required this.cateImageProvider,
     this.imageAlignment = Alignment.center,
   });
 
@@ -36,12 +36,14 @@ class CategoryTile extends StatelessWidget {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            Image.network(
-              imageUrl,
-              color: kGreyBackground,
-              colorBlendMode: BlendMode.darken,
-              alignment: imageAlignment,
-              fit: BoxFit.cover,
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: cateImageProvider,
+                  fit: BoxFit.cover,
+                ),
+                color: kGreyBackground,
+              ),
             ),
             Align(
               alignment: Alignment.center,

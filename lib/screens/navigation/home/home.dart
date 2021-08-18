@@ -13,6 +13,7 @@ class Home extends StatelessWidget {
     "assets/images/banner_3.jpg",
     "assets/images/banner_4.jpg",
   ];
+  
   final CarouselController carouselController = CarouselController();
 
   Widget bannerWidget ({
@@ -54,7 +55,7 @@ class Home extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 16),
             child: CarouselSlider(
               items: banners.map((e) => bannerWidget(
                 context: context,

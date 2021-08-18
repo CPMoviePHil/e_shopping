@@ -1,5 +1,7 @@
+import 'package:e_shopping/providers/category_notifier.dart';
 import 'package:e_shopping/screens/category/category_tile.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 import '../../temp_data.dart';
 
@@ -11,19 +13,19 @@ class CategoryList extends StatelessWidget {
       padding: listViewPadding,
       children: [
         CategoryTile(
-          imageUrl: manLookRightImageUrl,
+          cateImageProvider: context.read<CategoryNotifier>().firstProvider!,
           category: menCategory,
           imageAlignment: Alignment.topCenter,
         ),
         SizedBox(height: 16),
         CategoryTile(
-          imageUrl: womanLookLeftImageUrl,
+          cateImageProvider: context.read<CategoryNotifier>().secondProvider!,
           category: womenCategory,
           imageAlignment: Alignment.topCenter,
         ),
         SizedBox(height: 16),
         CategoryTile(
-          imageUrl: dogImageUrl, // TODO: Replace with your own image
+          cateImageProvider: context.read<CategoryNotifier>().thirdProvider!,
           category: petCategory,
         ),
       ],

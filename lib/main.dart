@@ -1,4 +1,5 @@
 import 'package:e_shopping/providers/cart_notifier.dart';
+import 'package:e_shopping/providers/category_notifier.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/providers/loading_notifier.dart';
@@ -39,6 +40,12 @@ Future<void> main() async {
           ),
           ChangeNotifierProvider<FavoriteProvider>(
             create: (context) => FavoriteProvider(),
+          ),
+          ChangeNotifierProvider<CategoryNotifier>(
+            create: (context) => CategoryNotifier()
+              ..preloadImages(context: context, cateID: 1,)
+              ..preloadImages(context: context, cateID: 2,)
+              ..preloadImages(context: context, cateID: 3,),
           ),
         ],
         child: MyApp(),
