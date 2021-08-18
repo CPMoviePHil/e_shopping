@@ -6,6 +6,7 @@ import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/favorite.dart';
+import 'package:e_shopping/providers/product_provider.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/cart/cart.dart';
 import 'package:e_shopping/screens/comment/create.dart';
@@ -42,6 +43,8 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
   int selectedCount = 1;
   final ScrollController scrollController = ScrollController();
   late AnimationController animationController;
+
+  bool commentsCollapsed = false;
 
   @override
   void initState() {
@@ -313,8 +316,28 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                                     Container(
                                       padding: EdgeInsets.symmetric(vertical: 15,),
                                       child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           AppLibScreen.appText(text: S.current.comments),
+                                          Consumer<ProductProvider>(
+                                            builder: (context, productProvider, child) {
+                                              if (productProvider.commentsCollapsed) {
+                                                return GestureDetector(
+                                                  onTap: () => productProvider.collapseComments(),
+                                                  child: AppLibScreen.appIcon(
+                                                    icon: Icons.arrow_drop_up_sharp,
+                                                  ),
+                                                );
+                                              } else {
+                                                return GestureDetector(
+                                                  onTap: () => productProvider.collapseComments(),
+                                                  child: AppLibScreen.appIcon(
+                                                    icon: Icons.arrow_drop_down_sharp,
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -322,7 +345,15 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                                       color: kGrey400,
                                       thickness: 0.5,
                                     ),
-                                    commentWidget,
+                                    Consumer<ProductProvider>(
+                                      builder: (context, productProvider, child) {
+                                        if (productProvider.commentsCollapsed) {
+                                          return Container();
+                                        } else {
+                                          return commentWidget;
+                                        }
+                                      },
+                                    ),
                                   ],
                                 ),
                               ),

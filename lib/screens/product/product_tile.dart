@@ -2,6 +2,7 @@ import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/navigation/favorite/favorite_widget.dart';
+import 'package:e_shopping/screens/product/loader.dart';
 import 'package:e_shopping/screens/product/product.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/app_libs.dart';
@@ -25,7 +26,7 @@ class ProductTile extends StatelessWidget {
         SystemSound.play(SystemSoundType.click);
         Utils.pushScreen(
           context: context,
-          screen: ProductScreen(product: product),
+          screen: ProductLoader(product: product),
         );
       },
       child: Stack(
