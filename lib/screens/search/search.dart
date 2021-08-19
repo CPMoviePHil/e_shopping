@@ -1,5 +1,7 @@
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/providers/search_provider.dart';
+import 'package:e_shopping/screens/navigation/search/search_list.dart';
+import 'package:e_shopping/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
@@ -10,12 +12,10 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> {
-  TextEditingController? _textEditingController;
 
   @override
   void initState() {
     super.initState();
-    _textEditingController = TextEditingController();
   }
 
   @override
@@ -26,10 +26,14 @@ class _SearchBarState extends State<SearchBar> {
         borderRadius: BorderRadius.circular(18),
       ),
       child: TextFormField(
-        controller: _textEditingController,
-        onChanged: (String currentText) {
+        onTap: () => Utils.pushScreen(
+          context: context,
+          screen: SearchList(),
+        ),
+        readOnly: true,
+        /*onChanged: (String currentText) {
           context.read<SearchNotifier>().changeString(search: currentText);
-        },
+        },*/
         textAlignVertical: TextAlignVertical.center,
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
@@ -48,7 +52,7 @@ class _SearchBarState extends State<SearchBar> {
             minHeight: 36,
             minWidth: 36,
           ),
-          suffixIcon: IconButton(
+          /*suffixIcon: IconButton(
             constraints: BoxConstraints(
               minHeight: 36,
               minWidth: 36,
@@ -57,14 +61,14 @@ class _SearchBarState extends State<SearchBar> {
             icon: Icon(
               Icons.clear,
             ),
-            onPressed: () {
+            *//*onPressed: () {
               _textEditingController!.clear();
               context.read<SearchNotifier>().changeString(
                 search: '',
               );
               FocusScope.of(context).requestFocus(FocusNode());
-            },
-          ),
+            },*//*
+          ),*/
         ),
       ),
     );

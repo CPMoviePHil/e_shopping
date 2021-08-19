@@ -1,4 +1,5 @@
 import 'package:e_shopping/data/comment.dart';
+import 'package:e_shopping/data/notification.dart';
 import 'package:e_shopping/data/user.dart';
 
 import 'data/category.dart';
@@ -338,5 +339,32 @@ List<Product> recommendProducts = [
     category: menCategory,
     productType: "shorts",
     sizes: ["XS", "S", "M", "L", "XL"],
+  ),
+];
+
+List<NotificationModel> notifications = [
+  NotificationModel(
+    notificationID: 1,
+    notificationType: 1,
+    title: "男性商品必買商品一律6折!",
+    short: "日常活動所需，美日鍛鍊所需",
+    content: "",
+    createTime: "2021-08-06 15:22:23",
+  ),
+  NotificationModel(
+    notificationID: 2,
+    notificationType: 1,
+    title: "還在煩惱要買什麼嗎?",
+    short: "日常活動所需，美日鍛鍊所需",
+    content: "",
+    createTime: "2021-08-18 15:29:23",
+  ),
+  NotificationModel(
+    notificationID: 3,
+    notificationType: 2,
+    title: "恭喜會員註冊成功!",
+    short: "歡迎使用E-Shopping",
+    content: "",
+    createTime: "2021-07-06 22:23:21",
   ),
 ];
