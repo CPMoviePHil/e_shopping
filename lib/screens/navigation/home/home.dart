@@ -55,7 +55,7 @@ class Home extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 16),
+            padding: EdgeInsets.symmetric(vertical: 5),
             child: CarouselSlider(
               items: banners.map((e) => bannerWidget(
                 context: context,

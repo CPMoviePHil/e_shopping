@@ -29,10 +29,7 @@ class CategoryTile extends StatelessWidget {
       ),
       child: Container(
         height: 200,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        clipBehavior: Clip.antiAlias,
+
         child: Stack(
           fit: StackFit.expand,
           children: [

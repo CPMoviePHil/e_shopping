@@ -8,7 +8,7 @@ import '../../temp_data.dart';
 class CategoryList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    EdgeInsets listViewPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 24);
+    EdgeInsets listViewPadding = EdgeInsets.symmetric(horizontal: 16, vertical: 5);
     return ListView(
       padding: listViewPadding,
       children: [
@@ -17,13 +17,13 @@ class CategoryList extends StatelessWidget {
           category: menCategory,
           imageAlignment: Alignment.topCenter,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 5),
         CategoryTile(
           cateImageProvider: context.read<CategoryNotifier>().secondProvider!,
           category: womenCategory,
           imageAlignment: Alignment.topCenter,
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 5),
         CategoryTile(
           cateImageProvider: context.read<CategoryNotifier>().thirdProvider!,
           category: petCategory,
