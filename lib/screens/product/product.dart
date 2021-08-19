@@ -43,6 +43,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
   int selectedCount = 1;
   final ScrollController scrollController = ScrollController();
   late AnimationController animationController;
+  late List<CommentModel> productComments;
 
   bool commentsCollapsed = false;
 
@@ -52,6 +53,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
+    productComments = comments.where((element) => element.productID == widget.product.productID).toList();
     animationController.forward(from: 0.0);
     selectedImageUrl = product.imageUrls!.first;
     selectedSize = product.sizes?.first;
@@ -319,25 +321,26 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           AppLibScreen.appText(text: S.current.comments),
-                                          Consumer<ProductProvider>(
-                                            builder: (context, productProvider, child) {
-                                              if (productProvider.commentsCollapsed) {
-                                                return GestureDetector(
-                                                  onTap: () => productProvider.collapseComments(),
-                                                  child: AppLibScreen.appIcon(
-                                                    icon: Icons.arrow_drop_up_sharp,
-                                                  ),
-                                                );
-                                              } else {
-                                                return GestureDetector(
-                                                  onTap: () => productProvider.collapseComments(),
-                                                  child: AppLibScreen.appIcon(
-                                                    icon: Icons.arrow_drop_down_sharp,
-                                                  ),
-                                                );
-                                              }
-                                            },
-                                          ),
+                                          if(productComments.length != 0)
+                                            Consumer<ProductProvider>(
+                                              builder: (context, productProvider, child) {
+                                                if (productProvider.commentsCollapsed) {
+                                                  return GestureDetector(
+                                                    onTap: () => productProvider.collapseComments(),
+                                                    child: AppLibScreen.appIcon(
+                                                      icon: Icons.arrow_drop_up_sharp,
+                                                    ),
+                                                  );
+                                                } else {
+                                                  return GestureDetector(
+                                                    onTap: () => productProvider.collapseComments(),
+                                                    child: AppLibScreen.appIcon(
+                                                      icon: Icons.arrow_drop_down_sharp,
+                                                    ),
+                                                  );
+                                                }
+                                              },
+                                            ),
                                         ],
                                       ),
                                     ),
@@ -455,7 +458,7 @@ class _ProductScreenState extends State<ProductScreen> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    List<CommentModel> productComments = comments.where((element) => element.productID == product.productID).toList();
+    productComments = comments.where((element) => element.productID == product.productID).toList();
     Widget commentWidget;
     double stars = 0.0;
     if (productComments.length == 0) {
