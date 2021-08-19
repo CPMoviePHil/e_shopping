@@ -1,16 +1,11 @@
 import 'package:e_shopping/data/product.dart';
-import 'package:e_shopping/generated/l10n.dart';
-import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/navigation/favorite/favorite_widget.dart';
 import 'package:e_shopping/screens/product/loader.dart';
-import 'package:e_shopping/screens/product/product.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
-import 'package:e_shopping/utils/app_libs.dart';
 import 'package:e_shopping/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 
 class ProductTile2 extends StatelessWidget {
 
@@ -29,9 +24,6 @@ class ProductTile2 extends StatelessWidget {
           context: context,
           screen: ProductLoader(product: product),
         );
-      },
-      onLongPress: () async {
-
       },
       child: Stack(
         children: [
