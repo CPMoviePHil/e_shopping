@@ -809,6 +809,26 @@ class S {
       args: [],
     );
   }
+
+  /// `一般`
+  String get notificationType1 {
+    return Intl.message(
+      '一般',
+      name: 'notificationType1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `重要`
+  String get notificationType2 {
+    return Intl.message(
+      '重要',
+      name: 'notificationType2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

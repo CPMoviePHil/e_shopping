@@ -89,6 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameInput": MessageLookupByLibrary.simpleMessage("輸入名字"),
         "needSignupMsg": MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
         "notification": MessageLookupByLibrary.simpleMessage("訊息通知"),
+        "notificationType1": MessageLookupByLibrary.simpleMessage("一般"),
+        "notificationType2": MessageLookupByLibrary.simpleMessage("重要"),
         "ok": MessageLookupByLibrary.simpleMessage("確認"),
         "orderCount": m4,
         "passwordInput": MessageLookupByLibrary.simpleMessage("輸入會員密碼"),

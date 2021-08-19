@@ -58,7 +58,7 @@ class AppLibScreen {
     double fontSize = 18;
     switch(textSize){
       case "large":
-        fontSize = 25;
+        fontSize = 20;
         break;
       case "small":
         fontSize = 13;

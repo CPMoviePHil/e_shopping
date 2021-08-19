@@ -95,6 +95,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "needSignupMsg":
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
+        "notificationType1": MessageLookupByLibrary.simpleMessage("一般"),
+        "notificationType2": MessageLookupByLibrary.simpleMessage("重要"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "orderCount": m4,
         "passwordInput": MessageLookupByLibrary.simpleMessage("password"),

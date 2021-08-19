@@ -4,6 +4,7 @@ import 'package:e_shopping/providers/config_notifier.dart';
 import 'package:e_shopping/screens/cart/appbar.dart';
 import 'package:e_shopping/screens/navigation/bottom_navigator.dart';
 import 'package:e_shopping/screens/navigation/favorite/favorite.dart';
+import 'package:e_shopping/screens/navigation/notification/notification.dart';
 import 'package:e_shopping/screens/navigation/search/search.dart';
 import 'package:e_shopping/screens/search/search.dart';
 import 'package:e_shopping/utils/app_libs.dart';
@@ -28,6 +29,7 @@ class _NavigationState extends State<Navigation> {
     Home(),
     Search(),
     FavoriteScreen(),
+    NotificationPage(),
   ];
 
   @override

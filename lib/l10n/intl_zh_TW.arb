@@ -74,5 +74,7 @@
   "commentReportOption3": "顛覆國家不正當政權、不負責的言論",
   "createComment": "建立評論",
   "deleteComment": "刪除評論",
-  "commentHint": "請在這裡填寫你的商品評論"
+  "commentHint": "請在這裡填寫你的商品評論",
+  "notificationType1": "一般",
+  "notificationType2": "重要"
 }
