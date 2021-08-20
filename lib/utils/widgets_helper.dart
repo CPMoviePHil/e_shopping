@@ -308,6 +308,22 @@ class WidgetsHelper {
     final dateTime = strToDateTime(str: datetime);
     return dateTimeToStr(datetime: dateTime, format: "onlyDate",);
   }
+
+  static String dateTimeDiffStr ({required DateTime dateTime}) {
+    final int days = DateTime.now().difference(dateTime).inDays;
+    if (days >= 7 && days <= 30) {
+      final double weeks = days / 7;
+      return S.current.weeksAgo(weeks.floor(),);
+    } else if(days >= 31 && days <= 365) {
+      final double months = days / 31;
+      return S.current.monthAgo(months.floor(),);
+    } else if(days >= 366 ) {
+      final double years = days / 365;
+      return S.current.yearsAgo(years.floor());
+    } else {
+      return S.current.daysAgo(days,);
+    }
+  }
 }
 
 class CartSelector {

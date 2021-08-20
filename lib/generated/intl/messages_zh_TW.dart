@@ -23,17 +23,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(days) => "${days} 天前";
 
-  static String m2(account) => "@${account}";
+  static String m2(days) => "${days} 天前";
 
-  static String m3(username) => "@${username}";
+  static String m3(account) => "@${account}";
 
-  static String m4(count) => "數量: ${count}";
+  static String m4(username) => "@${username}";
 
-  static String m5(size) => "大小: ${size}";
+  static String m5(months) => "${months} 月前";
 
-  static String m6(theme) => "更改成${theme}";
+  static String m6(count) => "數量: ${count}";
 
-  static String m7(theme) => "已經是${theme}";
+  static String m7(size) => "大小: ${size}";
+
+  static String m8(theme) => "更改成${theme}";
+
+  static String m9(theme) => "已經是${theme}";
+
+  static String m10(weeks) => "${weeks} 周前";
+
+  static String m11(years) => "${years} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -59,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "creating": MessageLookupByLibrary.simpleMessage("建立中..."),
         "customerService": MessageLookupByLibrary.simpleMessage("客服中心"),
         "darkMode": MessageLookupByLibrary.simpleMessage("暗黑主題"),
+        "daysAgo": m2,
         "deleteComment": MessageLookupByLibrary.simpleMessage("刪除評論"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("購物車是空的"),
         "emptyComments": MessageLookupByLibrary.simpleMessage("此商品尚無評論"),
@@ -72,11 +81,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightTheme": MessageLookupByLibrary.simpleMessage("一般主題"),
         "loggingOut": MessageLookupByLibrary.simpleMessage("登出中.."),
         "login": MessageLookupByLibrary.simpleMessage("登入"),
-        "loginAccount": m2,
+        "loginAccount": m3,
         "loginFailure": MessageLookupByLibrary.simpleMessage("登入失敗"),
         "loginFailureMsgOne":
             MessageLookupByLibrary.simpleMessage("登入資料儲存失敗，請在試一次"),
-        "loginUsername": m3,
+        "loginUsername": m4,
         "logout": MessageLookupByLibrary.simpleMessage("登出"),
         "logoutFailure": MessageLookupByLibrary.simpleMessage("登出失敗"),
         "logoutMsg": MessageLookupByLibrary.simpleMessage("確定登出此裝置嗎?"),
@@ -85,27 +94,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberLogin": MessageLookupByLibrary.simpleMessage("會員登入"),
         "memberLogout": MessageLookupByLibrary.simpleMessage("會員登出"),
         "memberSignup": MessageLookupByLibrary.simpleMessage("會員註冊"),
+        "monthAgo": m5,
         "more": MessageLookupByLibrary.simpleMessage("更多"),
         "nameInput": MessageLookupByLibrary.simpleMessage("輸入名字"),
         "needSignupMsg": MessageLookupByLibrary.simpleMessage("沒有帳號嗎?"),
-        "notification": MessageLookupByLibrary.simpleMessage("訊息通知"),
+        "notification": MessageLookupByLibrary.simpleMessage("通知"),
         "notificationType1": MessageLookupByLibrary.simpleMessage("一般"),
         "notificationType2": MessageLookupByLibrary.simpleMessage("重要"),
         "ok": MessageLookupByLibrary.simpleMessage("確認"),
-        "orderCount": m4,
+        "orderCount": m6,
         "passwordInput": MessageLookupByLibrary.simpleMessage("輸入會員密碼"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("個人資料"),
         "productCategory": MessageLookupByLibrary.simpleMessage("產品分類"),
         "productCollections": MessageLookupByLibrary.simpleMessage("收藏商品"),
         "productName": MessageLookupByLibrary.simpleMessage("產品名稱"),
         "productSearchHint": MessageLookupByLibrary.simpleMessage("產品搜尋"),
-        "productSize": m5,
+        "productSize": m7,
         "removeFromFavorite": MessageLookupByLibrary.simpleMessage("移除我的最愛"),
         "report": MessageLookupByLibrary.simpleMessage("檢舉"),
         "search": MessageLookupByLibrary.simpleMessage("產品搜尋"),
         "setting": MessageLookupByLibrary.simpleMessage("設定"),
-        "settingTheme": m6,
-        "settingThemeAlert": m7,
+        "settingTheme": m8,
+        "settingThemeAlert": m9,
         "shareHint": MessageLookupByLibrary.simpleMessage("社群分享"),
         "shoppingHistory": MessageLookupByLibrary.simpleMessage("購物紀錄"),
         "signup": MessageLookupByLibrary.simpleMessage("註冊"),
@@ -116,6 +126,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theme": MessageLookupByLibrary.simpleMessage("切換主題"),
         "total": MessageLookupByLibrary.simpleMessage("總共"),
         "validating": MessageLookupByLibrary.simpleMessage("驗證中..."),
-        "visitorGreeting": MessageLookupByLibrary.simpleMessage("訪客，你好!")
+        "visitorGreeting": MessageLookupByLibrary.simpleMessage("訪客，你好!"),
+        "weeksAgo": m10,
+        "yearsAgo": m11
       };
 }

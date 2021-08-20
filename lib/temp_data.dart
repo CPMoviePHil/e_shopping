@@ -344,15 +344,7 @@ List<Product> recommendProducts = [
 
 List<NotificationModel> notifications = [
   NotificationModel(
-    notificationID: 1,
-    notificationType: 1,
-    title: "男性商品必買商品一律6折!",
-    short: "日常活動所需，美日鍛鍊所需",
-    content: "",
-    createTime: "2021-08-06 15:22:23",
-  ),
-  NotificationModel(
-    notificationID: 2,
+    notificationID: 3,
     notificationType: 1,
     title: "還在煩惱要買什麼嗎?",
     short: "日常活動所需，美日鍛鍊所需",
@@ -360,7 +352,15 @@ List<NotificationModel> notifications = [
     createTime: "2021-08-18 15:29:23",
   ),
   NotificationModel(
-    notificationID: 3,
+    notificationID: 2,
+    notificationType: 1,
+    title: "男性商品必買商品一律6折!",
+    short: "日常活動所需，美日鍛鍊所需",
+    content: "",
+    createTime: "2021-08-06 15:22:23",
+  ),
+  NotificationModel(
+    notificationID: 1,
     notificationType: 2,
     title: "恭喜會員註冊成功!",
     short: "歡迎使用E-Shopping",

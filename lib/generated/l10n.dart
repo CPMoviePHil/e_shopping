@@ -829,6 +829,46 @@ class S {
       args: [],
     );
   }
+
+  /// `{days} 天前`
+  String daysAgo(Object days) {
+    return Intl.message(
+      '$days 天前',
+      name: 'daysAgo',
+      desc: '',
+      args: [days],
+    );
+  }
+
+  /// `{weeks} 周前`
+  String weeksAgo(Object weeks) {
+    return Intl.message(
+      '$weeks 周前',
+      name: 'weeksAgo',
+      desc: '',
+      args: [weeks],
+    );
+  }
+
+  /// `{months} 月前`
+  String monthAgo(Object months) {
+    return Intl.message(
+      '$months 月前',
+      name: 'monthAgo',
+      desc: '',
+      args: [months],
+    );
+  }
+
+  /// `{years} 年前`
+  String yearsAgo(Object years) {
+    return Intl.message(
+      '$years 年前',
+      name: 'yearsAgo',
+      desc: '',
+      args: [years],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

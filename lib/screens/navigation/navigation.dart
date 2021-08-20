@@ -43,6 +43,8 @@ class _NavigationState extends State<Navigation> {
         return SearchBar();
       case 2:
         return AppLibScreen.appText(text: S.current.favorite,);
+      case 3:
+        return AppLibScreen.appText(text: S.current.notification,);
       default:
         return AppLibScreen.appText(text: "e-shopping");
     }

@@ -3,6 +3,7 @@ import 'package:e_shopping/data/notification.dart';
 import 'package:e_shopping/generated/l10n.dart';
 import 'package:e_shopping/temp_data.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/widgets_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,10 +66,16 @@ class NotificationPage extends StatelessWidget {
                 SizedBox(height: 10,),
                 AppLibScreen.appText(
                   text: notification.short,
+                  fontColor: kGrey600,
                 ),
                 SizedBox(height: 10,),
                 AppLibScreen.appText(
-                  text: notification.createTime,
+                  text: WidgetsHelper.dateTimeDiffStr(
+                    dateTime: WidgetsHelper.strToDateTime(
+                      str: notification.createTime,
+                    ),
+                  ),
+                  fontColor: kGrey400,
                 ),
               ],
             ),

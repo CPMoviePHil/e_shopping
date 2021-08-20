@@ -23,17 +23,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(days) => "${days} 天前";
 
-  static String m2(account) => "@${account}";
+  static String m2(days) => "${days} 天前";
 
-  static String m3(username) => "@${username}";
+  static String m3(account) => "@${account}";
 
-  static String m4(count) => "Count: ${count}";
+  static String m4(username) => "@${username}";
 
-  static String m5(size) => "Size: ${size}";
+  static String m5(months) => "${months} 月前";
 
-  static String m6(theme) => "set theme to ${theme}";
+  static String m6(count) => "Count: ${count}";
 
-  static String m7(theme) => "${theme} already been set!";
+  static String m7(size) => "Size: ${size}";
+
+  static String m8(theme) => "set theme to ${theme}";
+
+  static String m9(theme) => "${theme} already been set!";
+
+  static String m10(weeks) => "${weeks} 周前";
+
+  static String m11(years) => "${years} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -62,6 +70,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "customerService":
             MessageLookupByLibrary.simpleMessage("Customer Service"),
         "darkMode": MessageLookupByLibrary.simpleMessage("dark mode"),
+        "daysAgo": m2,
         "deleteComment": MessageLookupByLibrary.simpleMessage("刪除評論"),
         "emptyCart": MessageLookupByLibrary.simpleMessage("Your cart is empty"),
         "emptyComments": MessageLookupByLibrary.simpleMessage("此商品尚無評論"),
@@ -75,11 +84,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "lightTheme": MessageLookupByLibrary.simpleMessage("light mode"),
         "loggingOut": MessageLookupByLibrary.simpleMessage("Logging out..."),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
-        "loginAccount": m2,
+        "loginAccount": m3,
         "loginFailure": MessageLookupByLibrary.simpleMessage("Login Failure"),
         "loginFailureMsgOne": MessageLookupByLibrary.simpleMessage(
             "Login Data save failure, Please try again"),
-        "loginUsername": m3,
+        "loginUsername": m4,
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
         "logoutFailure": MessageLookupByLibrary.simpleMessage("Logout failure"),
         "logoutMsg": MessageLookupByLibrary.simpleMessage(
@@ -90,6 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberLogin": MessageLookupByLibrary.simpleMessage("Member Login"),
         "memberLogout": MessageLookupByLibrary.simpleMessage("Member logout"),
         "memberSignup": MessageLookupByLibrary.simpleMessage("Member Signup"),
+        "monthAgo": m5,
         "more": MessageLookupByLibrary.simpleMessage("更多"),
         "nameInput": MessageLookupByLibrary.simpleMessage("name"),
         "needSignupMsg":
@@ -98,7 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notificationType1": MessageLookupByLibrary.simpleMessage("一般"),
         "notificationType2": MessageLookupByLibrary.simpleMessage("重要"),
         "ok": MessageLookupByLibrary.simpleMessage("Ok"),
-        "orderCount": m4,
+        "orderCount": m6,
         "passwordInput": MessageLookupByLibrary.simpleMessage("password"),
         "personalInfo": MessageLookupByLibrary.simpleMessage("Personal Info"),
         "productCategory":
@@ -108,14 +118,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "productName": MessageLookupByLibrary.simpleMessage("Product Name"),
         "productSearchHint":
             MessageLookupByLibrary.simpleMessage("Search for a product"),
-        "productSize": m5,
+        "productSize": m7,
         "removeFromFavorite":
             MessageLookupByLibrary.simpleMessage("Remove Favorite"),
         "report": MessageLookupByLibrary.simpleMessage("檢舉"),
         "search": MessageLookupByLibrary.simpleMessage("Product Search"),
         "setting": MessageLookupByLibrary.simpleMessage("Setting"),
-        "settingTheme": m6,
-        "settingThemeAlert": m7,
+        "settingTheme": m8,
+        "settingThemeAlert": m9,
         "shareHint": MessageLookupByLibrary.simpleMessage("Share"),
         "shoppingHistory":
             MessageLookupByLibrary.simpleMessage("Shopping History"),
@@ -128,6 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "total": MessageLookupByLibrary.simpleMessage("Total"),
         "validating": MessageLookupByLibrary.simpleMessage("Validating..."),
         "visitorGreeting":
-            MessageLookupByLibrary.simpleMessage("Hello, Visitor!")
+            MessageLookupByLibrary.simpleMessage("Hello, Visitor!"),
+        "weeksAgo": m10,
+        "yearsAgo": m11
       };
 }

@@ -3,7 +3,7 @@
   "search": "產品搜尋",
   "hotProduct": "熱門商品",
   "productCollections": "收藏商品",
-  "notification": "訊息通知",
+  "notification": "通知",
   "latestNews": "最新消息",
   "memberCenter": "紀錄中心",
   "personalInfo": "個人資料",
@@ -76,5 +76,9 @@
   "deleteComment": "刪除評論",
   "commentHint": "請在這裡填寫你的商品評論",
   "notificationType1": "一般",
-  "notificationType2": "重要"
+  "notificationType2": "重要",
+  "daysAgo": "{days} 天前",
+  "weeksAgo": "{weeks} 周前",
+  "monthAgo": "{months} 月前",
+  "yearsAgo": "{years} 年前"
 }
