@@ -80,5 +80,10 @@
   "daysAgo": "{days} 天前",
   "weeksAgo": "{weeks} 周前",
   "monthAgo": "{months} 月前",
-  "yearsAgo": "{years} 年前"
+  "yearsAgo": "{years} 年前",
+  "myAccount": "我的帳戶",
+  "myReviews": "我的評論",
+  "myPurse": "我的錢包",
+  "myFavorite": "我的最愛",
+  "browsedHistory": "瀏覽紀錄"
 }

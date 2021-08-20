@@ -80,5 +80,10 @@
   "daysAgo": "{days} 天前",
   "weeksAgo": "{weeks} 周前",
   "monthAgo": "{months} 月前",
-  "yearsAgo": "{years} 年前"
+  "yearsAgo": "{years} 年前",
+  "myAccount": "My Account",
+  "myReviews": "My Reviews",
+  "myPurse": "My Purse",
+  "myFavorite": "My Favorite",
+  "browsedHistory": "Browsed History"
 }

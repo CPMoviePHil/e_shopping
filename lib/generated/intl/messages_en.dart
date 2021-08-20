@@ -52,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "addedToCart": MessageLookupByLibrary.simpleMessage("此產品已加入到購物車"),
         "alreadyHaveAccount":
             MessageLookupByLibrary.simpleMessage("Already Have an Account?"),
+        "browsedHistory":
+            MessageLookupByLibrary.simpleMessage("Browsed History"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cart": MessageLookupByLibrary.simpleMessage("Cart"),
         "cartItems": m0,
@@ -101,6 +103,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "memberSignup": MessageLookupByLibrary.simpleMessage("Member Signup"),
         "monthAgo": m5,
         "more": MessageLookupByLibrary.simpleMessage("更多"),
+        "myAccount": MessageLookupByLibrary.simpleMessage("My Account"),
+        "myFavorite": MessageLookupByLibrary.simpleMessage("My Favorite"),
+        "myPurse": MessageLookupByLibrary.simpleMessage("My Purse"),
+        "myReviews": MessageLookupByLibrary.simpleMessage("My Reviews"),
         "nameInput": MessageLookupByLibrary.simpleMessage("name"),
         "needSignupMsg":
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
