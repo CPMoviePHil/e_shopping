@@ -1,3 +1,4 @@
+import 'package:e_shopping/providers/browsed_history_provider.dart';
 import 'package:e_shopping/providers/cart_notifier.dart';
 import 'package:e_shopping/providers/category_notifier.dart';
 import 'package:e_shopping/providers/config_notifier.dart';
@@ -20,9 +21,12 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   ConfigNotifier myConfig = ConfigNotifier();
+  BrowsedHistoryProvider browsedHistoryProvider = BrowsedHistoryProvider();
+
   await myConfig.getLocale();
   await myConfig.getTheme();
   await myConfig.getLoginStatus();
+  await browsedHistoryProvider.init();
 
   runApp(
     ChangeNotifierProvider<ConfigNotifier>.value(
@@ -31,6 +35,9 @@ Future<void> main() async {
         providers: [
           ChangeNotifierProvider<LoadingNotifier>(
             create: (context) => LoadingNotifier()..loadingProcess(),
+          ),
+          ChangeNotifierProvider<BrowsedHistoryProvider>.value(
+            value: browsedHistoryProvider,
           ),
           ChangeNotifierProvider<LoadingDataNotifier>(
             create: (context) => LoadingDataNotifier(),

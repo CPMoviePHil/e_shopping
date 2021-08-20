@@ -1,5 +1,6 @@
 import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/providers/browsed_history_provider.dart';
 import 'package:e_shopping/providers/favorite.dart';
 import 'package:e_shopping/screens/navigation/favorite/favorite_widget.dart';
 import 'package:e_shopping/screens/product/loader.dart';
@@ -22,11 +23,11 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         SystemSound.play(SystemSoundType.click);
-        Utils.pushScreen(
+        Utils.pushToProductDetail(
           context: context,
-          screen: ProductLoader(product: product),
+          product: product,
         );
       },
       child: Stack(

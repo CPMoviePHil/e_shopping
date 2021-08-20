@@ -1,6 +1,5 @@
 import 'package:e_shopping/data/product.dart';
 import 'package:e_shopping/screens/navigation/favorite/favorite_widget.dart';
-import 'package:e_shopping/screens/product/loader.dart';
 import 'package:e_shopping/screens/product/product_image.dart';
 import 'package:e_shopping/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,9 +19,9 @@ class ProductTile2 extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         SystemSound.play(SystemSoundType.click);
-        Utils.pushScreen(
+        Utils.pushToProductDetail(
           context: context,
-          screen: ProductLoader(product: product),
+          product: product,
         );
       },
       child: Stack(

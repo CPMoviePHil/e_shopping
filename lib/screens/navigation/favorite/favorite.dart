@@ -44,11 +44,9 @@ class FavoriteScreen extends StatelessWidget {
                         ),
                       ),
                       child: GestureDetector(
-                        onTap: () => Utils.pushScreen(
+                        onTap: () => Utils.pushToProductDetail(
                           context: context,
-                          screen: ProductLoader(
-                            product: favorite.products[index],
-                          ),
+                          product: favorite.products[index],
                         ),
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 5,),

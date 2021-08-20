@@ -2,19 +2,17 @@ import 'package:equatable/equatable.dart';
 
 import 'category.dart';
 
-class Product extends Equatable{
-  final int productID;
-  final String? name;
-  final List<String>? imageUrls;
-  final double? cost;
-  final String? description;
-  final List<String>? sizes;
+class Product extends Equatable {
 
-  /// Which overall category this product belongs in. e.g - Men, Women, Pets, etc.
-  final Category? category;
+  late final int productID;
+  late final String? name;
+  late final List<String>? imageUrls;
+  late final double? cost;
+  late final String? description;
+  late final List<String>? sizes;
 
-  /// Represents type of product such as shirt, jeans, pet treats, etc.
-  final String? productType;
+  late final Category? category;
+  late final String? productType;
 
   Product({
     required this.productID,
@@ -27,7 +25,28 @@ class Product extends Equatable{
     this.productType,
   });
 
+  Product.fromJson(Map<String, dynamic> json){
+    productID = json['productID'];
+    name = json['name'];
+    imageUrls = List.castFrom<dynamic, String>(json['imageUrls']);
+    cost = json['cost'];
+    category = json['category'];
+    productType = json['productType'];
+    sizes = List.castFrom<dynamic, String>(json['sizes']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = {};
+    _data['productID'] = productID;
+    _data['name'] = name;
+    _data['imageUrls'] = imageUrls;
+    _data['cost'] = cost;
+    _data['category'] = category;
+    _data['productType'] = productType;
+    _data['sizes'] = sizes;
+    return _data;
+  }
+
   @override
-  // TODO: implement props
   List<Object?> get props => [productID, name, imageUrls, cost, description, sizes, category, productType,];
 }
