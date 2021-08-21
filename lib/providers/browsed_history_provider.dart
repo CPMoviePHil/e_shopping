@@ -14,8 +14,9 @@ class BrowsedHistoryProvider with ChangeNotifier {
   Future<void> init() async {
     _prefs = MainPrefs(prefs: await SharedPreferences.getInstance());
     if(_prefs!.getString(key: "browsed_history") != null) {
-      print(_prefs!.getString(key: "browsed_history"));
-      browsedProducts = json.decode(_prefs!.getString(key: "browsed_history")!) as List<Product>;
+      final List<dynamic> products = json.decode(_prefs!.getString(key: "browsed_history")!) as List<dynamic>;
+      browsedProducts = products.map((e) => Product.fromJson(e)).toList();
+      print(browsedProducts.length);
     }
   }
 
@@ -24,10 +25,9 @@ class BrowsedHistoryProvider with ChangeNotifier {
       browsedProducts.add(product);
       await _prefs!.setString(
         key: "browsed_history",
-        value: browsedProducts.toString(),
+        value: json.encode(browsedProducts),
       );
     }
-    print(browsedProducts);
   }
 
   Future<void> removeHistory () async {

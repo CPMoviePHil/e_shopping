@@ -8,7 +8,6 @@ class Product extends Equatable {
   late final String? name;
   late final List<String>? imageUrls;
   late final double? cost;
-  late final String? description;
   late final List<String>? sizes;
 
   late final Category? category;
@@ -19,7 +18,6 @@ class Product extends Equatable {
     this.name,
     this.imageUrls,
     this.cost,
-    this.description,
     this.sizes,
     this.category,
     this.productType,
@@ -30,9 +28,9 @@ class Product extends Equatable {
     name = json['name'];
     imageUrls = List.castFrom<dynamic, String>(json['imageUrls']);
     cost = json['cost'];
-    category = json['category'];
+    category = Category.fromJson(json["category"]);
     productType = json['productType'];
-    sizes = List.castFrom<dynamic, String>(json['sizes']);
+    sizes = json['sizes'] == null ? null : List.castFrom<dynamic, String>(json['sizes']);
   }
 
   Map<String, dynamic> toJson() {
@@ -48,5 +46,5 @@ class Product extends Equatable {
   }
 
   @override
-  List<Object?> get props => [productID, name, imageUrls, cost, description, sizes, category, productType,];
+  List<Object?> get props => [productID, name, imageUrls, cost, sizes, category, productType,];
 }
