@@ -1,5 +1,7 @@
 import 'package:e_shopping/generated/l10n.dart';
+import 'package:e_shopping/screens/navigation/personal/browsed_history/browsed_history.dart';
 import 'package:e_shopping/utils/app_libs.dart';
+import 'package:e_shopping/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +53,7 @@ class PersonalPage extends StatelessWidget {
                 ),
                 personRow1(
                   context: context,
-                  onTap: null,
+                  onTap: () => Utils.pushScreen(context: context, screen: BrowsedHistoryPage(),),
                   icon: Icons.history_sharp,
                   rowName: S.current.browsedHistory,
                 ),
