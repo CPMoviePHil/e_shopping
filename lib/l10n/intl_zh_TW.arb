@@ -85,5 +85,6 @@
   "myReviews": "我的評論",
   "myPurse": "我的錢包",
   "myFavorite": "我的最愛",
-  "browsedHistory": "瀏覽紀錄"
+  "browsedHistory": "瀏覽紀錄",
+  "noBrowsedHistory": "無瀏覽產品"
 }

@@ -14,28 +14,56 @@ class BrowsedHistoryPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: AppLibScreen.appText(text: S.current.browsedHistory,),
+        actions: [
+          Consumer<BrowsedHistoryProvider>(
+            builder: (context, browsed, child,) {
+              if (browsed.browsedProducts.length > 1) {
+                return AppLibScreen.appIcon(
+                  icon: Icons.more_vert_sharp,
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 5,),
-        child: SingleChildScrollView(
-          child: Consumer<BrowsedHistoryProvider>(
-            builder: (context, browsed, child) {
-              return Container(
-                alignment: Alignment.topCenter,
-                width: MediaQuery.of(context).size.width,
-                child: Wrap(
-                  spacing: 10,
-                  runSpacing: 10,
-                  children: browsed.browsedProducts.map((e) => SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    child: ProductTile(
-                      product: e,
-                    ),
-                  ),).toList(),
+        child: Consumer<BrowsedHistoryProvider>(
+          builder: (context, browsed, child) {
+            if(browsed.browsedProducts.length == 0) {
+              return Center(
+                child: AppLibScreen.appText(
+                  text: S.current.noBrowsedHistory,
                 ),
               );
-            },
-          ),
+            } else if (browsed.browsedProducts.length == 1) {
+              return SizedBox(
+                width: MediaQuery.of(context).size.width * 0.45,
+                child: ProductTile(
+                  product: browsed.browsedProducts[0],
+                ),
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Container(
+                  alignment: Alignment.topCenter,
+                  width: MediaQuery.of(context).size.width,
+                  child: Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: browsed.browsedProducts.map((e) => SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      child: ProductTile(
+                        product: e,
+                      ),
+                    ),).toList(),
+                  ),
+                ),
+              );
+            }
+          },
         ),
       ),
     );

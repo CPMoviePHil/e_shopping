@@ -85,5 +85,6 @@
   "myReviews": "My Reviews",
   "myPurse": "My Purse",
   "myFavorite": "My Favorite",
-  "browsedHistory": "Browsed History"
+  "browsedHistory": "Browsed History",
+  "noBrowsedHistory": "無瀏覽產品"
 }

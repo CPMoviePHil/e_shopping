@@ -110,6 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "nameInput": MessageLookupByLibrary.simpleMessage("name"),
         "needSignupMsg":
             MessageLookupByLibrary.simpleMessage("Don\'t have a account?"),
+        "noBrowsedHistory": MessageLookupByLibrary.simpleMessage("無瀏覽產品"),
         "notification": MessageLookupByLibrary.simpleMessage("Notifications"),
         "notificationType1": MessageLookupByLibrary.simpleMessage("一般"),
         "notificationType2": MessageLookupByLibrary.simpleMessage("重要"),

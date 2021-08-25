@@ -919,6 +919,16 @@ class S {
       args: [],
     );
   }
+
+  /// `無瀏覽產品`
+  String get noBrowsedHistory {
+    return Intl.message(
+      '無瀏覽產品',
+      name: 'noBrowsedHistory',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
